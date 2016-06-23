@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.h
 //  PYNote
 //
-//  Created by kingnet on 16/5/13.
+//  Created by 杨鹏远 on 16/6/23.
 //  Copyright © 2016年 perry. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

@@ -13,4 +13,5 @@ pod 'SDWebImage', '~> 3.7.4'
 pod 'CocoaLumberjack', '~> 2.2.0'
 pod 'JSONModel', '~> 1.2.0'
 pod 'ReactiveCocoa', '~> 2.5'
+pod 'AESCrypt', '~> 0.0.1'
 

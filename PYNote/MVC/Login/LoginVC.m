@@ -16,14 +16,6 @@
 
 @implementation LoginVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -31,6 +23,12 @@
     // Do any additional setup after loading the view.
     self.title = NSLocalizedString(@"登录", @"");
     self.view.backgroundColor = [UIColor whiteColor];
+    
+//    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backAction:)];
+//    self.navigationItem.leftBarButtonItem = backBarButton;
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"注册", @"注册") style:UIBarButtonItemStylePlain target:self action:@selector(enterRegisterAction:)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,14 +38,22 @@
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)backAction:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
+
+- (void)enterRegisterAction:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"LoginToRegister" sender:nil];
+}
 
 @end

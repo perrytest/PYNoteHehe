@@ -1,14 +1,14 @@
 //
-//  AccountTextFieldCell.h
+//  PYTextfieldCell.h
 //  PYNote
 //
-//  Created by kingnet on 16/5/13.
+//  Created by 杨鹏远 on 16/6/3.
 //  Copyright © 2016年 perry. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface AccountTextFieldCell : UITableViewCell
+@interface PYTextfieldCell : UITableViewCell
 
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;

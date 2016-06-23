@@ -1,19 +1,14 @@
 //
-//  AccountTextFieldCell.m
+//  PYTextfieldCell.m
 //  PYNote
 //
-//  Created by kingnet on 16/5/13.
+//  Created by 杨鹏远 on 16/6/3.
 //  Copyright © 2016年 perry. All rights reserved.
 //
 
-#import "AccountTextFieldCell.h"
-#import "ReactiveCocoa.h"
+#import "PYTextfieldCell.h"
 
-@interface AccountTextFieldCell ()
-
-@end
-
-@implementation AccountTextFieldCell
+@implementation PYTextfieldCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -23,10 +18,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-
-- (void)prepareForReuse {
-//    [self.inputTF rac_deallocDisposable];
 }
 
 @end

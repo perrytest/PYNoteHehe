@@ -2,7 +2,7 @@
 //  Account+CoreDataProperties.h
 //  PYNote
 //
-//  Created by kingnet on 16/5/13.
+//  Created by 杨鹏远 on 16/6/23.
 //  Copyright © 2016年 perry. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,23 +15,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Account (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSString *account;
 @property (nullable, nonatomic, retain) NSString *accountId;
-@property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) NSString *nick;
 @property (nullable, nonatomic, retain) NSDate *creatAt;
-@property (nullable, nonatomic, retain) NSDate *updateAt;
-@property (nullable, nonatomic, retain) NSString *phone;
 @property (nullable, nonatomic, retain) NSString *email;
 @property (nullable, nonatomic, retain) NSString *keyword;
-@property (nullable, nonatomic, retain) NSString *account;
+@property (nullable, nonatomic, retain) NSString *name;
+@property (nullable, nonatomic, retain) NSString *nick;
+@property (nullable, nonatomic, retain) NSString *phone;
 @property (nullable, nonatomic, retain) NSString *pwd;
-@property (nullable, nonatomic, retain) NSString *pwd_notice;
 @property (nullable, nonatomic, retain) NSString *pwd_g;
+@property (nullable, nonatomic, retain) NSString *pwd_notice;
 @property (nullable, nonatomic, retain) NSNumber *type;
-@property (nullable, nonatomic, retain) User *user;
+@property (nullable, nonatomic, retain) NSDate *updateAt;
 @property (nullable, nonatomic, retain) NSSet<RelateData *> *accRelate;
 @property (nullable, nonatomic, retain) NSSet<RelateApp *> *appList;
 @property (nullable, nonatomic, retain) NSSet<Question *> *safety;
+@property (nullable, nonatomic, retain) User *user;
 
 @end
 

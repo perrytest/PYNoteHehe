@@ -10,4 +10,7 @@
 
 @interface RootViewController : UITableViewController
 
+- (void)showLoginPage:(BOOL)animated;
+
+
 @end

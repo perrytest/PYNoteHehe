@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegistVC : PYViewController
+@interface RegistVC : UITableViewController
 
 @end

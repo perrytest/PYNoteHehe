@@ -17,4 +17,5 @@
 //获取唯一ID
 + (NSString *)getUniqueId;
 
+
 @end

@@ -1,4 +1,5 @@
 PODS:
+  - AESCrypt (0.0.1)
   - AFDownloadRequestOperation (2.0.1):
     - AFNetworking (~> 2.0)
   - AFNetworking (2.5.4):
@@ -48,6 +49,7 @@ PODS:
     - SDWebImage (~> 3.7)
 
 DEPENDENCIES:
+  - AESCrypt (~> 0.0.1)
   - AFDownloadRequestOperation (~> 2.0.1)
   - AFNetworking (~> 2.5.2)
   - Base64nl (~> 1.2)
@@ -60,6 +62,7 @@ DEPENDENCIES:
   - UIActivityIndicator-for-SDWebImage (~> 1.2)
 
 SPEC CHECKSUMS:
+  AESCrypt: 1d89bf8b0789cf274ab2205ea461adbe9321d5f8
   AFDownloadRequestOperation: 748a1643423e1ddb23f2178f778087d4f0ae8ac7
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   Base64nl: a497bdcd1c01ea793d36b399016195a8713c0e95

@@ -2,7 +2,7 @@
 //  Account+CoreDataProperties.m
 //  PYNote
 //
-//  Created by kingnet on 16/5/13.
+//  Created by 杨鹏远 on 16/6/23.
 //  Copyright © 2016年 perry. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,22 +13,22 @@
 
 @implementation Account (CoreDataProperties)
 
+@dynamic account;
 @dynamic accountId;
-@dynamic name;
-@dynamic nick;
 @dynamic creatAt;
-@dynamic updateAt;
-@dynamic phone;
 @dynamic email;
 @dynamic keyword;
-@dynamic account;
+@dynamic name;
+@dynamic nick;
+@dynamic phone;
 @dynamic pwd;
-@dynamic pwd_notice;
 @dynamic pwd_g;
+@dynamic pwd_notice;
 @dynamic type;
-@dynamic user;
+@dynamic updateAt;
 @dynamic accRelate;
 @dynamic appList;
 @dynamic safety;
+@dynamic user;
 
 @end

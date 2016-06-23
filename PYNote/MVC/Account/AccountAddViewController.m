@@ -7,15 +7,15 @@
 //
 
 #import "AccountAddViewController.h"
-#import "AccountTextFieldCell.h"
-#import "Account.h"
+#import "PYTextfieldCell.h"
+#import "PYAccountModel.h"
 #import "ReactiveCocoa.h"
 
 @interface AccountAddViewController ()
 
 @property (nonatomic, strong) UIBarButtonItem *doneButton;
 
-@property (nonatomic, retain) Account *account;
+@property (nonatomic, retain) PYAccountModel *account;
 
 @end
 
@@ -30,11 +30,9 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
     
     self.navigationItem.rightBarButtonItem = self.doneButton;
     
-    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([AccountTextFieldCell class]) bundle:nil];
+    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([PYTextfieldCell class]) bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellTFIdentifier];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass([Account class]) inManagedObjectContext:[PYCoreDataController sharedInstance].managedObjectContext];
-    self.account = [[Account alloc] initWithEntity:entity insertIntoManagedObjectContext:[PYCoreDataController sharedInstance].managedObjectContext];
+    self.account = [[PYAccountModel alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,7 +56,6 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
     // add account
     if (self.account.account && self.account.account.length>0) {
         self.account.accountId = [PYTools getUniqueId];
-//        []
         TTDEBUGLOG(@"save account id:%@", self.account.accountId);
     }
 }
@@ -72,7 +69,7 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AccountTextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifier forIndexPath:indexPath];
+    PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifier forIndexPath:indexPath];
     
     cell.inputTF.secureTextEntry = NO;
     cell.inputTF.placeholder = nil;

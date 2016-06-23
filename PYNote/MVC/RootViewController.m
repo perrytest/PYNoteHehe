@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "LoginVC.h"
 
 @interface RootViewController ()
 
@@ -17,7 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.
     self.title = NSLocalizedString(@"首页", @"");
     self.navigationController.navigationBarHidden = NO;
 }
@@ -27,6 +28,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Public
+
+- (void)showLoginPage:(BOOL)animated {
+    // enter login
+    if (!self.presentedViewController) {
+        LoginVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginPage"];
+        UINavigationController *loginNavVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self.navigationController presentViewController:loginNavVC animated:animated completion:nil];
+    }
+}
+
 
 #pragma mark - UITableViewDataSource
 

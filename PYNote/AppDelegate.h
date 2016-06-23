@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "User.h"
+#import "PYUserModel.h"
 #import "RootViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, NSFetchedResultsControllerDelegate>
@@ -18,7 +18,7 @@
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
-@property (nonatomic, retain) User *currentUser;
+@property (nonatomic, retain) PYUserModel *currentUser;
 
 @property (nonatomic, copy) NSString *userToken;
 @property (nonatomic, assign) BOOL userActive;
