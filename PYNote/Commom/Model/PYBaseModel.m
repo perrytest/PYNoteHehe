@@ -31,10 +31,13 @@
 - (BOOL)isDemandProperty:(objc_property_t)property {
     const char *char_f = property_getName(property);
     const char *char_a = property_getAttributes(property);
+    unsigned int count = 0;
+    objc_property_attribute_t *attribute = property_copyAttributeList(property, &count);
+    const char *char_v = attribute->value;
     NSString *attributes = [NSString stringWithUTF8String:char_a];
-    printf("\nIgnore====%s:%s", char_f, char_a);
-    if ([attributes rangeOfString:@"<Ignore>"].location != NSNotFound || [attributes rangeOfString:@"assign"].location != NSNotFound) {
-        
+    NSString *attributesType = [NSString stringWithUTF8String:char_v];
+    printf("\nIgnore====%s:%s %s", char_f, char_a, char_v);
+    if ([attributes rangeOfString:@"<Ignore>"].location != NSNotFound || [attributesType isEqualToString:@"i"]) {
         return NO;
     }
     return YES;
