@@ -20,6 +20,7 @@
 @dynamic email;
 @dynamic lastAt;
 @dynamic limit;
+@dynamic wrongTimes;
 @dynamic locDarkTime;
 @dynamic lockTime;
 @dynamic lockType;

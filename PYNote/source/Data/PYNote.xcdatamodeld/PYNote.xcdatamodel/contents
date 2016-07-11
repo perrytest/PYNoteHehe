@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F27" minimumToolsVersion="Xcode 4.2">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15F34" minimumToolsVersion="Xcode 4.2">
     <entity name="Account" representedClassName="Account" syncable="YES">
         <attribute name="account" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="accountId" attributeType="String" minValueString="1" indexed="YES" syncable="YES"/>
@@ -58,14 +58,15 @@
         <attribute name="qq" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" attributeType="String" minValueString="1" indexed="YES" syncable="YES"/>
+        <attribute name="wrongTimes" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Account" inverseName="user" inverseEntity="Account" syncable="YES"/>
         <relationship name="safety" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Question" syncable="YES"/>
     </entity>
     <elements>
-        <element name="RelateData" positionX="36" positionY="189" width="128" height="103"/>
-        <element name="User" positionX="-621" positionY="-28" width="128" height="403"/>
         <element name="Account" positionX="-261" positionY="3" width="128" height="298"/>
-        <element name="RelateApp" positionX="-344" positionY="-117" width="128" height="88"/>
         <element name="Question" positionX="-387" positionY="63" width="128" height="90"/>
+        <element name="RelateApp" positionX="-344" positionY="-117" width="128" height="88"/>
+        <element name="RelateData" positionX="36" positionY="189" width="128" height="103"/>
+        <element name="User" positionX="-621" positionY="-28" width="128" height="420"/>
     </elements>
 </model>

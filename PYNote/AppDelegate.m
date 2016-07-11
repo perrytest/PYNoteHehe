@@ -69,11 +69,19 @@ AppDelegate *app = nil;
     [self showCoverPage];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSString *userID = UserDefaultsObjectForKey(kCurrentUserID);
+        User *currentUser;
         if (self.activeUserOID) {
-            TTDEBUGLOG(@"has login");
+            currentUser = [self activeUser];
         } else if (userID && userID.length>0) {
-            User *currentUser = [[PYCoreDataController sharedInstance] userWithUserID:userID];
-            self.activeUserOID = currentUser.objectID;
+            currentUser = [[PYCoreDataController sharedInstance] userWithUserID:userID];
+        }
+        if (currentUser) {
+            if ([currentUser isTokenValid]) {
+                [self setActiveUser:currentUser];
+            } else {
+                self.activeUserOID = nil;
+                [self.rootVC showLoginPage:NO];
+            }
         } else {
             [self.rootVC showLoginPage:NO];
         }
@@ -91,14 +99,18 @@ AppDelegate *app = nil;
 #pragma mark - Public
 
 - (User *)activeUser {
-    User *activeUser = [[PYCoreDataController sharedInstance].managedObjectContext existingObjectWithID:self.activeUserOID error:NULL];
-    return activeUser;
+    if (self.activeUserOID) {
+        User *activeUser = [[PYCoreDataController sharedInstance].managedObjectContext existingObjectWithID:self.activeUserOID error:NULL];
+        return activeUser;
+    }
+    return nil;
 }
 
 - (void)setActiveUser:(User *)activeUser {
     UserDefaultsSetValueForKey(activeUser.userId, kCurrentUserID);
     UserDefaultSynchronize;
     self.activeUserOID = activeUser.objectID;
+    [activeUser refreshAuthToken];
 }
 
 #pragma mark - Private

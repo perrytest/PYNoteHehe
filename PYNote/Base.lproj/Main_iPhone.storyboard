@@ -107,7 +107,20 @@
                     <view key="view" contentMode="scaleToFill" id="Yoe-gV-3iK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izX-Mt-Y9z">
+                                <rect key="frame" x="281" y="285" width="38" height="30"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginAction:" destination="ja3-u7-Bcq" eventType="touchUpInside" id="fiZ-KL-MQv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="izX-Mt-Y9z" firstAttribute="centerX" secondItem="Yoe-gV-3iK" secondAttribute="centerX" id="6hA-xd-QIo"/>
+                            <constraint firstItem="izX-Mt-Y9z" firstAttribute="centerY" secondItem="Yoe-gV-3iK" secondAttribute="centerY" id="IZW-Tg-2ZA"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="Cmp-xQ-aOu" kind="show" identifier="LoginToRegister" id="heZ-0B-mSS"/>

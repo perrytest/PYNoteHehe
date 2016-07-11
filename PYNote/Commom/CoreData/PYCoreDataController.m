@@ -41,6 +41,9 @@ static PYCoreDataController *sharedInstance = nil;
 
 - (void)saveContext {
     if (self.managedObjectContext != nil) {
+        if (app.activeUser) {
+            [app.activeUser refreshAuthToken];
+        }
         NSError *error = nil;
         if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
@@ -92,10 +95,14 @@ static PYCoreDataController *sharedInstance = nil;
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                    configuration:nil
                                                              URL:[self sourceStoreURL]
-                                                         options:nil
+                                                         options:options
                                                            error:&error]) {
         
         NSLog(@"error: %@", error);

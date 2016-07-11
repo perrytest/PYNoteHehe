@@ -56,4 +56,13 @@
     [self performSegueWithIdentifier:@"LoginToRegister" sender:nil];
 }
 
+- (IBAction)loginAction:(id)sender {
+    NSString *userID = UserDefaultsObjectForKey(kCurrentUserID);
+    if (userID && userID.length>0) {
+        User *currentUser = [[PYCoreDataController sharedInstance] userWithUserID:userID];
+        [app setActiveUser:currentUser];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 @end
