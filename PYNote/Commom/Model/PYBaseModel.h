@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol Ignore
+@end
+
 @interface PYBaseModel : NSObject
+
+- (NSArray *)filterDemandPropertys;
 
 @end

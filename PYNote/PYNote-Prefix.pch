@@ -19,9 +19,16 @@
 #import "PYToolDefine.h"
 #import "KeyDefine.h"
 #import "PYTools.h"
+
+#import "CocoaLumberjack.h"
+#import "SVProgressHUD.h"
+
 #import "AppDelegate.h"
 #import "PYViewController.h"
 #import "PYCoreDataController.h"
-#import "CocoaLumberjack.h"
+
+
+#import "User.h"
+#import "PYCoreDataController+User.h"
 
 #endif

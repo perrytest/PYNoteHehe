@@ -25,6 +25,11 @@ AppDelegate *app = nil;
     if (self.window && [self.window rootViewController]) {
         TTDEBUGLOG(@"self.window rootViewController is not null:%@", [[self.window rootViewController] class]);
     }
+    app = self;
+    
+    //
+    [SVProgressHUD setBackgroundColor:[UIColor darkGrayColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
     return YES;
 }
@@ -45,15 +50,17 @@ AppDelegate *app = nil;
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
+
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
+    [[PYCoreDataController sharedInstance] saveContext];
     [self showCoverPage];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -61,9 +68,12 @@ AppDelegate *app = nil;
     TTDEBUGLOG(@"become active");
     [self showCoverPage];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.userToken = UserDefaultsObjectForKey(kCurrentUserToken);
-        if (self.userToken && self.userToken.length>0) {
-            //...get current user
+        NSString *userID = UserDefaultsObjectForKey(kCurrentUserID);
+        if (self.activeUserOID) {
+            TTDEBUGLOG(@"has login");
+        } else if (userID && userID.length>0) {
+            User *currentUser = [[PYCoreDataController sharedInstance] userWithUserID:userID];
+            self.activeUserOID = currentUser.objectID;
         } else {
             [self.rootVC showLoginPage:NO];
         }
@@ -76,6 +86,19 @@ AppDelegate *app = nil;
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [[PYCoreDataController sharedInstance] saveContext];
+}
+
+#pragma mark - Public
+
+- (User *)activeUser {
+    User *activeUser = [[PYCoreDataController sharedInstance].managedObjectContext existingObjectWithID:self.activeUserOID error:NULL];
+    return activeUser;
+}
+
+- (void)setActiveUser:(User *)activeUser {
+    UserDefaultsSetValueForKey(activeUser.userId, kCurrentUserID);
+    UserDefaultSynchronize;
+    self.activeUserOID = activeUser.objectID;
 }
 
 #pragma mark - Private

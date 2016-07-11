@@ -8,6 +8,15 @@
 
 #import "PYUserModel.h"
 
+
 @implementation PYUserModel
+
+- (void)convertInfoToUser:(User **)user {
+    NSArray *properties = [self filterDemandPropertys];
+    for (NSString *key in properties) {
+        id value = [self valueForKey:key];
+        [*user setValue:value forKey:key];
+    }
+}
 
 @end

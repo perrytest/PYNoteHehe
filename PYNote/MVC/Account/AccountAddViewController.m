@@ -10,6 +10,7 @@
 #import "PYTextfieldCell.h"
 #import "PYAccountModel.h"
 #import "ReactiveCocoa.h"
+#import "Account.h"
 
 @interface AccountAddViewController ()
 
@@ -40,6 +41,17 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Private
+
+- (void)addAccoutToCoreData {
+    NSManagedObjectContext *context = [PYCoreDataController sharedInstance].managedObjectContext;
+    Account *insertAccout = [NSEntityDescription insertNewObjectForEntityForName:@"Account" inManagedObjectContext:context];
+    [self.account convertInfoToAccout:&insertAccout];
+    User *currentUser = [app activeUser];
+    [currentUser addAccountsObject:insertAccout];
+    [[PYCoreDataController sharedInstance] saveContext];
+}
+
 
 #pragma mark - Accessor
 
@@ -57,6 +69,9 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
     if (self.account.account && self.account.account.length>0) {
         self.account.accountId = [PYTools getUniqueId];
         TTDEBUGLOG(@"save account id:%@", self.account.accountId);
+        self.account.accountType = AccountType_App;//...need to do
+        [self addAccoutToCoreData];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

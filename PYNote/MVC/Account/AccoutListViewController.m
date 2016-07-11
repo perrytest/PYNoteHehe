@@ -7,7 +7,7 @@
 //
 
 #import "AccoutListViewController.h"
-#import "PYAccountModel.h"
+#import "Account.h"
 
 @interface AccoutListViewController ()
 
@@ -26,7 +26,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     self.title = NSLocalizedString(@"账号", @"");
     
-    [self reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,18 +34,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[PYCoreDataController sharedInstance] saveContext];
+}
+
 #pragma mark - Public
 
 - (void)reloadData {
-    NSArray *array = [[app.currentUser.accounts objectEnumerator] allObjects];
-    [array sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        PYAccountModel * account1 = (PYAccountModel *)obj1;
-        PYAccountModel * account2 = (PYAccountModel *)obj2;
-        
-        NSComparisonResult result = [account1.keyword compare:account2.keyword];
-        return result;
-    }];
-    self.accountList = [NSArray arrayWithArray:array];
+    [self reloadAccountList];
     
     if (self.accountList.count>0) {
         NSArray *rightButtons = @[self.addButton, self.editButtonItem];
@@ -55,6 +57,20 @@
     }
     
     [self.tableView reloadData];
+}
+
+#pragma mark - Private
+
+- (void)reloadAccountList {
+    NSArray *array = [[app.activeUser.accounts objectEnumerator] allObjects];
+    [array sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        Account * account1 = (Account *)obj1;
+        Account * account2 = (Account *)obj2;
+        
+        NSComparisonResult result = [account1.keyword compare:account2.keyword];
+        return result;
+    }];
+    self.accountList = [NSArray arrayWithArray:array];
 }
 
 #pragma mark - Accessor
@@ -86,56 +102,47 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AccountListCellIdentifier"];
     }
-    PYAccountModel *account = [self.accountList objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", account.keyword];
+    Account *account = [self.accountList objectAtIndex:indexPath.row];
+    if (account.keyword && account.keyword.length>0) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", account.keyword];
+    } else {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", account.account];
+    }
+    
     
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        Account *account = [self.accountList objectAtIndex:indexPath.row];
+        [app.activeUser removeAccountsObject:account];
+        [self reloadAccountList];
+        [tableView endUpdates];
+    }
+}
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
- }
- */
+#pragma mark - UITableViewDelegate
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Account *account = [self.accountList objectAtIndex:indexPath.row];
+    [SVProgressHUD showInfoWithStatus:account.user.name];
+}
 
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
+- (void)tableView:(UITableView*)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    TTDEBUGLOG(@"didEndEditingRowAtIndexPath");
+    
+}
 
 @end

@@ -10,4 +10,8 @@
 
 @interface PYDoubleTextfieldCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UITextField *leftInputTF;
+@property (strong, nonatomic) IBOutlet UITextField *rightInputTF;
+
 @end

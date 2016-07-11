@@ -60,5 +60,6 @@ typedef enum {
 //- (void)addSafety:(NSSet<Question *> *)values;
 //- (void)removeSafety:(NSSet<Question *> *)values;
 
+- (void)convertInfoToAccout:(Account * _Nonnull * _Nonnull)accoutData;
 
 @end

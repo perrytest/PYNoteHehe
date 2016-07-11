@@ -8,11 +8,15 @@
 
 #import "RegistVC.h"
 #import "PYTextfieldCell.h"
+#import "PYDoubleTextfieldCell.h"
 
+#import "PYUserModel.h"
 
 #import "ReactiveCocoa.h"
 
-static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
+
+static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
+static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 
 @interface RegistVC ()
 
@@ -26,7 +30,6 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
 @implementation RegistVC
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -34,8 +37,10 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
     
     self.navigationItem.rightBarButtonItem = self.doneButton;
     
-    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([PYTextfieldCell class]) bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellTFIdentifier];
+    UINib *cellNib1 = [UINib nibWithNibName:NSStringFromClass([PYTextfieldCell class]) bundle:nil];
+    UINib *cellNib2 = [UINib nibWithNibName:NSStringFromClass([PYDoubleTextfieldCell class]) bundle:nil];
+    [self.tableView registerNib:cellNib1 forCellReuseIdentifier:cellTFIdentifierNormal];
+    [self.tableView registerNib:cellNib2 forCellReuseIdentifier:cellTFIdentifierDouble];
     
     self.user = [[PYUserModel alloc] init];
 }
@@ -45,6 +50,15 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Private
+
+- (void)addUserToCoreData {
+    NSManagedObjectContext *context = [PYCoreDataController sharedInstance].managedObjectContext;
+    User *insertUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
+    [self.user convertInfoToUser:&insertUser];
+    [[PYCoreDataController sharedInstance] saveContext];
+    [app setActiveUser:insertUser];
+}
 
 #pragma mark - Accessor
 
@@ -59,11 +73,18 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
 
 - (void)addAccoutDoneAction:(UIButton *)sender {
     // add account
+    
     if (self.user.name && self.user.name.length>0 && self.user.pwd_s && self.user.pwd_s.length>0) {
         self.user.userId = [PYTools getUniqueId];
         TTDEBUGLOG(@"save account id:%@", self.user.userId);
         self.user.token = NSStringFromInteger([[NSDate date] timeIntervalSince1970]);
-        [[PYCoreDataController sharedInstance] saveContext];
+        self.user.creatAt = [NSDate date];
+        self.user.lastAt = [NSDate date];
+        
+        [self addUserToCoreData];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"请输入用户名和密码", nil)];
     }
 }
 
@@ -76,7 +97,21 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifier forIndexPath:indexPath];
+    if (indexPath.row == 2) {
+        PYDoubleTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierDouble forIndexPath:indexPath];
+        
+        cell.titleLabel.text = NSLocalizedString(@"密码", @"");
+        cell.leftInputTF.secureTextEntry = YES;
+        cell.rightInputTF.secureTextEntry = NO;
+        RAC(self.user, pwd_s) = [cell.leftInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+        RAC(cell.leftInputTF, text) = [RACObserve(self.user, pwd_s) takeUntil:[cell rac_prepareForReuseSignal]];
+        RAC(self.user, pwd_notice) = [cell.rightInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+        RAC(cell.rightInputTF, text) = [RACObserve(self.user, pwd_notice) takeUntil:[cell rac_prepareForReuseSignal]];
+        
+        return cell;
+    }
+    
+    PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierNormal forIndexPath:indexPath];
     
     cell.inputTF.secureTextEntry = NO;
     cell.inputTF.placeholder = nil;
@@ -92,12 +127,6 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
             cell.inputTF.placeholder = NSLocalizedString(@"请输入昵称", @"");
             RAC(self.user, nameNick) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
             RAC(cell.inputTF, text) = [RACObserve(self.user, nameNick) takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 2:
-            cell.titleLabel.text = NSLocalizedString(@"密码", @"");
-            cell.inputTF.secureTextEntry = YES;
-            RAC(self.user, pwd_s) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, pwd_s) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 3:
             cell.titleLabel.text = NSLocalizedString(@"身份证", @"");

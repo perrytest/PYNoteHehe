@@ -35,9 +35,6 @@
 @property (nullable, nonatomic, copy) NSString *token;
 @property (nullable, nonatomic, copy) NSString *userId;
 
-@property (nullable, nonatomic, retain) NSSet<PYAccountModel *> *accounts;
-@property (nullable, nonatomic, retain) NSSet<PYQuestionModel *> *safety;
-
 
 //- (void)addAccountsObject:(Account *)value;
 //- (void)removeAccountsObject:(Account *)value;
@@ -48,6 +45,8 @@
 //- (void)removeSafetyObject:(Question *)value;
 //- (void)addSafety:(NSSet<Question *> *)values;
 //- (void)removeSafety:(NSSet<Question *> *)values;
+
+- (void)convertInfoToUser:(User * _Nonnull * _Nonnull)user;
 
 
 @end

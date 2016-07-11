@@ -31,4 +31,23 @@ static NSString *UserTableName = @"User";
     return nil;
 }
 
+- (User *)userWithUserID:(NSString *)userID {
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:UserTableName inManagedObjectContext:context];
+    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"userId==%@", userID];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setFetchLimit:1];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:userPredicate];
+    NSError *error;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if (fetchedObjects.count == 1) {
+        return fetchedObjects[0];
+    }
+    return nil;
+}
+
 @end

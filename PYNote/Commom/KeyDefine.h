@@ -9,7 +9,7 @@
 #ifndef KeyDefine_h
 #define KeyDefine_h
 
-#define kCurrentUserToken  @"keyCurrentUserToken"
+#define kCurrentUserID  @"keyCurrentUserID"
 
 
 #endif /* KeyDefine_h */
