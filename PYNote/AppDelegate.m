@@ -67,22 +67,26 @@ AppDelegate *app = nil;
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     TTDEBUGLOG(@"become active");
     [self showCoverPage];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSString *userID = UserDefaultsObjectForKey(kCurrentUserID);
-        User *currentUser;
-        if (self.activeUserOID) {
-            currentUser = [self activeUser];
-        } else if (userID && userID.length>0) {
-            currentUser = [[PYCoreDataController sharedInstance] userWithUserID:userID];
-        }
-        if (currentUser) {
-            if ([currentUser isTokenValid]) {
-                [self setActiveUser:currentUser];
-            } else {
-                self.activeUserOID = nil;
-                [self.rootVC showLoginPage:NO];
-            }
+    
+    NSString *userID = UserDefaultsObjectForKey(kCurrentUserID);
+    User *currentUser;
+    if (self.activeUserOID) {
+        currentUser = [self activeUser];
+    } else if (userID && userID.length>0) {
+        currentUser = [[PYCoreDataController sharedInstance] userWithUserID:userID];
+    }
+    if (currentUser) {
+        if ([currentUser isTokenValid]) {
+            [self setActiveUser:currentUser];
         } else {
+            self.activeUserOID = nil;
+        }
+    } else {
+        self.activeUserOID = nil;
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([self activeUser] == nil) {
             [self.rootVC showLoginPage:NO];
         }
         [self unshowCoverPage:nil];
