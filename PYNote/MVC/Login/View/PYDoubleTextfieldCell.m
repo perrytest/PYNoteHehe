@@ -20,4 +20,24 @@
     // Configure the view for the selected state
 }
 
+
+#pragma mark - UITextFieldDelegate
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.leftInputTF) {
+        [textField resignFirstResponder];
+        [self.rightInputTF becomeFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+//    if (textField == self.leftInputTF) {
+//        [self.rightInputTF becomeFirstResponder];
+//    }
+}
+
+
 @end

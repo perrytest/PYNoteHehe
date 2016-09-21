@@ -135,6 +135,7 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
             break;
         case 4:
             cell.titleLabel.text = NSLocalizedString(@"手机号码", @"");
+//            cell.inputTF setKeyboardType:<#(UIKeyboardType)#>
             RAC(self.user, phone) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
             RAC(cell.inputTF, text) = [RACObserve(self.user, phone) takeUntil:[cell rac_prepareForReuseSignal]];
             break;

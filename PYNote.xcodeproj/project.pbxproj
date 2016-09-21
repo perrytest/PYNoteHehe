@@ -16,8 +16,16 @@
 		20514DC71C86B6A400B586D1 /* RegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DC01C86B6A400B586D1 /* RegistVC.m */; };
 		20514DC81C86B6A400B586D1 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DC21C86B6A400B586D1 /* RootViewController.m */; };
 		20514DCE1C86B6E300B586D1 /* PYNote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20514DCB1C86B6E300B586D1 /* PYNote.xcdatamodeld */; };
+		2064405D1D645B09001EE5B4 /* PYAppProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2064405C1D645B09001EE5B4 /* PYAppProxy.m */; };
+		208592941D34D33900D10B6C /* CLLockItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2085928F1D34D33900D10B6C /* CLLockItemView.m */; };
+		208592951D34D33900D10B6C /* CLLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 208592911D34D33900D10B6C /* CLLockView.m */; };
+		208592961D34D33900D10B6C /* CoreLockConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 208592931D34D33900D10B6C /* CoreLockConst.m */; };
+		2088869F1D38D47600F94998 /* PYAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2088869E1D38D47600F94998 /* PYAppManager.m */; };
+		208886A21D38D4A700F94998 /* PYAppInstallation.m in Sources */ = {isa = PBXBuildFile; fileRef = 208886A11D38D4A700F94998 /* PYAppInstallation.m */; };
+		2092F2411D8FED0800802CF1 /* AppListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2092F2401D8FED0800802CF1 /* AppListViewController.m */; };
 		20ACF8B01CE5A6F100BFB120 /* AccoutListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ACF8AF1CE5A6F100BFB120 /* AccoutListViewController.m */; };
 		20ACF8B31CE5B36400BFB120 /* AccountAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ACF8B21CE5B36400BFB120 /* AccountAddViewController.m */; };
+		20C44F631D92252300EB8BD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20C44F651D92252300EB8BD1 /* Localizable.strings */; };
 		20D76B831C2146A20026B3A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D76B821C2146A20026B3A0 /* main.m */; };
 		20D76B861C2146A20026B3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D76B851C2146A20026B3A0 /* AppDelegate.m */; };
 		20D76B8C1C2146A20026B3A0 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20D76B8A1C2146A20026B3A0 /* Main_iPhone.storyboard */; };
@@ -70,11 +78,27 @@
 		20514DC11C86B6A400B586D1 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		20514DC21C86B6A400B586D1 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		20514DCC1C86B6E300B586D1 /* PYNote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PYNote.xcdatamodel; sourceTree = "<group>"; };
+		2064405B1D645B09001EE5B4 /* PYAppProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAppProxy.h; sourceTree = "<group>"; };
+		2064405C1D645B09001EE5B4 /* PYAppProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAppProxy.m; sourceTree = "<group>"; };
+		2085928E1D34D33900D10B6C /* CLLockItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockItemView.h; sourceTree = "<group>"; };
+		2085928F1D34D33900D10B6C /* CLLockItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockItemView.m; sourceTree = "<group>"; };
+		208592901D34D33900D10B6C /* CLLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockView.h; sourceTree = "<group>"; };
+		208592911D34D33900D10B6C /* CLLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockView.m; sourceTree = "<group>"; };
+		208592921D34D33900D10B6C /* CoreLockConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLockConst.h; sourceTree = "<group>"; };
+		208592931D34D33900D10B6C /* CoreLockConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLockConst.m; sourceTree = "<group>"; };
+		2088869D1D38D47600F94998 /* PYAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAppManager.h; sourceTree = "<group>"; };
+		2088869E1D38D47600F94998 /* PYAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAppManager.m; sourceTree = "<group>"; };
+		208886A01D38D4A700F94998 /* PYAppInstallation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAppInstallation.h; sourceTree = "<group>"; };
+		208886A11D38D4A700F94998 /* PYAppInstallation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAppInstallation.m; sourceTree = "<group>"; };
 		2092A1AB1C8E6A430030AC80 /* PYNote-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYNote-Prefix.pch"; sourceTree = "<group>"; };
+		2092F23F1D8FED0800802CF1 /* AppListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppListViewController.h; sourceTree = "<group>"; };
+		2092F2401D8FED0800802CF1 /* AppListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppListViewController.m; sourceTree = "<group>"; };
 		20ACF8AE1CE5A6F100BFB120 /* AccoutListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccoutListViewController.h; sourceTree = "<group>"; };
 		20ACF8AF1CE5A6F100BFB120 /* AccoutListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccoutListViewController.m; sourceTree = "<group>"; };
 		20ACF8B11CE5B36400BFB120 /* AccountAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountAddViewController.h; sourceTree = "<group>"; };
 		20ACF8B21CE5B36400BFB120 /* AccountAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountAddViewController.m; sourceTree = "<group>"; };
+		20C44F641D92252300EB8BD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		20C44F661D92252500EB8BD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		20D76B7E1C2146A10026B3A0 /* PYNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PYNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20D76B821C2146A20026B3A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		20D76B841C2146A20026B3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -154,6 +178,7 @@
 				20514DA91C86B66900B586D1 /* Common.h */,
 				20F4A4A01CE9CFA400BE76CA /* KeyDefine.h */,
 				20514DAE1C86B66900B586D1 /* PYTool */,
+				2088869B1D38D35C00F94998 /* ThirdTool */,
 				B874E6891D0021DF000B8366 /* Category */,
 				20514DAA1C86B66900B586D1 /* CoreData */,
 				20514DB11C86B66900B586D1 /* ViewController */,
@@ -226,6 +251,7 @@
 			children = (
 				20514DC11C86B6A400B586D1 /* RootViewController.h */,
 				20514DC21C86B6A400B586D1 /* RootViewController.m */,
+				2092F23E1D8FEBB600802CF1 /* App */,
 				20514DB81C86B6A400B586D1 /* Login */,
 				20ACF8AD1CE5A6C000BFB120 /* Account */,
 				20514DC31C86B6A400B586D1 /* Setting */,
@@ -280,6 +306,49 @@
 			children = (
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		2085928D1D34D33900D10B6C /* CoreLock */ = {
+			isa = PBXGroup;
+			children = (
+				2085928E1D34D33900D10B6C /* CLLockItemView.h */,
+				2085928F1D34D33900D10B6C /* CLLockItemView.m */,
+				208592901D34D33900D10B6C /* CLLockView.h */,
+				208592911D34D33900D10B6C /* CLLockView.m */,
+				208592921D34D33900D10B6C /* CoreLockConst.h */,
+				208592931D34D33900D10B6C /* CoreLockConst.m */,
+			);
+			path = CoreLock;
+			sourceTree = "<group>";
+		};
+		2088869B1D38D35C00F94998 /* ThirdTool */ = {
+			isa = PBXGroup;
+			children = (
+				2088869C1D38D44B00F94998 /* AppTool */,
+			);
+			path = ThirdTool;
+			sourceTree = "<group>";
+		};
+		2088869C1D38D44B00F94998 /* AppTool */ = {
+			isa = PBXGroup;
+			children = (
+				208886A01D38D4A700F94998 /* PYAppInstallation.h */,
+				208886A11D38D4A700F94998 /* PYAppInstallation.m */,
+				2088869D1D38D47600F94998 /* PYAppManager.h */,
+				2088869E1D38D47600F94998 /* PYAppManager.m */,
+				2064405B1D645B09001EE5B4 /* PYAppProxy.h */,
+				2064405C1D645B09001EE5B4 /* PYAppProxy.m */,
+			);
+			path = AppTool;
+			sourceTree = "<group>";
+		};
+		2092F23E1D8FEBB600802CF1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2092F23F1D8FED0800802CF1 /* AppListViewController.h */,
+				2092F2401D8FED0800802CF1 /* AppListViewController.m */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		20ACF8AD1CE5A6C000BFB120 /* Account */ = {
@@ -343,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				20D76B821C2146A20026B3A0 /* main.m */,
+				20C44F651D92252300EB8BD1 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -360,6 +430,7 @@
 		B80D0AC21D016D1F00227BA1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2085928D1D34D33900D10B6C /* CoreLock */,
 				B80D0AC31D016DEA00227BA1 /* PYDoubleTextfieldCell.h */,
 				B80D0AC41D016DEA00227BA1 /* PYDoubleTextfieldCell.m */,
 				B80D0AC51D016DEA00227BA1 /* PYDoubleTextfieldCell.xib */,
@@ -446,6 +517,7 @@
 				TargetAttributes = {
 					20D76B7D1C2146A10026B3A0 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 37J966PJJJ;
 					};
 				};
 			};
@@ -477,6 +549,7 @@
 				20D76B9D1C21474D0026B3A0 /* Main_iPad.storyboard in Resources */,
 				B80D0AC11D01639E00227BA1 /* PYTextfieldCell.xib in Resources */,
 				B80D0AC71D016DEA00227BA1 /* PYDoubleTextfieldCell.xib in Resources */,
+				20C44F631D92252300EB8BD1 /* Localizable.strings in Resources */,
 				20D76B911C2146A20026B3A0 /* Assets.xcassets in Resources */,
 				20D76B8C1C2146A20026B3A0 /* Main_iPhone.storyboard in Resources */,
 			);
@@ -541,6 +614,7 @@
 				B85D127E1D1BCC8F0091ECA5 /* Account+CoreDataProperties.m in Sources */,
 				20D76B861C2146A20026B3A0 /* AppDelegate.m in Sources */,
 				20ACF8B31CE5B36400BFB120 /* AccountAddViewController.m in Sources */,
+				208592941D34D33900D10B6C /* CLLockItemView.m in Sources */,
 				20514DB41C86B66900B586D1 /* PYCoreDataController.m in Sources */,
 				B80D0AD11D018D4A00227BA1 /* PYUserModel.m in Sources */,
 				B80D0ACE1D018D2900227BA1 /* PYBaseModel.m in Sources */,
@@ -550,10 +624,12 @@
 				20514DB51C86B66900B586D1 /* PYTools.m in Sources */,
 				20ACF8B01CE5A6F100BFB120 /* AccoutListViewController.m in Sources */,
 				B85D12801D1BCC8F0091ECA5 /* Question+CoreDataProperties.m in Sources */,
+				208592961D34D33900D10B6C /* CoreLockConst.m in Sources */,
 				B80D0ADD1D0190FD00227BA1 /* PYRelateDataModel.m in Sources */,
 				B85D12791D1BCC8F0091ECA5 /* RelateApp.m in Sources */,
 				B80D0AC01D01639E00227BA1 /* PYTextfieldCell.m in Sources */,
 				B85D127C1D1BCC8F0091ECA5 /* User+CoreDataProperties.m in Sources */,
+				208592951D34D33900D10B6C /* CLLockView.m in Sources */,
 				B80D0ADA1D0190E000227BA1 /* PYRelateAppModel.m in Sources */,
 				B85D127F1D1BCC8F0091ECA5 /* Account.m in Sources */,
 				20514DC51C86B6A400B586D1 /* GestureLockVC.m in Sources */,
@@ -561,6 +637,9 @@
 				20514DB61C86B66900B586D1 /* PYViewController.m in Sources */,
 				20514DCE1C86B6E300B586D1 /* PYNote.xcdatamodeld in Sources */,
 				B85D127D1D1BCC8F0091ECA5 /* User.m in Sources */,
+				2064405D1D645B09001EE5B4 /* PYAppProxy.m in Sources */,
+				2092F2411D8FED0800802CF1 /* AppListViewController.m in Sources */,
+				208886A21D38D4A700F94998 /* PYAppInstallation.m in Sources */,
 				B874E68C1D002205000B8366 /* NSString+Encode.m in Sources */,
 				20514DC81C86B6A400B586D1 /* RootViewController.m in Sources */,
 				20514DC41C86B6A400B586D1 /* EasyPwdLockVC.m in Sources */,
@@ -570,6 +649,7 @@
 				20D76B831C2146A20026B3A0 /* main.m in Sources */,
 				B80D0AD71D01908E00227BA1 /* PYQuestionModel.m in Sources */,
 				B85D127A1D1BCC8F0091ECA5 /* RelateData+CoreDataProperties.m in Sources */,
+				2088869F1D38D47600F94998 /* PYAppManager.m in Sources */,
 				B85D12811D1BCC8F0091ECA5 /* Question.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,6 +657,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		20C44F651D92252300EB8BD1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20C44F641D92252300EB8BD1 /* en */,
+				20C44F661D92252500EB8BD1 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		20D76B8A1C2146A20026B3A0 /* Main_iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -700,12 +789,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yujian Yang (2FK97V4U49)";
+				DEVELOPMENT_TEAM = 37J966PJJJ;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_PREFIX_HEADER = "PYNote/PYNote-Prefix.pch";
 				INFOPLIST_FILE = PYNote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpy.PYNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "162fb6da-8aab-4e4d-a1a8-5b18bf27c68c";
+				PROVISIONING_PROFILE_SPECIFIER = development_common_20160722;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -715,12 +809,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yujian Yang (2FK97V4U49)";
+				DEVELOPMENT_TEAM = 37J966PJJJ;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_PREFIX_HEADER = "PYNote/PYNote-Prefix.pch";
 				INFOPLIST_FILE = PYNote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpy.PYNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "162fb6da-8aab-4e4d-a1a8-5b18bf27c68c";
+				PROVISIONING_PROFILE_SPECIFIER = development_common_20160722;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

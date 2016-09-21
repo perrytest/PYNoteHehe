@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CoverViewController.h"
+#import "PYAppManager.h"
 
 AppDelegate *app = nil;
 
@@ -30,6 +31,13 @@ AppDelegate *app = nil;
     //
     [SVProgressHUD setBackgroundColor:[UIColor darkGrayColor]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        PYAppManager *appManager = [PYAppManager shareAppManager];
+        TTDEBUGLOG(@"installed app : %@", appManager.installedArray);
+    });
+    
+    
     
     return YES;
 }
@@ -75,19 +83,21 @@ AppDelegate *app = nil;
     } else if (userID && userID.length>0) {
         currentUser = [[PYCoreDataController sharedInstance] userWithUserID:userID];
     }
-    if (currentUser) {
-        if ([currentUser isTokenValid]) {
-            [self setActiveUser:currentUser];
-        } else {
-            self.activeUserOID = nil;
-        }
+    if (currentUser && [currentUser isTokenValid]) {
+        [self setActiveUser:currentUser];
     } else {
         self.activeUserOID = nil;
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([self activeUser] == nil) {
-            [self.rootVC showLoginPage:NO];
+            if (currentUser) {
+//                UserAuthType lockType = [currentUser authType];
+//                [self.rootVC showLockPage:NO];
+                [self.rootVC showLoginPage:NO];
+            } else{
+                [self.rootVC showLoginPage:NO];
+            }
         }
         [self unshowCoverPage:nil];
     });

@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  PYNote
+
+  Created by kingnet on 16/9/21.
+  Copyright © 2016年 perry. All rights reserved.
+*/
+
+
+Sure="确认";
+Delete="删除";
+Cancel="取消";
+
+App_Delete_Title="删除“%@”";
+App_Delete_Messager="若删除“%@”，其所有数据也将被删除";

@@ -26,6 +26,7 @@
     
 //    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backAction:)];
 //    self.navigationItem.leftBarButtonItem = backBarButton;
+    self.navigationItem.hidesBackButton = YES;
     
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"注册", @"注册") style:UIBarButtonItemStylePlain target:self action:@selector(enterRegisterAction:)];
     self.navigationItem.rightBarButtonItem = rightBarButton;

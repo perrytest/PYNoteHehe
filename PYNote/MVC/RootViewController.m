@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "LoginVC.h"
+#import "GestureLockVC.h"
 
 @interface RootViewController ()
 
@@ -41,11 +42,19 @@
     }
 }
 
+- (void)showLockPage:(BOOL)animated {
+    //GestureLockPage
+    if (!self.presentedViewController) {
+        GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];;
+        UINavigationController *gestureLockNavVC = [[UINavigationController alloc] initWithRootViewController:gestureLockVC];
+        [self.navigationController presentViewController:gestureLockNavVC animated:animated completion:nil];
+    }
+}
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -53,7 +62,18 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"rootCellIdentifier"];
     }
-    cell.textLabel.text = NSLocalizedString(@"账号", @"");
+    
+    switch (indexPath.row) {
+        case 0:
+            cell.textLabel.text = NSLocalizedString(@"账号", @"");
+            break;
+        case 1:
+            cell.textLabel.text = NSLocalizedString(@"app列表", @"");
+            break;
+        default:
+            break;
+    }
+    
     return cell;
 }
 
@@ -61,8 +81,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    // enter account list
-    [self performSegueWithIdentifier:@"RootToAccount" sender:nil];
+    
+    switch (indexPath.row) {
+        case 0:
+            // enter account list
+            [self performSegueWithIdentifier:@"RootToAccount" sender:nil];
+            break;
+        case 1:
+            // enter app list
+            [self performSegueWithIdentifier:@"RootToAppList" sender:nil];
+            break;
+        default:
+            break;
+    }
 }
 
 @end

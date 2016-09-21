@@ -12,5 +12,7 @@
 
 - (void)showLoginPage:(BOOL)animated;
 
+- (void)showLockPage:(BOOL)animated;
+
 
 @end
