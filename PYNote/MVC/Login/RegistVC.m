@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
 
+#import "GestureLockVC.h"
 #import "PYTextfieldCell.h"
 #import "PYDoubleTextfieldCell.h"
 
@@ -66,6 +67,11 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     self.user = [[PYUserModel alloc] init];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -118,8 +124,15 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 }
 
 - (void)avartarClickAction:(UIButton *)sender {
-    UIActionSheet *avatarSettingSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"从相册选择", nil), NSLocalizedString(@"拍照", nil), nil];
-    [avatarSettingSheet showInView:self.view];
+//    UIActionSheet *avatarSettingSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"从相册选择", nil), NSLocalizedString(@"拍照", nil), nil];
+//    [avatarSettingSheet showInView:self.view];
+    GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];
+    gestureLockVC.title = NSLocalizedString(@"设置手势密码", @"");
+    gestureLockVC.type = GestureLockTypeSetPwd;
+    gestureLockVC.successBlock = ^(NSString *pwd) {
+        self.user.pwd_g = pwd;
+    };
+    [self.navigationController pushViewController:gestureLockVC animated:YES];
 }
 
 #pragma mark - Table view data source

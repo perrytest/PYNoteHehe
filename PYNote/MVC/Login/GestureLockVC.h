@@ -27,4 +27,9 @@ typedef enum{
 
 @property (nonatomic, assign) NSInteger limitTryTimes;
 
+/** 操作成功：密码设置成功、密码验证成功 */
+@property (nonatomic,copy) void (^successBlock)(NSString *pwd);
+
+@property (nonatomic,copy) void (^forgetPwdBlock)();
+
 @end

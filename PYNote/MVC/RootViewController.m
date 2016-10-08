@@ -42,12 +42,19 @@
     }
 }
 
-- (void)showLockPage:(BOOL)animated {
+- (void)showLockPage:(User *)loginUser {
     //GestureLockPage
     if (!self.presentedViewController) {
-        GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];;
+        GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];
+        gestureLockVC.type = GestureLockTypeVeryfiPwd;
+        gestureLockVC.checkPwd = loginUser.pwd_g;
+        gestureLockVC.successBlock = ^(NSString *pwd) {
+            loginUser.lastAt = [NSDate date];
+            [loginUser refreshAuthToken];
+            [app setActiveUser:loginUser];
+        };
         UINavigationController *gestureLockNavVC = [[UINavigationController alloc] initWithRootViewController:gestureLockVC];
-        [self.navigationController presentViewController:gestureLockNavVC animated:animated completion:nil];
+        [self.navigationController presentViewController:gestureLockNavVC animated:NO completion:nil];
     }
 }
 

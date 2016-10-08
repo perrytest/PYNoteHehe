@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -161,25 +162,58 @@
                                     <constraint firstAttribute="width" secondItem="eJX-cN-Bgi" secondAttribute="height" multiplier="1:1" id="Dxd-cZ-5a1"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zo2-cw-zVP">
-                                <frame key="frameInset" minX="277" minY="541" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n70-SC-3hH">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="FsF-8W-5mJ"/>
+                                    <constraint firstAttribute="width" secondItem="n70-SC-3hH" secondAttribute="height" multiplier="1:1" id="GyD-Qh-L6o"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="Back"/>
+                                <connections>
+                                    <action selector="backAction:" destination="8XM-zr-ixo" eventType="touchUpInside" id="dSh-wC-1Mw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zo2-cw-zVP">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="9oC-Tq-uoa"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="forgetPWDAction:" destination="8XM-zr-ixo" eventType="touchUpInside" id="1KQ-cY-LzV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GrE-9m-4HK">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Uxk-Ph-jnA"/>
+                                    <constraint firstAttribute="width" secondItem="GrE-9m-4HK" secondAttribute="height" multiplier="1:1" id="qdg-do-gy0"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="Icon_avatar"/>
+                                <connections>
+                                    <action selector="enterLoginPage:" destination="8XM-zr-ixo" eventType="touchUpInside" id="cMK-SC-VsX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="GrE-9m-4HK" firstAttribute="top" secondItem="q5r-Jk-ULo" secondAttribute="bottom" constant="40" id="AMl-AT-KOr"/>
+                            <constraint firstItem="Zo2-cw-zVP" firstAttribute="centerX" secondItem="sMP-rn-9kH" secondAttribute="centerX" id="ANk-pL-lCN"/>
+                            <constraint firstItem="GrE-9m-4HK" firstAttribute="centerX" secondItem="sMP-rn-9kH" secondAttribute="centerX" id="Gu2-vm-392"/>
+                            <constraint firstItem="n70-SC-3hH" firstAttribute="top" secondItem="q5r-Jk-ULo" secondAttribute="bottom" id="S4l-Wa-7s8"/>
                             <constraint firstItem="eJX-cN-Bgi" firstAttribute="width" secondItem="sMP-rn-9kH" secondAttribute="width" id="ZG6-Mv-I2u"/>
                             <constraint firstItem="oSf-Ro-fpg" firstAttribute="top" secondItem="eJX-cN-Bgi" secondAttribute="bottom" constant="100" id="dOD-2u-wwS"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="n70-SC-3hH" secondAttribute="leading" id="fMg-iY-D4h"/>
                             <constraint firstItem="eJX-cN-Bgi" firstAttribute="centerX" secondItem="sMP-rn-9kH" secondAttribute="centerX" id="jg0-Ne-Yx8"/>
+                            <constraint firstItem="oSf-Ro-fpg" firstAttribute="top" secondItem="Zo2-cw-zVP" secondAttribute="bottom" constant="40" id="wq3-2p-odZ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="avatarButton" destination="GrE-9m-4HK" id="F7C-0q-XKA"/>
+                        <outlet property="backBtn" destination="n70-SC-3hH" id="qvp-5z-EJc"/>
+                        <outlet property="forgetBtn" destination="Zo2-cw-zVP" id="mN7-1j-hIn"/>
                         <outlet property="lockView" destination="eJX-cN-Bgi" id="Pzp-FQ-ZR6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvV-qN-87B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="197" y="-796"/>
+            <point key="canvasLocation" x="196" y="-796.55172413793105"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="cIP-hK-K6P">
@@ -260,4 +294,8 @@
             <point key="canvasLocation" x="-549" y="49"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Back" width="47" height="47"/>
+        <image name="Icon_avatar" width="60" height="60"/>
+    </resources>
 </document>

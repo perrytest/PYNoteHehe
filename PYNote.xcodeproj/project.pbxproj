@@ -29,6 +29,7 @@
 		20D349191DA89D0E00743ADA /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D349181DA89D0E00743ADA /* UIView+Frame.m */; };
 		20D3491C1DA89FA900743ADA /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D3491B1DA89FA900743ADA /* UIColor+Extension.m */; };
 		20D3491F1DA8C41600743ADA /* Icon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20D3491E1DA8C41600743ADA /* Icon.xcassets */; };
+		20D349211DA8FAFB00743ADA /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20D349201DA8FAFB00743ADA /* Image.xcassets */; };
 		20D76B831C2146A20026B3A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D76B821C2146A20026B3A0 /* main.m */; };
 		20D76B861C2146A20026B3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D76B851C2146A20026B3A0 /* AppDelegate.m */; };
 		20D76B8C1C2146A20026B3A0 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20D76B8A1C2146A20026B3A0 /* Main_iPhone.storyboard */; };
@@ -108,6 +109,7 @@
 		20D3491B1DA89FA900743ADA /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
 		20D3491D1DA8A05C00743ADA /* StyleDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StyleDefine.h; sourceTree = "<group>"; };
 		20D3491E1DA8C41600743ADA /* Icon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icon.xcassets; sourceTree = "<group>"; };
+		20D349201DA8FAFB00743ADA /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		20D76B7E1C2146A10026B3A0 /* PYNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PYNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20D76B821C2146A20026B3A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		20D76B841C2146A20026B3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				20D3491E1DA8C41600743ADA /* Icon.xcassets */,
+				20D349201DA8FAFB00743ADA /* Image.xcassets */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				B80D0AC11D01639E00227BA1 /* PYTextfieldCell.xib in Resources */,
 				B80D0AC71D016DEA00227BA1 /* PYDoubleTextfieldCell.xib in Resources */,
 				20C44F631D92252300EB8BD1 /* Localizable.strings in Resources */,
+				20D349211DA8FAFB00743ADA /* Image.xcassets in Resources */,
 				20D76B911C2146A20026B3A0 /* Assets.xcassets in Resources */,
 				20D76B8C1C2146A20026B3A0 /* Main_iPhone.storyboard in Resources */,
 			);

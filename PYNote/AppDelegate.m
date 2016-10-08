@@ -91,35 +91,37 @@ AppDelegate *app = nil;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([self activeUser] == nil) {
-            if (currentUser) {
-                UserAuthType lockType = [currentUser authType];
-                [self showUnLockPage:lockType];
-            } else{
-                [self showUnLockPage:UserAuthType_Login];
-            }
+            [self showUnLockPageWithUser:currentUser];
         }
         [self unshowCoverPage:nil];
     });
     
 }
 
-- (void)showUnLockPage:(UserAuthType)authType {
-    switch (authType) {
-        case UserAuthType_CheckID:
-            [self.rootVC showLoginPage:NO];
-            break;
-        case UserAuthType_Login:
-            [self.rootVC showLoginPage:NO];
-            break;
-        case UserAuthType_Easy:
-            [self.rootVC showLoginPage:NO];
-            break;
-        case UserAuthType_Gesture:
-            [self.rootVC showLoginPage:NO];
-            break;
-        default:
-            break;
+- (void)showUnLockPageWithUser:(User *)loginUser {
+    if (loginUser) {
+        UserAuthType lockType = [loginUser authType];
+        switch (lockType) {
+            case UserAuthType_CheckID:
+                [self.rootVC showLoginPage:NO];
+                break;
+            case UserAuthType_Login:
+                [self.rootVC showLoginPage:NO];
+                break;
+            case UserAuthType_Easy:
+                [self.rootVC showLoginPage:NO];
+                break;
+            case UserAuthType_Gesture:
+                [self.rootVC showLockPage:loginUser];
+                break;
+            default:
+                break;
+        }
+        
+    } else{
+        [self.rootVC showLoginPage:NO];
     }
+    
     
 }
 

@@ -14,12 +14,11 @@
 
 @interface GestureLockVC ()
 
-/** 操作成功：密码设置成功、密码验证成功 */
-@property (nonatomic,copy) void (^successBlock)(NSString *pwd);
 
-@property (nonatomic,copy) void (^forgetPwdBlock)();
-
+@property (strong, nonatomic) IBOutlet UIButton *backBtn;
 @property (strong, nonatomic) IBOutlet CLLockView *lockView;
+@property (strong, nonatomic) IBOutlet UIButton *avatarButton;
+@property (strong, nonatomic) IBOutlet UIButton *forgetBtn;
 
 @property (nonatomic, copy) NSString *firstInputPWD;
 @property (nonatomic, assign) NSInteger tryTimes;
@@ -53,6 +52,15 @@
     //设置背景色
     self.view.backgroundColor = CoreLockViewBgColor;
     self.tryTimes = 0;
+    
+    if (self.type == GestureLockTypeSetPwd) {
+        self.backBtn.hidden = NO;
+        self.forgetBtn.hidden = YES;
+    } else {
+        self.backBtn.hidden = YES;
+        self.forgetBtn.hidden = NO;
+        [self.forgetBtn setTitle:NSLocalizedString(@"忘记密码", @"") forState:UIControlStateNormal];
+    }
     
     [self prepareLockView];
 }
@@ -91,9 +99,9 @@
         if (weakSelf.type == GestureLockTypeSetPwd) {
             if (weakSelf.firstInputPWD && weakSelf.firstInputPWD.length>0) {
                 if ([pwd isEqualToString:weakSelf.firstInputPWD]) {
-                    TTDEBUGLOG(@"set password success");
-                    if (weakSelf.successBlock) weakSelf.successBlock(pwd);
+                    [weakSelf setPwdSuccess:pwd];
                 } else {
+                    weakSelf.firstInputPWD = nil;
                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"密码不一致，请重新输入", nil)];
                 }
             } else {
@@ -101,12 +109,11 @@
             }
         } else {
             if ([pwd isEqualToString:weakSelf.checkPwd]) {
-                TTDEBUGLOG(@"check password success");
-                if (weakSelf.successBlock) weakSelf.successBlock(pwd);
+                [weakSelf checkPwdSuccess:nil];
             } else {
                 if (weakSelf.tryTimes>weakSelf.limitTryTimes) {
                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"密码错误，请重新登录", nil)];
-                    [weakSelf enterLoginPage];
+                    [weakSelf enterLoginPage:nil];
                 } else {
                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"密码错误，请重新输入", nil)];
                 }
@@ -124,13 +131,33 @@
 
 #pragma mark - Action
 
-- (void)enterLoginPage {
-    LoginVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginPage"];
-    [self.navigationController pushViewController:loginVC animated:YES];
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)enterLoginPage:(id)sender {
+    if (self.type == GestureLockTypeVeryfiPwd) {
+        LoginVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginPage"];
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
 }
 
 - (IBAction)forgetPWDAction:(id)sender {
     if (self.forgetPwdBlock) self.forgetPwdBlock();
+}
+
+#pragma mark - Private
+
+- (void)setPwdSuccess:(NSString *)pwd {
+    TTDEBUGLOG(@"set password success");
+    if (self.successBlock) self.successBlock(pwd);
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)checkPwdSuccess:(NSString *)pwd {
+    TTDEBUGLOG(@"check password success");
+    if (self.successBlock) self.successBlock(pwd);
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

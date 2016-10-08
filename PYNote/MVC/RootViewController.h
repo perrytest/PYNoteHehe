@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface RootViewController : UITableViewController
 
 - (void)showLoginPage:(BOOL)animated;
 
-- (void)showLockPage:(BOOL)animated;
+- (void)showLockPage:(User *)loginUser;
 
 
 @end
