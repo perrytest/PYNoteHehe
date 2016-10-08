@@ -15,21 +15,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUx-Rq-Fo8">
-                        <rect key="frame" x="28" y="11" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="idg-th-hZu">
-                        <rect key="frame" x="90" y="7" width="102" height="30"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="idg-th-hZu">
+                        <rect key="frame" x="28" y="13" width="164" height="19"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                         <connections>
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="FSb-r8-oex"/>
                         </connections>
                     </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nPo-qS-Bgd">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nPo-qS-Bgd">
                         <rect key="frame" x="212" y="7" width="80" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="pvI-jJ-HOr"/>
@@ -44,17 +38,14 @@
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="nPo-qS-Bgd" secondAttribute="trailing" constant="20" id="2xr-d3-61s"/>
                     <constraint firstItem="nPo-qS-Bgd" firstAttribute="leading" secondItem="idg-th-hZu" secondAttribute="trailing" constant="20" id="3sA-5j-FLI"/>
-                    <constraint firstItem="wUx-Rq-Fo8" firstAttribute="centerY" secondItem="nPo-qS-Bgd" secondAttribute="centerY" id="6lP-9g-xPJ"/>
-                    <constraint firstItem="wUx-Rq-Fo8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="8mW-Yb-KFU"/>
-                    <constraint firstItem="idg-th-hZu" firstAttribute="leading" secondItem="wUx-Rq-Fo8" secondAttribute="trailing" constant="20" id="cP1-cQ-Io2"/>
-                    <constraint firstItem="wUx-Rq-Fo8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lXV-jN-qwt"/>
-                    <constraint firstItem="wUx-Rq-Fo8" firstAttribute="centerY" secondItem="idg-th-hZu" secondAttribute="centerY" id="qC9-F7-heW"/>
+                    <constraint firstItem="nPo-qS-Bgd" firstAttribute="centerY" secondItem="idg-th-hZu" secondAttribute="centerY" id="K2A-vt-dDV"/>
+                    <constraint firstItem="idg-th-hZu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="clq-NR-MKr"/>
+                    <constraint firstItem="idg-th-hZu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kTu-8M-GK1"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="leftInputTF" destination="idg-th-hZu" id="SKN-Ef-GSW"/>
                 <outlet property="rightInputTF" destination="nPo-qS-Bgd" id="xbW-aD-SyD"/>
-                <outlet property="titleLabel" destination="wUx-Rq-Fo8" id="51o-jE-NWK"/>
             </connections>
         </tableViewCell>
     </objects>

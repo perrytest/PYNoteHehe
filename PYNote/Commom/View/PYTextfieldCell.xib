@@ -15,14 +15,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yzY-Xm-iAS">
-                        <rect key="frame" x="28" y="13" width="25" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="998-Fe-6HI">
-                        <rect key="frame" x="73" y="7" width="219" height="30"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="998-Fe-6HI">
+                        <rect key="frame" x="28" y="12" width="264" height="19"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                         <connections>
@@ -31,16 +25,13 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="yzY-Xm-iAS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="2EN-by-0Ef"/>
-                    <constraint firstItem="998-Fe-6HI" firstAttribute="leading" secondItem="yzY-Xm-iAS" secondAttribute="trailing" constant="20" id="EF8-01-dMh"/>
+                    <constraint firstItem="998-Fe-6HI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="1WM-RQ-L4b"/>
+                    <constraint firstItem="998-Fe-6HI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2v8-hp-k3e"/>
                     <constraint firstAttribute="trailingMargin" secondItem="998-Fe-6HI" secondAttribute="trailing" constant="20" id="N8p-27-62X"/>
-                    <constraint firstItem="yzY-Xm-iAS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nzI-tQ-msE"/>
-                    <constraint firstItem="yzY-Xm-iAS" firstAttribute="centerY" secondItem="998-Fe-6HI" secondAttribute="centerY" id="tqQ-H0-eHE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="inputTF" destination="998-Fe-6HI" id="UEU-Tm-KPJ"/>
-                <outlet property="titleLabel" destination="yzY-Xm-iAS" id="Izd-v3-H21"/>
             </connections>
         </tableViewCell>
     </objects>

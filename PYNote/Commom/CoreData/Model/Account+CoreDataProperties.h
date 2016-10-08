@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *pwd;
 @property (nullable, nonatomic, retain) NSString *pwd_g;
 @property (nullable, nonatomic, retain) NSString *pwd_notice;
+@property (nullable, nonatomic, retain) NSString *url;
 @property (nullable, nonatomic, retain) NSNumber *type;
 @property (nullable, nonatomic, retain) NSDate *updateAt;
 @property (nullable, nonatomic, retain) NSSet<RelateData *> *accRelate;

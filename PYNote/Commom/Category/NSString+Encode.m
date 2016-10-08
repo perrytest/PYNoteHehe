@@ -9,19 +9,19 @@
 #import "NSString+Encode.h"
 #import "AESCrypt.h"
 
-static NSString *encodeKey = @"PYNoteTestKey";
+
 
 @implementation NSString (Encode)
 
 - (NSString *)encodeString {
     NSString *oldString = [self copy];
-    NSString *encodeString = [AESCrypt encrypt:oldString password:encodeKey];
+    NSString *encodeString = [AESCrypt encrypt:oldString password:[PYCoreDataController sharedInstance].dataKeyString];
     return encodeString;
 }
 
 - (NSString *)decodeString {
     NSString *oldString = [self copy];
-    NSString *encodeString = [AESCrypt decrypt:oldString password:encodeKey];
+    NSString *encodeString = [AESCrypt decrypt:oldString password:[PYCoreDataController sharedInstance].dataKeyString];
     return encodeString;
 }
 

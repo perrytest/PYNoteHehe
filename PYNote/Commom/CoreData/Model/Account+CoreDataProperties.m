@@ -24,6 +24,7 @@
 @dynamic pwd;
 @dynamic pwd_g;
 @dynamic pwd_notice;
+@dynamic url;
 @dynamic type;
 @dynamic updateAt;
 @dynamic accRelate;

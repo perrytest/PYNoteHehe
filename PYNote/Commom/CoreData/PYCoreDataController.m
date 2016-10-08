@@ -8,6 +8,48 @@
 
 #import "PYCoreDataController.h"
 
+
+
+#define XOR_KEY 0xB2
+
+static NSString *encodeKey = @"PYNoteTestKey";
+
+NSData *PYEncodeString() {
+    unsigned char str5[] = {
+        (XOR_KEY ^ 'P'),
+        (XOR_KEY ^ 'X'),
+        (XOR_KEY ^ 'O'),
+        (XOR_KEY ^ 'n'),
+        (XOR_KEY ^ 'u'),
+        (XOR_KEY ^ 'd'),
+        (XOR_KEY ^ 'U'),
+        (XOR_KEY ^ 'd'),
+        (XOR_KEY ^ 'r'),
+        (XOR_KEY ^ 'u'),
+        (XOR_KEY ^ 'J'),
+        (XOR_KEY ^ 'd'),
+        (XOR_KEY ^ 'x'),
+        (XOR_KEY ^ '\0')};
+    unsigned char *p = str5;
+    while( ((*p) ^=  XOR_KEY) != '\0'){
+        p++;
+    }
+    NSString *string = [NSString stringWithFormat:@"%s", str5];
+    return [string dataUsingEncoding:NSUTF8StringEncoding];
+}
+
+NSString *keyDataEncode(NSData * data) {
+    char *dataP = (char *)[data bytes];
+    for (int i = 0; i < data.length; i++) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsequenced"
+        *dataP = *(++dataP) ^ 1;
+#pragma clang diagnostic pop
+    }
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
+
 static PYCoreDataController *sharedInstance = nil;
 
 @implementation PYCoreDataController
@@ -33,6 +75,14 @@ static PYCoreDataController *sharedInstance = nil;
         }
     }
     return nil;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.dataKeyString = keyDataEncode(PYEncodeString());
+    }
+    return self;
 }
 
 

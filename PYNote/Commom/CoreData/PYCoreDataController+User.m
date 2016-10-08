@@ -16,7 +16,7 @@ static NSString *UserTableName = @"User";
     NSManagedObjectContext *context = [self managedObjectContext];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:UserTableName inManagedObjectContext:context];
-    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"name==%@", userName];
+    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"name=%@ || cardId=%@ || phone=%@ || email=%@", userName, userName, userName, userName];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setFetchLimit:1];
@@ -29,6 +29,25 @@ static NSString *UserTableName = @"User";
         return fetchedObjects[0];
     }
     return nil;
+}
+
+- (BOOL)isExistUser:(NSString *)userName {
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:UserTableName inManagedObjectContext:context];
+    NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"name=%@ || cardId=%@ || phone=%@ || email=%@", userName, userName, userName, userName];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setFetchLimit:1];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:userPredicate];
+    NSError *error;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if (fetchedObjects.count >= 1) {
+        return YES;
+    }
+    return NO;
 }
 
 - (User *)userWithUserID:(NSString *)userID {

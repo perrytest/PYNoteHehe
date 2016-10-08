@@ -1,0 +1,12 @@
+
+/* Class = "UINavigationItem"; title = "iPhone root title"; ObjectID = "e4n-ZU-msi"; */
+"e4n-ZU-msi.title" = "iPhone root title";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "izX-Mt-Y9z"; */
+"izX-Mt-Y9z.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "mPP-0T-Hj7"; */
+"mPP-0T-Hj7.text" = "Title";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "nwc-Pc-7J3"; */
+"nwc-Pc-7J3.text" = "Subtitle";

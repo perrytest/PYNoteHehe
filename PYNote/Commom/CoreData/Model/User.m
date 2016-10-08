@@ -35,13 +35,16 @@
 }
 
 - (BOOL)isTokenValid {
-    NSString *tokenString = [self.token base64DecodedString];
-    NSArray *items = [tokenString componentsSeparatedByString:@"@"];
-    NSString *timeString = items[1];
-    NSDate *tokenDate = [NSDate dateWithTimeIntervalSince1970:[timeString doubleValue]];
-    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:tokenDate];
-    if (timeInterval>0 && timeInterval < [self lockTimeInterval]) {
-        return YES;
+    if (self.token && self.token.length>0) {
+        NSString *tokenString = [self.token base64DecodedString];
+        NSArray *items = [tokenString componentsSeparatedByString:@"@"];
+        NSString *timeString = items[1];
+        NSDate *tokenDate = [NSDate dateWithTimeIntervalSince1970:[timeString doubleValue]];
+        NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:tokenDate];
+        if (timeInterval>0 && timeInterval < [self lockTimeInterval]) {
+            return YES;
+        }
+        self.token = nil;
     }
     return NO;
 }
@@ -91,5 +94,15 @@
     }
     
 }
+
+- (BOOL)checkLoginPassword:(NSString *)pwd {
+    if ([self.pwd_s isEqualToString:pwd]) {
+        return YES;
+    } else {
+        [self addLoginTryWrongTimes];
+        return NO;
+    }
+}
+
 
 @end

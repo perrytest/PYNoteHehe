@@ -18,7 +18,11 @@
 #import "Common.h"
 #import "PYToolDefine.h"
 #import "KeyDefine.h"
+#import "StyleDefine.h"
 #import "PYTools.h"
+#import "NSString+Encode.h"
+#import "UIView+Frame.h"
+#import "UIColor+Extension.h"
 
 #import "CocoaLumberjack.h"
 #import "SVProgressHUD.h"

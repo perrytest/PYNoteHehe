@@ -11,8 +11,6 @@
 @interface PYTextfieldCell : UITableViewCell
 
 
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-
 @property (strong, nonatomic) IBOutlet UITextField *inputTF;
 
 @end

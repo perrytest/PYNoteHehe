@@ -90,48 +90,38 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
     cell.inputTF.placeholder = nil;
     switch (indexPath.row) {
         case 0:
-            cell.titleLabel.text = NSLocalizedString(@"账号", @"");
             cell.inputTF.placeholder = NSLocalizedString(@"请输入账号", @"");
             RAC(self.account, account) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.account, account) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 1:
-            cell.titleLabel.text = NSLocalizedString(@"姓名", @"");
+            cell.inputTF.placeholder = NSLocalizedString(@"请输入姓名", @"");
             RAC(self.account, name) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.account, name) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 2:
-            cell.titleLabel.text = NSLocalizedString(@"昵称", @"");
+            cell.inputTF.placeholder = NSLocalizedString(@"请输入昵称", @"");
             RAC(self.account, nick) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.account, nick) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 3:
-            cell.titleLabel.text = NSLocalizedString(@"账号标注", @"");
+            cell.inputTF.placeholder = NSLocalizedString(@"请输入账号关键字", @"");
             cell.inputTF.text = self.account.keyword;
             RAC(self.account, keyword) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.account, keyword) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 4:
-            cell.titleLabel.text = NSLocalizedString(@"电话号码", @"");
+            cell.inputTF.placeholder = NSLocalizedString(@"请输入手机号", @"");
             RAC(self.account, phone) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.account, phone) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 5:
-            cell.titleLabel.text = NSLocalizedString(@"email", @"");
+            cell.inputTF.placeholder = NSLocalizedString(@"请输入email", @"");
             RAC(self.account, email) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.account, email) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 6:
-            cell.titleLabel.text = NSLocalizedString(@"密码", @"");
             cell.inputTF.secureTextEntry = YES;
             cell.inputTF.placeholder = NSLocalizedString(@"请输入密码", @"");
             RAC(self.account, pwd) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.account, pwd) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 7:
-            cell.titleLabel.text = NSLocalizedString(@"密码备注", @"");
+            cell.inputTF.placeholder = NSLocalizedString(@"请输入密码备注", @"");
             RAC(self.account, pwd_notice) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.account, pwd_notice) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         default:
             break;

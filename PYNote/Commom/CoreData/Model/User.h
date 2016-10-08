@@ -34,7 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addLoginTryWrongTimes;
 
-//- (void)convertToPYUserModel:(User * _Nonnull * _Nonnull)user;
+- (BOOL)checkLoginPassword:(NSString *)pwd;
+
 
 @end
 

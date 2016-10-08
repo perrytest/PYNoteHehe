@@ -14,6 +14,7 @@
         <attribute name="pwd_notice" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="updateAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="accRelate" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RelateData" syncable="YES"/>
         <relationship name="appList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RelateApp" syncable="YES"/>
         <relationship name="safety" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Question" syncable="YES"/>
@@ -63,7 +64,7 @@
         <relationship name="safety" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Question" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-261" positionY="3" width="128" height="298"/>
+        <element name="Account" positionX="-261" positionY="3" width="128" height="315"/>
         <element name="Question" positionX="-387" positionY="63" width="128" height="90"/>
         <element name="RelateApp" positionX="-344" positionY="-117" width="128" height="88"/>
         <element name="RelateData" positionX="36" positionY="189" width="128" height="103"/>

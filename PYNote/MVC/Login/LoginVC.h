@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginVC : PYViewController
+@interface LoginVC : UITableViewController
 
 @end

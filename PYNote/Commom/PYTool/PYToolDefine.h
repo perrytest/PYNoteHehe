@@ -25,8 +25,13 @@
 
 
 #define RGBA(r, g, b, a)      [UIColor colorWithRed:r grern:g blue:b alpha:a]
+#define HexColor(hexValue) [UIColor hexColor:(hexValue)]
 
 #define NSStringFromInteger(i) [NSString stringWithFormat:@"%ld", (long)(i)]
+
+#define PYScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define PYScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define PYMainScale [UIScreen mainScreen].scale
 
 
 #endif /* PYToolDefine_h */

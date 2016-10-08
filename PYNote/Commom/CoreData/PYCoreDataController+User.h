@@ -14,6 +14,8 @@
 //查询用户
 - (User *)searchUser:(NSString *)userName;
 
+- (BOOL)isExistUser:(NSString *)userName;
+
 - (User *)userWithUserID:(NSString *)userID;
 
 @end

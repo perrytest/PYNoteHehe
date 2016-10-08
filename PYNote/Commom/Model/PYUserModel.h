@@ -36,17 +36,13 @@
 @property (nullable, nonatomic, copy) NSString *userId;
 
 
-//- (void)addAccountsObject:(Account *)value;
-//- (void)removeAccountsObject:(Account *)value;
-//- (void)addAccounts:(NSSet<Account *> *)values;
-//- (void)removeAccounts:(NSSet<Account *> *)values;
-//
-//- (void)addSafetyObject:(Question *)value;
-//- (void)removeSafetyObject:(Question *)value;
-//- (void)addSafety:(NSSet<Question *> *)values;
-//- (void)removeSafety:(NSSet<Question *> *)values;
-
 - (void)convertInfoToUser:(User * _Nonnull * _Nonnull)user;
 
++ (instancetype)convertFromUser:(User * _Nonnull)user;
+
+
+- (BOOL)isUserValid;
+
+- (BOOL)isUserRegistValid;
 
 @end

@@ -11,6 +11,8 @@
 
 @interface PYCoreDataController : NSObject
 
+@property (nonatomic, copy) NSString *dataKeyString;
+
 + (PYCoreDataController *)sharedInstance;
 
 - (NSURL *)sourceStoreURL;

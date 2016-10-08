@@ -7,6 +7,9 @@
 //
 
 #import "RegistVC.h"
+#import <AVFoundation/AVFoundation.h>
+#import <Photos/Photos.h>
+
 #import "PYTextfieldCell.h"
 #import "PYDoubleTextfieldCell.h"
 
@@ -18,7 +21,10 @@
 static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
 static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 
-@interface RegistVC ()
+@interface RegistVC () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) UIButton *avatarButton;
+@property (nonatomic, copy) NSData *avatarData;
 
 @property (nonatomic, strong) UIBarButtonItem *doneButton;
 
@@ -42,6 +48,21 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     [self.tableView registerNib:cellNib1 forCellReuseIdentifier:cellTFIdentifierNormal];
     [self.tableView registerNib:cellNib2 forCellReuseIdentifier:cellTFIdentifierDouble];
     
+    self.avatarButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.width-60)/2, 20, 60, 60)];
+    [self.avatarButton setBackgroundImage:[UIImage imageNamed:@"Icon_avatar"] forState:UIControlStateNormal];
+    self.avatarButton.layer.cornerRadius = 30.0;
+    self.avatarButton.clipsToBounds = YES;
+    [self.avatarButton addTarget:self action:@selector(avartarClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.tableView.tableHeaderView = ({
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 100)];
+        
+        [headerView addSubview:self.avatarButton];
+        
+        headerView;
+    });
+    
+    
     self.user = [[PYUserModel alloc] init];
 }
 
@@ -56,8 +77,9 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     NSManagedObjectContext *context = [PYCoreDataController sharedInstance].managedObjectContext;
     User *insertUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
     [self.user convertInfoToUser:&insertUser];
-    [[PYCoreDataController sharedInstance] saveContext];
+    [insertUser refreshAuthToken];
     [app setActiveUser:insertUser];
+    [[PYCoreDataController sharedInstance] saveContext];
 }
 
 #pragma mark - Accessor
@@ -74,18 +96,30 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 - (void)addAccoutDoneAction:(UIButton *)sender {
     // add account
     
-    if (self.user.name && self.user.name.length>0 && self.user.pwd_s && self.user.pwd_s.length>0) {
+    if ([self.user isUserRegistValid]) {
         self.user.userId = [PYTools getUniqueId];
-        TTDEBUGLOG(@"save account id:%@", self.user.userId);
-        self.user.token = NSStringFromInteger([[NSDate date] timeIntervalSince1970]);
+        TTDEBUGLOG(@"save user id:%@", self.user.userId);
         self.user.creatAt = [NSDate date];
         self.user.lastAt = [NSDate date];
+        
+        if (self.avatarData && self.avatarData.length>0) {
+//            self.user.av
+        }
         
         [self addUserToCoreData];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"请输入用户名和密码", nil)];
+        if (![self.user isUserValid]) {
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"请输入用户名和密码", nil)];
+        } else {
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"用户已存在", nil)];
+        }
     }
+}
+
+- (void)avartarClickAction:(UIButton *)sender {
+    UIActionSheet *avatarSettingSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"从相册选择", nil), NSLocalizedString(@"拍照", nil), nil];
+    [avatarSettingSheet showInView:self.view];
 }
 
 #pragma mark - Table view data source
@@ -100,9 +134,10 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     if (indexPath.row == 2) {
         PYDoubleTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierDouble forIndexPath:indexPath];
         
-        cell.titleLabel.text = NSLocalizedString(@"密码", @"");
         cell.leftInputTF.secureTextEntry = YES;
+        cell.leftInputTF.placeholder = NSLocalizedString(@"请输入密码", @"");
         cell.rightInputTF.secureTextEntry = NO;
+        cell.rightInputTF.placeholder = NSLocalizedString(@"密码备注", @"");
         RAC(self.user, pwd_s) = [cell.leftInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
         RAC(cell.leftInputTF, text) = [RACObserve(self.user, pwd_s) takeUntil:[cell rac_prepareForReuseSignal]];
         RAC(self.user, pwd_notice) = [cell.rightInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
@@ -117,62 +152,125 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     cell.inputTF.placeholder = nil;
     switch (indexPath.row) {
         case 0:
-            cell.titleLabel.text = NSLocalizedString(@"姓名", @"");
             cell.inputTF.placeholder = NSLocalizedString(@"请输入姓名", @"");
             RAC(self.user, name) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, name) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 1:
-            cell.titleLabel.text = NSLocalizedString(@"昵称", @"");
             cell.inputTF.placeholder = NSLocalizedString(@"请输入昵称", @"");
             RAC(self.user, nameNick) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, nameNick) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 3:
-            cell.titleLabel.text = NSLocalizedString(@"身份证", @"");
+            cell.inputTF.placeholder = NSLocalizedString(@"请输入身份证", @"");
             RAC(self.user, cardId) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, cardId) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 4:
-            cell.titleLabel.text = NSLocalizedString(@"手机号码", @"");
-//            cell.inputTF setKeyboardType:<#(UIKeyboardType)#>
+            cell.inputTF.placeholder = NSLocalizedString(@"请输入手机号码", @"");
             RAC(self.user, phone) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, phone) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 5:
-            cell.titleLabel.text = NSLocalizedString(@"email", @"");
             cell.inputTF.placeholder = NSLocalizedString(@"请输入email", @"");
             RAC(self.user, email) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, email) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 6:
-            cell.titleLabel.text = NSLocalizedString(@"QQ", @"");
             cell.inputTF.placeholder = NSLocalizedString(@"请输入QQ", @"");
             RAC(self.user, qq) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, qq) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 7:
-            cell.titleLabel.text = NSLocalizedString(@"地址", @"");
             cell.inputTF.placeholder = NSLocalizedString(@"请输入地址", @"");
             RAC(self.user, address) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, address) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 8:
-            cell.titleLabel.text = NSLocalizedString(@"座右铭", @"");
             cell.inputTF.placeholder = NSLocalizedString(@"请输入座右铭", @"");
             RAC(self.user, motto) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, motto) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         case 9:
-            cell.titleLabel.text = NSLocalizedString(@"备注", @"");
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入座右铭", @"");
+            cell.inputTF.placeholder = NSLocalizedString(@"请输入备注留言", @"");
             RAC(self.user, notice) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            RAC(cell.inputTF, text) = [RACObserve(self.user, notice) takeUntil:[cell rac_prepareForReuseSignal]];
             break;
         default:
             break;
     }
     return cell;
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //判断按键
+    if (buttonIndex==2) {
+        return;
+    }
+    UIImagePickerController *pick = [[UIImagePickerController alloc] init];
+    pick.delegate = self;
+    pick.allowsEditing = YES;
+    if(buttonIndex == 1 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        if ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusAuthorized || [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusNotDetermined) {
+            pick.sourceType = UIImagePickerControllerSourceTypeCamera;
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无法访问您的相机。" message:@"您可以在“设置-隐私-相机”中启用访问" delegate:self cancelButtonTitle:NSLocalizedString(@"Sure", nil) otherButtonTitles:nil];
+            [alertView show];
+            return;
+        }
+    }
+    else if(buttonIndex == 0 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        @try {
+            if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusRestricted || [PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusDenied) {
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无法访问您的相机。" message:@"您可以在“设置-隐私-相机”中启用访问" delegate:self cancelButtonTitle:NSLocalizedString(@"Sure", nil) otherButtonTitles:nil];
+                [alertView show];
+                return;
+            } else {
+                pick.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }
+        }
+        @catch (NSException *exception) {
+            pick.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        @finally {
+            
+        }
+    } else {
+        return;
+    }
+    [self presentViewController:pick animated:YES completion:nil];
+    
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    [self performSelector:@selector(imagePickerController:didFinishPickingMediaWithInfo:)];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = nil;
+    image = [info objectForKey:UIImagePickerControllerEditedImage];
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    UIImage *image_ = [self resizeImage:image];
+    self.avatarData = UIImagePNGRepresentation(image_);
+    [self.avatarButton setBackgroundImage:image_ forState:UIControlStateNormal];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+-(UIImage*)resizeImage:(UIImage*)image
+{
+    float size = 300/PYMainScale;
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(size, size), NO, 0.0);
+    [image drawInRect:CGRectMake(0,0,size,size)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 @end

@@ -12,4 +12,6 @@
 
 - (NSString *)encodeString;
 
+- (NSString *)decodeString;
+
 @end
