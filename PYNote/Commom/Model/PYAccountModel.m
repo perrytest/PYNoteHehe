@@ -25,7 +25,7 @@
 - (AccountType)accountType
 {
     NSNumber *tempValue = [self type];
-    return (tempValue != nil) ? [tempValue intValue] : AccountType_Other;
+    return (tempValue != nil) ? [tempValue intValue] : AccountType_Unknown;
 }
 
 - (void)setAccountType:(AccountType)accountType {

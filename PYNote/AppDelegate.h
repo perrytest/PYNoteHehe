@@ -25,6 +25,8 @@
 
 - (void)setActiveUser:(User *)activeUser;
 
+- (void)logout;
+
 @end
 
 extern AppDelegate *app;

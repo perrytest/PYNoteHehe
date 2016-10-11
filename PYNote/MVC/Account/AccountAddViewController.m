@@ -8,6 +8,8 @@
 
 #import "AccountAddViewController.h"
 #import "PYTextfieldCell.h"
+#import "PYDoubleTextfieldCell.h"
+
 #import "PYAccountModel.h"
 #import "ReactiveCocoa.h"
 #import "Account.h"
@@ -20,7 +22,9 @@
 
 @end
 
-static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
+static NSString *cellTFIdentifierNormal = @"kNormalCellIdentifier";
+static NSString *cellTFIdentifierSingle = @"kCellTextFieldIdentifier";
+static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 
 @implementation AccountAddViewController
 
@@ -31,8 +35,12 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
     
     self.navigationItem.rightBarButtonItem = self.doneButton;
     
-    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([PYTextfieldCell class]) bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellTFIdentifier];
+    UINib *cellNib1 = [UINib nibWithNibName:NSStringFromClass([PYTextfieldCell class]) bundle:nil];
+    UINib *cellNib2 = [UINib nibWithNibName:NSStringFromClass([PYDoubleTextfieldCell class]) bundle:nil];
+    [self.tableView registerNib:cellNib1 forCellReuseIdentifier:cellTFIdentifierSingle];
+    [self.tableView registerNib:cellNib2 forCellReuseIdentifier:cellTFIdentifierDouble];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTFIdentifierNormal];
+    
     self.account = [[PYAccountModel alloc] init];
 }
 
@@ -69,7 +77,6 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
     if (self.account.account && self.account.account.length>0) {
         self.account.accountId = [PYTools getUniqueId];
         TTDEBUGLOG(@"save account id:%@", self.account.accountId);
-        self.account.accountType = AccountType_App;//...need to do
         [self addAccoutToCoreData];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -78,100 +85,117 @@ static NSString *cellTFIdentifier = @"kCellTextFieldIdentifier";
 #pragma mark - Table view data source
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifier forIndexPath:indexPath];
-    
-    cell.inputTF.secureTextEntry = NO;
-    cell.inputTF.placeholder = nil;
-    switch (indexPath.row) {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
         case 0:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入账号", @"");
-            RAC(self.account, account) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
+            return 7;
             break;
         case 1:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入姓名", @"");
-            RAC(self.account, name) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 2:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入昵称", @"");
-            RAC(self.account, nick) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 3:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入账号关键字", @"");
-            cell.inputTF.text = self.account.keyword;
-            RAC(self.account, keyword) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 4:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入手机号", @"");
-            RAC(self.account, phone) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 5:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入email", @"");
-            RAC(self.account, email) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 6:
-            cell.inputTF.secureTextEntry = YES;
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入密码", @"");
-            RAC(self.account, pwd) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 7:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入密码备注", @"");
-            RAC(self.account, pwd_notice) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+            return 1;
             break;
         default:
             break;
     }
-    return cell;
+    return 0;
 }
 
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 0: {
+            if (indexPath.row == 6) {
+                PYDoubleTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierDouble forIndexPath:indexPath];
+                
+                cell.leftInputTF.secureTextEntry = YES;
+                cell.leftInputTF.placeholder = NSLocalizedString(@"请输入密码", @"");
+                cell.rightInputTF.secureTextEntry = NO;
+                cell.rightInputTF.placeholder = NSLocalizedString(@"密码备注", @"");
+                RAC(self.account, pwd) = [cell.leftInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                RAC(self.account, pwd_notice) = [cell.rightInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                
+                return cell;
+            }
+            
+            PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierSingle forIndexPath:indexPath];
+            
+            cell.inputTF.secureTextEntry = NO;
+            cell.inputTF.placeholder = nil;
+            switch (indexPath.row) {
+                case 0:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入账号", @"");
+                    RAC(self.account, account) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 1:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入姓名", @"");
+                    RAC(self.account, name) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 2:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入昵称", @"");
+                    RAC(self.account, nick) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 3:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入账号关键字", @"");
+                    cell.inputTF.text = self.account.keyword;
+                    RAC(self.account, keyword) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 4:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入手机号", @"");
+                    RAC(self.account, phone) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 5:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入email", @"");
+                    RAC(self.account, email) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                default:
+                    break;
+            }
+            return cell;
+        }
+            break;
+        case 1: {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierNormal forIndexPath:indexPath];
+            
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = NSLocalizedString(@"相关app", @"");
+                    break;
+                default:
+                    break;
+            }
+            return cell;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierNormal forIndexPath:indexPath];
+    return cell;
+}
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.section) {
+        case 1: {
+            switch (indexPath.row) {
+                case 0:
+                    // enter app list
+                    [self performSegueWithIdentifier:@"AccountAddToApp" sender:nil];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
 
 @end

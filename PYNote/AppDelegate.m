@@ -148,6 +148,13 @@ AppDelegate *app = nil;
     [activeUser refreshAuthToken];
 }
 
+- (void)logout {
+    UserDefaultsRemoveObjectForKey(kCurrentUserID);
+    UserDefaultSynchronize;
+    [[self activeUser] deleteAuthToken];
+    self.activeUserOID = nil;
+}
+
 #pragma mark - Private
 
 - (void)showCoverPage {

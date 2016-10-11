@@ -56,24 +56,38 @@ static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
     });
     
     
+    [self loadLoginButton];
+    
+    [self loadCurrentUser];
+}
+
+#pragma mark - Style
+
+- (void)loadLoginButton {
     UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 30, self.view.width-40*2, 40)];
-    [loginBtn setBackgroundColor:Color_FC06];
     [loginBtn.layer setCornerRadius:20];
     [loginBtn setTitle:NSLocalizedString(@"登  录", nil) forState:UIControlStateNormal];
     [loginBtn setTitleColor:Color_FC10 forState:UIControlStateNormal];
     [loginBtn.titleLabel setFont:Font_FS06];
-//    [loginBtn setRac_command:<#(RACCommand *)#>]
     [loginBtn addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
+    RACSignal *combinSignal = [RACSignal combineLatest:@[RACObserve(self, userString), RACObserve(self, password)] reduce:^id(NSString *user, NSString *pwd){
+        return @(user.length && pwd.length);
+    }];
+    RAC(loginBtn, enabled) = combinSignal;
+    [combinSignal subscribeNext:^(id x) {
+        if ([x boolValue]) {
+            [loginBtn setBackgroundColor:Color_FC06];
+        } else {
+            [loginBtn setBackgroundColor:[UIColor lightGrayColor]];
+        }
+        
+    }];
     
     self.tableView.tableFooterView = ({
         UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 100)];
-        
         [footerView addSubview:loginBtn];
-        
         footerView;
     });
-    
-    [self loadCurrentUser];
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,14 +118,6 @@ static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
 }
 
 - (void)loginAction:(id)sender {
-//    //...test
-//    NSString *userID = UserDefaultsObjectForKey(kCurrentUserID);
-//    if (userID && userID.length>0) {
-//        User *currentUser = [[PYCoreDataController sharedInstance] userWithUserID:userID];
-//        [app setActiveUser:currentUser];
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }
-    
     if (self.userString && self.userString.length>0 && self.password && self.password.length>0) {
         User *loginUser = [[PYCoreDataController sharedInstance] searchUser:self.userString];
         if ([loginUser checkLoginPassword:self.password]) {
@@ -119,6 +125,8 @@ static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
             [loginUser refreshAuthToken];
             [app setActiveUser:loginUser];
             [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"用户名和密码不正确", nil)];
         }
     }
 }

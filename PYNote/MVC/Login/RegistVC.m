@@ -19,7 +19,8 @@
 #import "ReactiveCocoa.h"
 
 
-static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
+static NSString *cellTFIdentifierNormal = @"kNormalCellIdentifier";
+static NSString *cellTFIdentifierSingle = @"kCellTextFieldIdentifier";
 static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 
 @interface RegistVC () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -46,8 +47,9 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     
     UINib *cellNib1 = [UINib nibWithNibName:NSStringFromClass([PYTextfieldCell class]) bundle:nil];
     UINib *cellNib2 = [UINib nibWithNibName:NSStringFromClass([PYDoubleTextfieldCell class]) bundle:nil];
-    [self.tableView registerNib:cellNib1 forCellReuseIdentifier:cellTFIdentifierNormal];
+    [self.tableView registerNib:cellNib1 forCellReuseIdentifier:cellTFIdentifierSingle];
     [self.tableView registerNib:cellNib2 forCellReuseIdentifier:cellTFIdentifierDouble];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTFIdentifierNormal];
     
     self.avatarButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.width-60)/2, 20, 60, 60)];
     [self.avatarButton setBackgroundImage:[UIImage imageNamed:@"Icon_avatar"] forState:UIControlStateNormal];
@@ -124,86 +126,143 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 }
 
 - (void)avartarClickAction:(UIButton *)sender {
-//    UIActionSheet *avatarSettingSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"从相册选择", nil), NSLocalizedString(@"拍照", nil), nil];
-//    [avatarSettingSheet showInView:self.view];
-    GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];
-    gestureLockVC.title = NSLocalizedString(@"设置手势密码", @"");
-    gestureLockVC.type = GestureLockTypeSetPwd;
-    gestureLockVC.successBlock = ^(NSString *pwd) {
-        self.user.pwd_g = pwd;
-    };
-    [self.navigationController pushViewController:gestureLockVC animated:YES];
+    UIActionSheet *avatarSettingSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"从相册选择", nil), NSLocalizedString(@"拍照", nil), nil];
+    [avatarSettingSheet showInView:self.view];
+    
 }
 
 #pragma mark - Table view data source
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 2) {
-        PYDoubleTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierDouble forIndexPath:indexPath];
-        
-        cell.leftInputTF.secureTextEntry = YES;
-        cell.leftInputTF.placeholder = NSLocalizedString(@"请输入密码", @"");
-        cell.rightInputTF.secureTextEntry = NO;
-        cell.rightInputTF.placeholder = NSLocalizedString(@"密码备注", @"");
-        RAC(self.user, pwd_s) = [cell.leftInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-        RAC(cell.leftInputTF, text) = [RACObserve(self.user, pwd_s) takeUntil:[cell rac_prepareForReuseSignal]];
-        RAC(self.user, pwd_notice) = [cell.rightInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-        RAC(cell.rightInputTF, text) = [RACObserve(self.user, pwd_notice) takeUntil:[cell rac_prepareForReuseSignal]];
-        
-        return cell;
-    }
-    
-    PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierNormal forIndexPath:indexPath];
-    
-    cell.inputTF.secureTextEntry = NO;
-    cell.inputTF.placeholder = nil;
-    switch (indexPath.row) {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
         case 0:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入姓名", @"");
-            RAC(self.user, name) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
+            return 10;
             break;
         case 1:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入昵称", @"");
-            RAC(self.user, nameNick) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 3:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入身份证", @"");
-            RAC(self.user, cardId) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 4:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入手机号码", @"");
-            RAC(self.user, phone) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 5:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入email", @"");
-            RAC(self.user, email) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 6:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入QQ", @"");
-            RAC(self.user, qq) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 7:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入地址", @"");
-            RAC(self.user, address) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 8:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入座右铭", @"");
-            RAC(self.user, motto) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
-            break;
-        case 9:
-            cell.inputTF.placeholder = NSLocalizedString(@"请输入备注留言", @"");
-            RAC(self.user, notice) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+            return 1;
             break;
         default:
             break;
     }
+    return 0;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    switch (indexPath.section) {
+        case 0: {
+            if (indexPath.row == 2) {
+                PYDoubleTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierDouble forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                cell.leftInputTF.secureTextEntry = YES;
+                cell.leftInputTF.placeholder = NSLocalizedString(@"请输入密码", @"");
+                cell.rightInputTF.secureTextEntry = NO;
+                cell.rightInputTF.placeholder = NSLocalizedString(@"密码备注", @"");
+                RAC(self.user, pwd_s) = [cell.leftInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                RAC(self.user, pwd_notice) = [cell.rightInputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                
+                return cell;
+            }
+            
+            PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierSingle forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.inputTF.secureTextEntry = NO;
+            cell.inputTF.placeholder = nil;
+            switch (indexPath.row) {
+                case 0:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入姓名", @"");
+                    RAC(self.user, name) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 1:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入昵称", @"");
+                    RAC(self.user, nameNick) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 3:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入身份证", @"");
+                    RAC(self.user, cardId) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 4:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入手机号码", @"");
+                    RAC(self.user, phone) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 5:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入email", @"");
+                    RAC(self.user, email) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 6:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入QQ", @"");
+                    RAC(self.user, qq) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 7:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入地址", @"");
+                    RAC(self.user, address) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 8:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入座右铭", @"");
+                    RAC(self.user, motto) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 9:
+                    cell.inputTF.placeholder = NSLocalizedString(@"请输入备注留言", @"");
+                    RAC(self.user, notice) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                default:
+                    break;
+            }
+            return cell;
+        }
+            break;
+        case 1: {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierNormal forIndexPath:indexPath];
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = NSLocalizedString(@"添加手势密码", @"");
+                    break;
+                default:
+                    break;
+            }
+            return cell;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierNormal forIndexPath:indexPath];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.section) {
+        case 1: {
+            switch (indexPath.row) {
+                case 0: {
+                    GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];
+                    gestureLockVC.title = NSLocalizedString(@"设置手势密码", @"");
+                    gestureLockVC.type = GestureLockTypeSetPwd;
+                    gestureLockVC.successBlock = ^(NSString *pwd) {
+                        self.user.pwd_g = pwd;
+                    };
+                    [self.navigationController pushViewController:gestureLockVC animated:YES];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - UIActionSheetDelegate

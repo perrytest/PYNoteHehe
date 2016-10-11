@@ -22,6 +22,10 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.title = NSLocalizedString(@"首页", @"");
     self.navigationController.navigationBarHidden = NO;
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"注销", @"") style:UIBarButtonItemStylePlain target:self action:@selector(logoutAction:)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,10 +57,21 @@
             [loginUser refreshAuthToken];
             [app setActiveUser:loginUser];
         };
+        gestureLockVC.forgetPwdBlock = ^ {
+            
+        };
         UINavigationController *gestureLockNavVC = [[UINavigationController alloc] initWithRootViewController:gestureLockVC];
         [self.navigationController presentViewController:gestureLockNavVC animated:NO completion:nil];
     }
 }
+
+#pragma mark - Action
+
+- (void)logoutAction:(UIBarButtonItem *)sender {
+    [app logout];
+    [self showLoginPage:YES];
+}
+
 
 #pragma mark - UITableViewDataSource
 

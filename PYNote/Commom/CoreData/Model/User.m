@@ -18,6 +18,11 @@
     return validTimeInterval;
 }
 
+- (NSTimeInterval)darkLockTimeInterval {
+    NSTimeInterval validTimeInterval = [self.lockTime doubleValue]!=0?[self.lockTime doubleValue]:60*60*24*3;
+    return validTimeInterval;
+}
+
 - (NSInteger)limitTimes {
     NSInteger times = [self.lockTime integerValue]!=0?[self.lockTime integerValue]:5;
     return times;
@@ -31,7 +36,12 @@
     NSString *tokenString = [NSString stringWithFormat:@"%@@%@", self.userId, timeString];
     NSString *newToken = [tokenString base64EncodedString];
     self.token = newToken;
+    self.lastAt = [NSDate date];
     self.wrongTimes = @(0);
+}
+
+- (void)deleteAuthToken {
+    self.token = nil;
 }
 
 - (BOOL)isTokenValid {
@@ -44,38 +54,61 @@
         if (timeInterval>0 && timeInterval < [self lockTimeInterval]) {
             return YES;
         }
-        self.token = nil;
     }
     return NO;
 }
 
+//token失效，需要密码登录
+- (BOOL)isTokenLock {
+    if (self.token && self.token.length>0) {
+        NSString *tokenString = [self.token base64DecodedString];
+        NSArray *items = [tokenString componentsSeparatedByString:@"@"];
+        NSString *timeString = items[1];
+        NSDate *tokenDate = [NSDate dateWithTimeIntervalSince1970:[timeString doubleValue]];
+        NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:tokenDate];
+        if (timeInterval>0 && timeInterval < [self darkLockTimeInterval]) {
+            return NO;
+        }
+        self.token = nil;
+    }
+    return YES;
+}
+
 - (UserAuthType)authType {
     UserAuthType lockType = (UserAuthType)[self.lockType integerValue];
-    switch (lockType) {
-        case UserAuthType_CheckID:
-            return UserAuthType_CheckID;
-            break;
-        case UserAuthType_Login:
-            return UserAuthType_Login;
-            break;
-        case UserAuthType_Gesture:
-            return UserAuthType_Gesture;
-            break;
-        case UserAuthType_Easy:
-            return UserAuthType_Easy;
-            break;
-        case UserAuthType_None:
-            if (self.pwd_e && self.pwd_e.length>0) {
-                return UserAuthType_Easy;
-            } else if (self.pwd_g && self.pwd_g.length>0) {
-                return UserAuthType_Gesture;
-            } else {
+    if (self.token && self.token.length>0 && (![self isTokenLock])) {
+        switch (lockType) {
+            case UserAuthType_CheckID:
+                return UserAuthType_CheckID;
+                break;
+            case UserAuthType_Login:
                 return UserAuthType_Login;
-            }
-            break;
-        default:
+                break;
+            case UserAuthType_Gesture:
+                return UserAuthType_Gesture;
+                break;
+            case UserAuthType_Easy:
+                return UserAuthType_Easy;
+                break;
+            case UserAuthType_None:
+                if (self.pwd_e && self.pwd_e.length>0) {
+                    return UserAuthType_Easy;
+                } else if (self.pwd_g && self.pwd_g.length>0) {
+                    return UserAuthType_Gesture;
+                } else {
+                    return UserAuthType_Login;
+                }
+                break;
+            default:
+                return UserAuthType_Login;
+                break;
+        }
+    } else {
+        if (lockType == UserAuthType_CheckID) {
+            return lockType;
+        } else {
             return UserAuthType_Login;
-            break;
+        }
     }
 }
 

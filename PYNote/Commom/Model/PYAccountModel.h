@@ -12,10 +12,9 @@
 #import "PYQuestionModel.h"
 
 typedef enum {
-    AccountType_BankCard = 0,  //银行卡
-    AccountType_Email = 1,     //邮箱
-    AccountType_App = 2,       //app帐号
-    AccountType_Other = 3,     //其它
+    AccountType_Unknown = 0,
+    AccountType_BankCard = 1,  //银行卡
+    AccountType_Email = 2,     //邮箱
 } AccountType;
 
 

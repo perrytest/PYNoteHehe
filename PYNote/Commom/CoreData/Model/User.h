@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //刷新授权token
 - (void)refreshAuthToken;
+- (void)deleteAuthToken;
 
 //判断授权token是否有效
 - (BOOL)isTokenValid;

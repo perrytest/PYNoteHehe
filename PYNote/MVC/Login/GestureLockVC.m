@@ -40,7 +40,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        self.limitTryTimes = 5;
+        
     }
     return self;
 }
@@ -52,6 +52,7 @@
     //设置背景色
     self.view.backgroundColor = CoreLockViewBgColor;
     self.tryTimes = 0;
+    self.limitTryTimes = 5;
     
     if (self.type == GestureLockTypeSetPwd) {
         self.backBtn.hidden = NO;
@@ -143,6 +144,8 @@
 }
 
 - (IBAction)forgetPWDAction:(id)sender {
+    LoginVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginPage"];
+    [self.navigationController pushViewController:loginVC animated:YES];
     if (self.forgetPwdBlock) self.forgetPwdBlock();
 }
 

@@ -21,6 +21,7 @@
 //NSUserDefaults相关
 #define UserDefaultsObjectForKey(key)             [[NSUserDefaults standardUserDefaults] objectForKey:key]
 #define UserDefaultsSetValueForKey(value,key)     [[NSUserDefaults standardUserDefaults] setValue:value forKey:key]
+#define UserDefaultsRemoveObjectForKey(key)       [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
 #define UserDefaultSynchronize                    [[NSUserDefaults standardUserDefaults] synchronize]
 
 
