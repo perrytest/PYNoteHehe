@@ -9,16 +9,21 @@
 #import "AccountAddViewController.h"
 #import "PYTextfieldCell.h"
 #import "PYDoubleTextfieldCell.h"
+#import "AppListViewController.h"
 
 #import "PYAccountModel.h"
 #import "ReactiveCocoa.h"
 #import "Account.h"
 
-@interface AccountAddViewController ()
+#import "CardIO.h"
+
+@interface AccountAddViewController () <CardIOPaymentViewControllerDelegate>
 
 @property (nonatomic, strong) UIBarButtonItem *doneButton;
 
 @property (nonatomic, retain) PYAccountModel *account;
+
+@property (nonatomic, retain) NSArray *relatedAppArray;
 
 @end
 
@@ -95,7 +100,7 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
             return 7;
             break;
         case 1:
-            return 1;
+            return 2;
             break;
         default:
             break;
@@ -127,14 +132,17 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
             switch (indexPath.row) {
                 case 0:
                     cell.inputTF.placeholder = NSLocalizedString(@"请输入账号", @"");
+                    cell.inputTF.text = self.account.account;
                     RAC(self.account, account) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 1:
                     cell.inputTF.placeholder = NSLocalizedString(@"请输入姓名", @"");
+                    cell.inputTF.text = self.account.name;
                     RAC(self.account, name) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 2:
                     cell.inputTF.placeholder = NSLocalizedString(@"请输入昵称", @"");
+                    cell.inputTF.text = self.account.nick;
                     RAC(self.account, nick) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 3:
@@ -144,10 +152,12 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
                     break;
                 case 4:
                     cell.inputTF.placeholder = NSLocalizedString(@"请输入手机号", @"");
+                    cell.inputTF.text = self.account.phone;
                     RAC(self.account, phone) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 5:
                     cell.inputTF.placeholder = NSLocalizedString(@"请输入email", @"");
+                    cell.inputTF.text = self.account.email;
                     RAC(self.account, email) = [cell.inputTF.rac_textSignal takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 default:
@@ -162,6 +172,9 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
             switch (indexPath.row) {
                 case 0:
                     cell.textLabel.text = NSLocalizedString(@"相关app", @"");
+                    break;
+                case 1:
+                    cell.textLabel.text = NSLocalizedString(@"扫描银行卡", @"");
                     break;
                 default:
                     break;
@@ -186,7 +199,12 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
                     // enter app list
                     [self performSegueWithIdentifier:@"AccountAddToApp" sender:nil];
                     break;
-                    
+                case 1: {
+                    CardIOPaymentViewController *scanViewController = [[CardIOPaymentViewController alloc] initWithPaymentDelegate:self];
+                    scanViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+                    [self presentViewController:scanViewController animated:YES completion:nil];
+                }
+                    break;
                 default:
                     break;
             }
@@ -196,6 +214,27 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
         default:
             break;
     }
+}
+
+#pragma mark - CardIOPaymentViewControllerDelegate
+
+- (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfo *)info inPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    TTDEBUGLOG(@"Scan succeeded with info: %@", info);
+    // Do whatever needs to be done to deliver the purchased items.
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.account.accountType = AccountType_BankCard;
+    self.account.account = info.cardNumber;
+    [self.tableView reloadData];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+//
+//    self.account.account = [NSString stringWithFormat:@"Received card info. Number: %@, expiry: %02lu/%lu, cvv: %@.", info.redactedCardNumber, (unsigned long)info.expiryMonth, (unsigned long)info.expiryYear, info.cvv];
+}
+
+- (void)userDidCancelPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    TTDEBUGLOG(@"User cancelled scan");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

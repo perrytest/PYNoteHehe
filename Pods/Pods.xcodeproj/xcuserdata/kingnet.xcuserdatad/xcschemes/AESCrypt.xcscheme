@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '77C3EE8F481FCA5713448684'
+               BlueprintIdentifier = '8D918DF9841CF86DD56E88D5'
                BlueprintName = 'AESCrypt'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libAESCrypt.a'>

@@ -33,6 +33,7 @@ typedef enum {
 @property (nullable, nonatomic, copy) NSString *pwd;
 @property (nullable, nonatomic, copy) NSString *pwd_notice;
 @property (nullable, nonatomic, copy) NSString *pwd_g;
+@property (nullable, nonatomic, copy) NSString *url;
 
 @property (nullable, nonatomic, copy) NSNumber *type;
 @property (nonatomic, assign) AccountType accountType;

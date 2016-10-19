@@ -17,6 +17,9 @@
 		20514DC81C86B6A400B586D1 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DC21C86B6A400B586D1 /* RootViewController.m */; };
 		20514DCE1C86B6E300B586D1 /* PYNote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20514DCB1C86B6E300B586D1 /* PYNote.xcdatamodeld */; };
 		2064405D1D645B09001EE5B4 /* PYAppProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2064405C1D645B09001EE5B4 /* PYAppProxy.m */; };
+		207C4DD61DB0751B0015EC1F /* libCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 207C4DD31DB0751B0015EC1F /* libCardIO.a */; };
+		207C4DD71DB0751B0015EC1F /* libopencv_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 207C4DD41DB0751B0015EC1F /* libopencv_core.a */; };
+		207C4DD81DB0751B0015EC1F /* libopencv_imgproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 207C4DD51DB0751B0015EC1F /* libopencv_imgproc.a */; };
 		208592941D34D33900D10B6C /* CLLockItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2085928F1D34D33900D10B6C /* CLLockItemView.m */; };
 		208592951D34D33900D10B6C /* CLLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 208592911D34D33900D10B6C /* CLLockView.m */; };
 		208592961D34D33900D10B6C /* CoreLockConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 208592931D34D33900D10B6C /* CoreLockConst.m */; };
@@ -25,6 +28,16 @@
 		2092F2411D8FED0800802CF1 /* AppListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2092F2401D8FED0800802CF1 /* AppListViewController.m */; };
 		20ACF8B01CE5A6F100BFB120 /* AccoutListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ACF8AF1CE5A6F100BFB120 /* AccoutListViewController.m */; };
 		20ACF8B31CE5B36400BFB120 /* AccountAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ACF8B21CE5B36400BFB120 /* AccountAddViewController.m */; };
+		20B921061DB752CF000A7E7F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921041DB752CF000A7E7F /* Accelerate.framework */; };
+		20B921071DB752CF000A7E7F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921051DB752CF000A7E7F /* AudioToolbox.framework */; };
+		20B921091DB752E9000A7E7F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921081DB752E9000A7E7F /* CoreVideo.framework */; };
+		20B9210E1DB75302000A7E7F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B9210A1DB75302000A7E7F /* MobileCoreServices.framework */; };
+		20B9210F1DB75302000A7E7F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B9210B1DB75302000A7E7F /* OpenGLES.framework */; };
+		20B921101DB75302000A7E7F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B9210C1DB75302000A7E7F /* QuartzCore.framework */; };
+		20B921111DB75302000A7E7F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B9210D1DB75302000A7E7F /* Security.framework */; };
+		20B921131DB75323000A7E7F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921121DB75323000A7E7F /* CoreGraphics.framework */; };
+		20B921151DB7533A000A7E7F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921141DB7533A000A7E7F /* CoreMedia.framework */; };
+		20B921171DB75358000A7E7F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921161DB75358000A7E7F /* AVFoundation.framework */; };
 		20C44F631D92252300EB8BD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20C44F651D92252300EB8BD1 /* Localizable.strings */; };
 		20D349191DA89D0E00743ADA /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D349181DA89D0E00743ADA /* UIView+Frame.m */; };
 		20D3491C1DA89FA900743ADA /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D3491B1DA89FA900743ADA /* UIColor+Extension.m */; };
@@ -84,6 +97,17 @@
 		20514DCC1C86B6E300B586D1 /* PYNote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PYNote.xcdatamodel; sourceTree = "<group>"; };
 		2064405B1D645B09001EE5B4 /* PYAppProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAppProxy.h; sourceTree = "<group>"; };
 		2064405C1D645B09001EE5B4 /* PYAppProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAppProxy.m; sourceTree = "<group>"; };
+		207C4DCB1DB0751B0015EC1F /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
+		207C4DCC1DB0751B0015EC1F /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
+		207C4DCD1DB0751B0015EC1F /* CardIODetectionMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIODetectionMode.h; sourceTree = "<group>"; };
+		207C4DCE1DB0751B0015EC1F /* CardIOPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewController.h; sourceTree = "<group>"; };
+		207C4DCF1DB0751B0015EC1F /* CardIOPaymentViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewControllerDelegate.h; sourceTree = "<group>"; };
+		207C4DD01DB0751B0015EC1F /* CardIOUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOUtilities.h; sourceTree = "<group>"; };
+		207C4DD11DB0751B0015EC1F /* CardIOView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOView.h; sourceTree = "<group>"; };
+		207C4DD21DB0751B0015EC1F /* CardIOViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOViewDelegate.h; sourceTree = "<group>"; };
+		207C4DD31DB0751B0015EC1F /* libCardIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCardIO.a; sourceTree = "<group>"; };
+		207C4DD41DB0751B0015EC1F /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_core.a; sourceTree = "<group>"; };
+		207C4DD51DB0751B0015EC1F /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_imgproc.a; sourceTree = "<group>"; };
 		2085928E1D34D33900D10B6C /* CLLockItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockItemView.h; sourceTree = "<group>"; };
 		2085928F1D34D33900D10B6C /* CLLockItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockItemView.m; sourceTree = "<group>"; };
 		208592901D34D33900D10B6C /* CLLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockView.h; sourceTree = "<group>"; };
@@ -101,6 +125,16 @@
 		20ACF8AF1CE5A6F100BFB120 /* AccoutListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccoutListViewController.m; sourceTree = "<group>"; };
 		20ACF8B11CE5B36400BFB120 /* AccountAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountAddViewController.h; sourceTree = "<group>"; };
 		20ACF8B21CE5B36400BFB120 /* AccountAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountAddViewController.m; sourceTree = "<group>"; };
+		20B921041DB752CF000A7E7F /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		20B921051DB752CF000A7E7F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		20B921081DB752E9000A7E7F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		20B9210A1DB75302000A7E7F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		20B9210B1DB75302000A7E7F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		20B9210C1DB75302000A7E7F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		20B9210D1DB75302000A7E7F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		20B921121DB75323000A7E7F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		20B921141DB7533A000A7E7F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		20B921161DB75358000A7E7F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		20C44F641D92252300EB8BD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		20C44F661D92252500EB8BD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		20D349171DA89D0E00743ADA /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -176,7 +210,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20B921171DB75358000A7E7F /* AVFoundation.framework in Frameworks */,
+				20B921151DB7533A000A7E7F /* CoreMedia.framework in Frameworks */,
+				20B921131DB75323000A7E7F /* CoreGraphics.framework in Frameworks */,
+				20B921061DB752CF000A7E7F /* Accelerate.framework in Frameworks */,
+				20B9210E1DB75302000A7E7F /* MobileCoreServices.framework in Frameworks */,
+				20B9210F1DB75302000A7E7F /* OpenGLES.framework in Frameworks */,
+				20B921101DB75302000A7E7F /* QuartzCore.framework in Frameworks */,
+				20B921111DB75302000A7E7F /* Security.framework in Frameworks */,
+				20B921091DB752E9000A7E7F /* CoreVideo.framework in Frameworks */,
+				20B921071DB752CF000A7E7F /* AudioToolbox.framework in Frameworks */,
+				207C4DD81DB0751B0015EC1F /* libopencv_imgproc.a in Frameworks */,
 				78FAFEFBAD2946EB3783D271 /* libPods.a in Frameworks */,
+				207C4DD61DB0751B0015EC1F /* libCardIO.a in Frameworks */,
+				207C4DD71DB0751B0015EC1F /* libopencv_core.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +369,24 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		207C4DCA1DB0751B0015EC1F /* CardIO */ = {
+			isa = PBXGroup;
+			children = (
+				207C4DCB1DB0751B0015EC1F /* CardIO.h */,
+				207C4DCC1DB0751B0015EC1F /* CardIOCreditCardInfo.h */,
+				207C4DCD1DB0751B0015EC1F /* CardIODetectionMode.h */,
+				207C4DCE1DB0751B0015EC1F /* CardIOPaymentViewController.h */,
+				207C4DCF1DB0751B0015EC1F /* CardIOPaymentViewControllerDelegate.h */,
+				207C4DD01DB0751B0015EC1F /* CardIOUtilities.h */,
+				207C4DD11DB0751B0015EC1F /* CardIOView.h */,
+				207C4DD21DB0751B0015EC1F /* CardIOViewDelegate.h */,
+				207C4DD31DB0751B0015EC1F /* libCardIO.a */,
+				207C4DD41DB0751B0015EC1F /* libopencv_core.a */,
+				207C4DD51DB0751B0015EC1F /* libopencv_imgproc.a */,
+			);
+			path = CardIO;
+			sourceTree = "<group>";
+		};
 		2085928D1D34D33900D10B6C /* CoreLock */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +403,7 @@
 		2088869B1D38D35C00F94998 /* ThirdTool */ = {
 			isa = PBXGroup;
 			children = (
+				207C4DCA1DB0751B0015EC1F /* CardIO */,
 				2088869C1D38D44B00F94998 /* AppTool */,
 			);
 			path = ThirdTool;
@@ -496,6 +562,16 @@
 		FBE8279162566CEBF3241D08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				20B921161DB75358000A7E7F /* AVFoundation.framework */,
+				20B921141DB7533A000A7E7F /* CoreMedia.framework */,
+				20B921121DB75323000A7E7F /* CoreGraphics.framework */,
+				20B9210A1DB75302000A7E7F /* MobileCoreServices.framework */,
+				20B9210B1DB75302000A7E7F /* OpenGLES.framework */,
+				20B9210C1DB75302000A7E7F /* QuartzCore.framework */,
+				20B9210D1DB75302000A7E7F /* Security.framework */,
+				20B921081DB752E9000A7E7F /* CoreVideo.framework */,
+				20B921041DB752CF000A7E7F /* Accelerate.framework */,
+				20B921051DB752CF000A7E7F /* AudioToolbox.framework */,
 				8FFDBA95E5C2DA93BB46C63E /* libPods.a */,
 			);
 			name = Frameworks;
@@ -819,6 +895,38 @@
 				INFOPLIST_FILE = PYNote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PYNote/Commom/ThirdTool/CardIO",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AESCrypt\"",
+					"-l\"AFDownloadRequestOperation\"",
+					"-l\"AFNetworking\"",
+					"-l\"Base64nl\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"JSONModel\"",
+					"-l\"Reachability\"",
+					"-l\"ReactiveCocoa\"",
+					"-l\"SDWebImage\"",
+					"-l\"SVProgressHUD\"",
+					"-l\"UIActivityIndicator-for-SDWebImage\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpy.PYNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1fcd3d51-ecce-4912-a40f-7987c139a85d";
@@ -840,6 +948,38 @@
 				INFOPLIST_FILE = PYNote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PYNote/Commom/ThirdTool/CardIO",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AESCrypt\"",
+					"-l\"AFDownloadRequestOperation\"",
+					"-l\"AFNetworking\"",
+					"-l\"Base64nl\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"JSONModel\"",
+					"-l\"Reachability\"",
+					"-l\"ReactiveCocoa\"",
+					"-l\"SDWebImage\"",
+					"-l\"SVProgressHUD\"",
+					"-l\"UIActivityIndicator-for-SDWebImage\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpy.PYNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1fcd3d51-ecce-4912-a40f-7987c139a85d";
