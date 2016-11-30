@@ -17,7 +17,15 @@
     NSArray *properties = [self filterDemandPropertys];
     for (NSString *key in properties) {
         id value = [self valueForKey:key];
-        [*accoutData setValue:value forKey:key];
+        if ([key isEqualToString:@"appList"]) {
+//            [*accoutData addAppList:value];
+        } else if ([key isEqualToString:@"accRelate"]) {
+//            [*accoutData addAccRelate:value];
+        } else if ([key isEqualToString:@"safety"]) {
+//            [*accoutData addSafety:value];
+        } else {
+            [*accoutData setValue:value forKey:key];
+        }
     }
 }
 
@@ -34,6 +42,7 @@
     [self setType:temp];
     [self didChangeValueForKey:@"accountType"];
 }
+
 
 
 @end

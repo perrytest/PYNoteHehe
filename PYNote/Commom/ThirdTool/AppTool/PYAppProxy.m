@@ -39,6 +39,9 @@
     SEL function_ = NSSelectorFromString(@"localizedName");
     id localizedName = objc_msgSend(applicationProxy, function_);
     app.localizedName = [NSString stringWithFormat:@"%@", localizedName];
+    SEL function_test = NSSelectorFromString(@"signerIdentity");
+    id signId = objc_msgSend(applicationProxy, function_test);
+    app.signerIdentity = [NSString stringWithFormat:@"%@", signId];
     return app;
 }
 

@@ -31,6 +31,8 @@
 #import "PYViewController.h"
 #import "PYCoreDataController.h"
 
+#import "PYAppProxy.h"
+
 
 #import "User.h"
 #import "PYCoreDataController+User.h"

@@ -137,7 +137,7 @@
 }
 
 - (IBAction)enterLoginPage:(id)sender {
-    if (self.type == GestureLockTypeVeryfiPwd) {
+    if (self.type == GestureLockTypeVerifyPwd) {
         LoginVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginPage"];
         [self.navigationController pushViewController:loginVC animated:YES];
     }

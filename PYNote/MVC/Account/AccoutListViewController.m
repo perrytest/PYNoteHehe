@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) NSArray *accountList;
 
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
+
 @end
 
 @implementation AccoutListViewController
@@ -102,13 +104,13 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AccountListCellIdentifier"];
     }
+    cell.accessoryType = UITableViewCellAccessoryDetailButton;
     Account *account = [self.accountList objectAtIndex:indexPath.row];
     if (account.keyword && account.keyword.length>0) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@", account.keyword];
     } else {
         cell.textLabel.text = [NSString stringWithFormat:@"%@", account.account];
     }
-    
     
     return cell;
 }
@@ -132,8 +134,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    self.selectedIndexPath = indexPath;
     Account *account = [self.accountList objectAtIndex:indexPath.row];
-    [SVProgressHUD showInfoWithStatus:account.user.name];
+    NSString *title = nil;
+    if (account.keyword && account.keyword.length>0) {
+        title = [NSString stringWithFormat:@"%@", account.keyword];
+    } else {
+        title = [NSString stringWithFormat:@"%@", account.account];
+    }
+    NSString *message = [NSString stringWithFormat:@"%@\n密码备注: %@", account.account, account.pwd_notice];
+    UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:NSLocalizedString(@"Sure", @"") otherButtonTitles:NSLocalizedString(@"Copy_Pwd", Copy_Pwd), nil];
+    [infoAlert show];
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    TTDEBUGLOG(@"enter to accout detail page....");
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -143,6 +158,17 @@
 - (void)tableView:(UITableView*)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     TTDEBUGLOG(@"didEndEditingRowAtIndexPath");
     
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        Account *account = [self.accountList objectAtIndex:self.selectedIndexPath.row];
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = account.pwd;
+        [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"Copy_OK", @"")];
+    }
 }
 
 @end

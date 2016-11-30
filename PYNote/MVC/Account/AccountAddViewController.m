@@ -17,7 +17,7 @@
 
 #import "CardIO.h"
 
-@interface AccountAddViewController () <CardIOPaymentViewControllerDelegate>
+@interface AccountAddViewController () <CardIOPaymentViewControllerDelegate, AppListSelectDelegate>
 
 @property (nonatomic, strong) UIBarButtonItem *doneButton;
 
@@ -195,11 +195,16 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     switch (indexPath.section) {
         case 1: {
             switch (indexPath.row) {
-                case 0:
+                case 0: {
                     // enter app list
-                    [self performSegueWithIdentifier:@"AccountAddToApp" sender:nil];
+                    AppListViewController *appListVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AppListPage"];
+                    appListVC.delegate = self;
+                    [self.navigationController pushViewController:appListVC animated:YES];
+                }
+                    
                     break;
                 case 1: {
+                    //
                     CardIOPaymentViewController *scanViewController = [[CardIOPaymentViewController alloc] initWithPaymentDelegate:self];
                     scanViewController.modalPresentationStyle = UIModalPresentationFormSheet;
                     [self presentViewController:scanViewController animated:YES completion:nil];
@@ -235,6 +240,13 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 - (void)userDidCancelPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
     TTDEBUGLOG(@"User cancelled scan");
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - AppListSelectDelegate
+
+- (void)didSelectedAppList:(NSArray <PYAppProxy *> *)appList {
+    NSSet *list = [NSSet setWithArray:appList];
+    self.account.appList = list;
 }
 
 @end

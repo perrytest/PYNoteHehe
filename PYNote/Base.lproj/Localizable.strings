@@ -13,3 +13,6 @@ Cancel="取消";
 
 App_Delete_Title="删除“%@”";
 App_Delete_Messager="若删除“%@”，其所有数据也将被删除";
+
+Copy_Pwd="复制密码";
+Copy_OK="复制成功";

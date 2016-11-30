@@ -59,7 +59,6 @@
 		B80D0AD11D018D4A00227BA1 /* PYUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D0AD01D018D4A00227BA1 /* PYUserModel.m */; };
 		B80D0AD41D018E1900227BA1 /* PYAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D0AD31D018E1900227BA1 /* PYAccountModel.m */; };
 		B80D0AD71D01908E00227BA1 /* PYQuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D0AD61D01908E00227BA1 /* PYQuestionModel.m */; };
-		B80D0ADA1D0190E000227BA1 /* PYRelateAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D0AD91D0190E000227BA1 /* PYRelateAppModel.m */; };
 		B80D0ADD1D0190FD00227BA1 /* PYRelateDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D0ADC1D0190FD00227BA1 /* PYRelateDataModel.m */; };
 		B85D12781D1BCC8F0091ECA5 /* RelateApp+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B85D12651D1BCC8E0091ECA5 /* RelateApp+CoreDataProperties.m */; };
 		B85D12791D1BCC8F0091ECA5 /* RelateApp.m in Sources */ = {isa = PBXBuildFile; fileRef = B85D12671D1BCC8E0091ECA5 /* RelateApp.m */; };
@@ -174,8 +173,6 @@
 		B80D0AD31D018E1900227BA1 /* PYAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAccountModel.m; sourceTree = "<group>"; };
 		B80D0AD51D01908E00227BA1 /* PYQuestionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYQuestionModel.h; sourceTree = "<group>"; };
 		B80D0AD61D01908E00227BA1 /* PYQuestionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYQuestionModel.m; sourceTree = "<group>"; };
-		B80D0AD81D0190E000227BA1 /* PYRelateAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYRelateAppModel.h; sourceTree = "<group>"; };
-		B80D0AD91D0190E000227BA1 /* PYRelateAppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYRelateAppModel.m; sourceTree = "<group>"; };
 		B80D0ADB1D0190FD00227BA1 /* PYRelateDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYRelateDataModel.h; sourceTree = "<group>"; };
 		B80D0ADC1D0190FD00227BA1 /* PYRelateDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYRelateDataModel.m; sourceTree = "<group>"; };
 		B85D12641D1BCC8E0091ECA5 /* RelateApp+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RelateApp+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -529,8 +526,6 @@
 				B80D0AD31D018E1900227BA1 /* PYAccountModel.m */,
 				B80D0AD51D01908E00227BA1 /* PYQuestionModel.h */,
 				B80D0AD61D01908E00227BA1 /* PYQuestionModel.m */,
-				B80D0AD81D0190E000227BA1 /* PYRelateAppModel.h */,
-				B80D0AD91D0190E000227BA1 /* PYRelateAppModel.m */,
 				B80D0ADB1D0190FD00227BA1 /* PYRelateDataModel.h */,
 				B80D0ADC1D0190FD00227BA1 /* PYRelateDataModel.m */,
 			);
@@ -727,7 +722,6 @@
 				B80D0AC01D01639E00227BA1 /* PYTextfieldCell.m in Sources */,
 				B85D127C1D1BCC8F0091ECA5 /* User+CoreDataProperties.m in Sources */,
 				208592951D34D33900D10B6C /* CLLockView.m in Sources */,
-				B80D0ADA1D0190E000227BA1 /* PYRelateAppModel.m in Sources */,
 				B85D127F1D1BCC8F0091ECA5 /* Account.m in Sources */,
 				20514DC51C86B6A400B586D1 /* GestureLockVC.m in Sources */,
 				B85D12781D1BCC8F0091ECA5 /* RelateApp+CoreDataProperties.m in Sources */,
@@ -888,7 +882,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yujian Yang (2FK97V4U49)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yujian Yang (2FK97V4U49)";
 				DEVELOPMENT_TEAM = 37J966PJJJ;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_PREFIX_HEADER = "PYNote/PYNote-Prefix.pch";
@@ -929,7 +923,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpy.PYNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1fcd3d51-ecce-4912-a40f-7987c139a85d";
+				PROVISIONING_PROFILE = "fffc65c1-d7eb-4fb5-a2c4-b1cc81e13ce2";
 				PROVISIONING_PROFILE_SPECIFIER = development_common_20160722;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -941,7 +935,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yujian Yang (2FK97V4U49)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yujian Yang (2FK97V4U49)";
 				DEVELOPMENT_TEAM = 37J966PJJJ;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_PREFIX_HEADER = "PYNote/PYNote-Prefix.pch";
@@ -982,7 +976,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpy.PYNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1fcd3d51-ecce-4912-a40f-7987c139a85d";
+				PROVISIONING_PROFILE = "fffc65c1-d7eb-4fb5-a2c4-b1cc81e13ce2";
 				PROVISIONING_PROFILE_SPECIFIER = development_common_20160722;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

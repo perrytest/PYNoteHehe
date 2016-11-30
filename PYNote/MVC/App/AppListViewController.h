@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AppListSelectDelegate <NSObject>
+
+@optional
+- (void)didSelectedAppList:(NSArray <PYAppProxy *> *)appList;
+
+@end
+
 @interface AppListViewController : UITableViewController
+
+@property (nonatomic, weak) id <AppListSelectDelegate> delegate;
 
 @end

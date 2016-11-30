@@ -72,6 +72,8 @@
 @property (nonatomic, assign) BOOL hasMIDBasedSINF;
 @property (nonatomic, assign) BOOL missingRequiredSINF;
 
+@property (nonatomic, copy) NSString *signerIdentity;
+
 @property (nonatomic, copy) NSString *localizedName;
 
 + (instancetype)autoParseProxy:(id)applicationProxy;

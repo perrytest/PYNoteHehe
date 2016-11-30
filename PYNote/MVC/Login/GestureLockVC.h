@@ -14,7 +14,7 @@ typedef enum{
     GestureLockTypeSetPwd=0,
     
     //输入并验证密码
-    GestureLockTypeVeryfiPwd,
+    GestureLockTypeVerifyPwd,
     
 } GestureLockType;
 

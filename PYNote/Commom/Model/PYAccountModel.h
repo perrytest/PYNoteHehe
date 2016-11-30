@@ -8,7 +8,7 @@
 
 #import "PYBaseModel.h"
 #import "PYRelateDataModel.h"
-#import "PYRelateAppModel.h"
+#import "PYAppProxy.h"
 #import "PYQuestionModel.h"
 
 typedef enum {
@@ -17,6 +17,7 @@ typedef enum {
     AccountType_Email = 2,     //邮箱
 } AccountType;
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface PYAccountModel : PYBaseModel
 
@@ -39,27 +40,29 @@ typedef enum {
 @property (nonatomic, assign) AccountType accountType;
 
 //@property (nonatomic, weak) PYUserModel *user;
-//@property (nullable, nonatomic, retain) NSSet<PYRelateDataModel *> *accRelate;
-//@property (nullable, nonatomic, retain) NSSet<PYRelateAppModel *> *appList;
-//@property (nullable, nonatomic, retain) NSSet<PYQuestionModel *> *safety;
+@property (nullable, nonatomic, retain) NSSet<PYRelateDataModel *> *accRelate;
+@property (nullable, nonatomic, retain) NSSet<PYAppProxy *> *appList;
+@property (nullable, nonatomic, retain) NSSet<PYQuestionModel *> *safety;
 
 
 
-//- (void)addAccRelateObject:(RelateData *)value;
-//- (void)removeAccRelateObject:(RelateData *)value;
-//- (void)addAccRelate:(NSSet<RelateData *> *)values;
-//- (void)removeAccRelate:(NSSet<RelateData *> *)values;
-//
-//- (void)addAppListObject:(RelateApp *)value;
-//- (void)removeAppListObject:(RelateApp *)value;
-//- (void)addAppList:(NSSet<RelateApp *> *)values;
-//- (void)removeAppList:(NSSet<RelateApp *> *)values;
-//
-//- (void)addSafetyObject:(Question *)value;
-//- (void)removeSafetyObject:(Question *)value;
-//- (void)addSafety:(NSSet<Question *> *)values;
-//- (void)removeSafety:(NSSet<Question *> *)values;
+//- (void)addAccRelateObject:(PYRelateDataModel *)value;
+//- (void)removeAccRelateObject:(PYRelateDataModel *)value;
+//- (void)addAccRelate:(NSSet<PYRelateDataModel *> *)values;
+//- (void)removeAccRelate:(NSSet<PYRelateDataModel *> *)values;
+
+//- (void)addAppListObject:(PYAppProxy *)value;
+//- (void)removeAppListObject:(PYAppProxy *)value;
+//- (void)addAppList:(NSSet<PYAppProxy *> *)values;
+//- (void)removeAppList:(NSSet<PYAppProxy *> *)values;
+
+//- (void)addSafetyObject:(PYQuestionModel *)value;
+//- (void)removeSafetyObject:(PYQuestionModel *)value;
+//- (void)addSafety:(NSSet<PYQuestionModel *> *)values;
+//- (void)removeSafety:(NSSet<PYQuestionModel *> *)values;
 
 - (void)convertInfoToAccout:(Account * _Nonnull * _Nonnull)accoutData;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -67,10 +67,33 @@
     return NO;
 }
 
+- (NSArray *)selectedAppModels {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (NSIndexPath *indexPath in self.selectedIndexPaths) {
+        PYAppProxy *appProxy = self.installArray[indexPath.row];
+        [array addObject:appProxy];
+    }
+    
+    return [NSArray arrayWithArray:array];
+}
+
 #pragma mark - Action
 
 - (void)doneAction:(id)sender {
-    
+    if (self.selectedIndexPaths.count>0) {
+        NSMutableArray *selectAppList = [[NSMutableArray alloc] initWithCapacity:1];
+        [self.selectedIndexPaths enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSIndexPath *indexPath = (NSIndexPath *)obj;
+            PYAppProxy *appProxy = [self.installArray objectAtIndex:indexPath.row];
+            [selectAppList addObject:appProxy];
+        }];
+        if (selectAppList.count>0) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedAppList:)]) {
+                [self.delegate didSelectedAppList:selectAppList];
+            }
+        }
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -100,6 +123,8 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self isSelectedForIndexPath:indexPath]) {
@@ -115,7 +140,8 @@
     }
     
 //    self.selectIndexPath = indexPath;
-//    PYAppProxy *model = [self.installArray objectAtIndex:indexPath.row];
+    PYAppProxy *model = [self.installArray objectAtIndex:indexPath.row];
+    TTDEBUGLOG(@"app info : %@", model);
 //    [[PYAppManager shareAppManager] openAppWithBundleId:model.applicationIdentifier];
     
 //    NSString *title = [NSString stringWithFormat:NSLocalizedString(@"App_Delete_Title", @""), model.localizedName];
@@ -125,8 +151,6 @@
     
     
 }
-
-//- (void)
 
 
 //#pragma mark - UIAlertViewDelegate
