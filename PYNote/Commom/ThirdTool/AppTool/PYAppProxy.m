@@ -15,7 +15,7 @@
 
 + (instancetype)autoParseProxy:(id)applicationProxy {
     unsigned int outCount, i;
-    objc_property_t *properties = class_copyPropertyList([applicationProxy class], &outCount);
+    objc_property_t *properties = class_copyPropertyList([self class], &outCount);
     PYAppProxy *app = [[self alloc] init];
     for (i = 0; i<outCount; i++)
     {

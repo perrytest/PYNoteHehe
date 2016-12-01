@@ -30,8 +30,8 @@
 @property (nonatomic, copy) NSUUID *deviceIdentifierForVendor;
 @property (nonatomic, copy) NSProgress *installProgress;
 @property (nonatomic, copy) NSNumber *staticDiskUsage;
-@property (nonatomic, copy) NSNumber *dynamicDiskUsage;
-@property (nonatomic, copy) NSNumber *ODRDiskUsage;
+//@property (nonatomic, copy) NSNumber *dynamicDiskUsage;
+//@property (nonatomic, copy) NSNumber *ODRDiskUsage;
 @property (nonatomic, copy) NSArray *VPNPlugins;
 @property (nonatomic, copy) NSArray *plugInKitPlugins;
 @property (nonatomic, copy) NSArray *appTags;
