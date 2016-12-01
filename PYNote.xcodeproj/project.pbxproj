@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		202C80F71DEFC2B40013AE4D /* PYAppProxy+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C80F61DEFC2B40013AE4D /* PYAppProxy+Convert.m */; };
+		202C80FA1DF00F500013AE4D /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C80F91DF00F500013AE4D /* UserInfoViewController.m */; };
 		20514DB41C86B66900B586D1 /* PYCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DAD1C86B66900B586D1 /* PYCoreDataController.m */; };
 		20514DB51C86B66900B586D1 /* PYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DB01C86B66900B586D1 /* PYTools.m */; };
 		20514DB61C86B66900B586D1 /* PYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DB31C86B66900B586D1 /* PYViewController.m */; };
@@ -79,6 +80,8 @@
 /* Begin PBXFileReference section */
 		202C80F51DEFC2B40013AE4D /* PYAppProxy+Convert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYAppProxy+Convert.h"; sourceTree = "<group>"; };
 		202C80F61DEFC2B40013AE4D /* PYAppProxy+Convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PYAppProxy+Convert.m"; sourceTree = "<group>"; };
+		202C80F81DF00F500013AE4D /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		202C80F91DF00F500013AE4D /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		20514DA91C86B66900B586D1 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		20514DAC1C86B66900B586D1 /* PYCoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCoreDataController.h; sourceTree = "<group>"; };
 		20514DAD1C86B66900B586D1 /* PYCoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCoreDataController.m; sourceTree = "<group>"; };
@@ -331,6 +334,8 @@
 				20514DC01C86B6A400B586D1 /* RegistVC.m */,
 				B874E6831CFFE13D000B8366 /* CoverViewController.h */,
 				B874E6841CFFE13D000B8366 /* CoverViewController.m */,
+				202C80F81DF00F500013AE4D /* UserInfoViewController.h */,
+				202C80F91DF00F500013AE4D /* UserInfoViewController.m */,
 				B80D0AC21D016D1F00227BA1 /* View */,
 			);
 			path = Login;
@@ -724,6 +729,7 @@
 				208592961D34D33900D10B6C /* CoreLockConst.m in Sources */,
 				B80D0ADD1D0190FD00227BA1 /* PYRelateDataModel.m in Sources */,
 				B85D12791D1BCC8F0091ECA5 /* RelateApp.m in Sources */,
+				202C80FA1DF00F500013AE4D /* UserInfoViewController.m in Sources */,
 				B80D0AC01D01639E00227BA1 /* PYTextfieldCell.m in Sources */,
 				B85D127C1D1BCC8F0091ECA5 /* User+CoreDataProperties.m in Sources */,
 				208592951D34D33900D10B6C /* CLLockView.m in Sources */,

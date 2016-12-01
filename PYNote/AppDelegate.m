@@ -28,6 +28,8 @@ AppDelegate *app = nil;
     }
     app = self;
     
+    [self makeResourceDirectory];
+    
     //
     [SVProgressHUD setBackgroundColor:[UIColor darkGrayColor]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
@@ -156,6 +158,14 @@ AppDelegate *app = nil;
 }
 
 #pragma mark - Private
+
+- (void)makeResourceDirectory {
+    NSString *resourcePath = [PYTools getResourceRootDirectoryPath];
+    BOOL isDir = YES;
+    if (!([[NSFileManager defaultManager] fileExistsAtPath:resourcePath isDirectory:&isDir] && isDir)) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:resourcePath withIntermediateDirectories:YES attributes:nil error:NULL];
+    }
+}
 
 - (void)showCoverPage {
     BOOL needToShow = YES;

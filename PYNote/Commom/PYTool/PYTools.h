@@ -11,8 +11,10 @@
 @interface PYTools : NSObject
 
 + (NSString*)getDocumentDirectoryPath;
-
 + (NSURL *)URLForDocumentsDirectory;
+
++ (NSString*)getResourceRootDirectoryPath;
++ (NSURL *)URLForResourceRootDirectory;
 
 //获取唯一ID
 + (NSString *)getUniqueId;

@@ -51,12 +51,6 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     [self.tableView registerNib:cellNib2 forCellReuseIdentifier:cellTFIdentifierDouble];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTFIdentifierNormal];
     
-    self.avatarButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.width-60)/2, 20, 60, 60)];
-    [self.avatarButton setBackgroundImage:[UIImage imageNamed:@"Icon_avatar"] forState:UIControlStateNormal];
-    self.avatarButton.layer.cornerRadius = 30.0;
-    self.avatarButton.clipsToBounds = YES;
-    [self.avatarButton addTarget:self action:@selector(avartarClickAction:) forControlEvents:UIControlEventTouchUpInside];
-    
     self.tableView.tableHeaderView = ({
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 100)];
         
@@ -99,6 +93,17 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     return _doneButton;
 }
 
+- (UIButton *)avatarButton {
+    if (_avatarButton == nil) {
+        _avatarButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.width-60)/2, 20, 60, 60)];
+        [_avatarButton setBackgroundImage:[UIImage imageNamed:@"Icon_avatar"] forState:UIControlStateNormal];
+        _avatarButton.layer.cornerRadius = 30.0;
+        _avatarButton.clipsToBounds = YES;
+        [_avatarButton addTarget:self action:@selector(avartarClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _avatarButton;
+}
+
 #pragma mark - Action
 
 - (void)addAccoutDoneAction:(UIButton *)sender {
@@ -111,7 +116,10 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
         self.user.lastAt = [NSDate date];
         
         if (self.avatarData && self.avatarData.length>0) {
-//            self.user.av
+            NSString *avatarFileName = [NSString stringWithFormat:@"%@_avatar.png", self.user.userId];
+            NSURL *avatarFilePath = [[PYTools URLForResourceRootDirectory] URLByAppendingPathComponent:avatarFileName];
+            [self.avatarData writeToURL:avatarFilePath atomically:YES];
+            self.user.avator = avatarFileName;
         }
         
         [self addUserToCoreData];

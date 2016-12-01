@@ -10,8 +10,7 @@
 
 @implementation PYTools
 
-+ (NSString*)getDocumentDirectoryPath
-{
++ (NSString*)getDocumentDirectoryPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
     return documentDirectory;
@@ -19,6 +18,16 @@
 
 + (NSURL *)URLForDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
++ (NSString*)getResourceRootDirectoryPath {
+    NSString *dirPath = [[self getDocumentDirectoryPath] stringByAppendingPathComponent:@"User"];
+    return dirPath;
+}
+
++ (NSURL *)URLForResourceRootDirectory {
+    NSURL *resurceDir = [[self URLForDocumentsDirectory] URLByAppendingPathComponent:@"User" isDirectory:YES];
+    return resurceDir;
 }
 
 + (NSString *)getUniqueId {

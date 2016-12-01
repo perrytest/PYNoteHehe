@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "LoginVC.h"
 #import "GestureLockVC.h"
+#import "UserInfoViewController.h"
 
 @interface RootViewController ()
 
@@ -66,15 +67,17 @@
 
 #pragma mark - Action
 
-//- (void)logoutAction:(UIBarButtonItem *)sender {
-//    [app logout];
-//    [self showLoginPage:YES];
-//}
-
-- (void)goUserCenter:(UIBarButtonItem *)sender {
-    [SVProgressHUD showInfoWithStatus:@"go to user center"];
+- (void)logoutAction:(UIBarButtonItem *)sender {
     [app logout];
     [self showLoginPage:YES];
+}
+
+- (void)goUserCenter:(UIBarButtonItem *)sender {
+//    [SVProgressHUD showInfoWithStatus:@"go to user center"];
+//    [app logout];
+//    [self showLoginPage:YES];
+    UserInfoViewController *userInfoVC = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInfoPage"];
+    [self.navigationController pushViewController:userInfoVC animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -84,9 +87,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"rootCellIdentifier"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonCellIdentify"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"rootCellIdentifier"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonCellIdentify"];
     }
     
     switch (indexPath.row) {
