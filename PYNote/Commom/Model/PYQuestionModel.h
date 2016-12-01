@@ -7,6 +7,9 @@
 //
 
 #import "PYBaseModel.h"
+@class Question;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface PYQuestionModel : PYBaseModel
 
@@ -14,4 +17,8 @@
 @property (nullable, nonatomic, retain) NSString *answerNotice;
 @property (nullable, nonatomic, retain) NSString *question;
 
+- (void)convertInfoToQuestion:(Question * _Nonnull * _Nonnull)questionData;
+
 @end
+
+NS_ASSUME_NONNULL_END

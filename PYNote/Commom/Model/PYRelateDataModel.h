@@ -7,6 +7,7 @@
 //
 
 #import "PYBaseModel.h"
+@class RelateData;
 
 @interface PYRelateDataModel : PYBaseModel
 
@@ -14,5 +15,7 @@
 @property (nullable, nonatomic, retain) NSString *file;
 @property (nullable, nonatomic, retain) NSString *ps;
 @property (nullable, nonatomic, retain) NSString *reId;
+
+- (void)convertInfoToData:(RelateData * _Nonnull * _Nonnull)data;
 
 @end

@@ -7,7 +7,16 @@
 //
 
 #import "PYQuestionModel.h"
+#import "Question.h"
 
 @implementation PYQuestionModel
+
+- (void)convertInfoToQuestion:(Question * _Nonnull * _Nonnull)questionData {
+    NSArray *properties = [self filterDemandPropertys];
+    for (NSString *key in properties) {
+        id value = [self valueForKey:key];
+        [*questionData setValue:value forKey:key];
+    }
+}
 
 @end

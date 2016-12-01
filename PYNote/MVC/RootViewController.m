@@ -23,9 +23,8 @@
     self.title = NSLocalizedString(@"首页", @"");
     self.navigationController.navigationBarHidden = NO;
     
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"注销", @"") style:UIBarButtonItemStylePlain target:self action:@selector(logoutAction:)];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"user_top_bar"] style:UIBarButtonItemStylePlain target:self action:@selector(goUserCenter:)];
     self.navigationItem.rightBarButtonItem = rightBarButton;
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,11 +66,16 @@
 
 #pragma mark - Action
 
-- (void)logoutAction:(UIBarButtonItem *)sender {
+//- (void)logoutAction:(UIBarButtonItem *)sender {
+//    [app logout];
+//    [self showLoginPage:YES];
+//}
+
+- (void)goUserCenter:(UIBarButtonItem *)sender {
+    [SVProgressHUD showInfoWithStatus:@"go to user center"];
     [app logout];
     [self showLoginPage:YES];
 }
-
 
 #pragma mark - UITableViewDataSource
 

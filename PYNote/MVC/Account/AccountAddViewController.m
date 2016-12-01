@@ -14,6 +14,8 @@
 #import "PYAccountModel.h"
 #import "ReactiveCocoa.h"
 #import "Account.h"
+#import "RelateApp.h"
+#import "PYAppProxy+Convert.h"
 
 #import "CardIO.h"
 
@@ -60,6 +62,11 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     NSManagedObjectContext *context = [PYCoreDataController sharedInstance].managedObjectContext;
     Account *insertAccout = [NSEntityDescription insertNewObjectForEntityForName:@"Account" inManagedObjectContext:context];
     [self.account convertInfoToAccout:&insertAccout];
+    for (PYAppProxy *appProxy in self.account.appList) {
+        RelateApp *insertApp = [NSEntityDescription insertNewObjectForEntityForName:@"RelateApp" inManagedObjectContext:context];
+        [appProxy convertInfoToRelateApp:&insertApp];
+        [insertAccout addAppListObject:insertApp];
+    }
     User *currentUser = [app activeUser];
     [currentUser addAccountsObject:insertAccout];
     [[PYCoreDataController sharedInstance] saveContext];

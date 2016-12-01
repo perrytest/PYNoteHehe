@@ -7,7 +7,16 @@
 //
 
 #import "PYRelateDataModel.h"
+#import "RelateData.h"
 
 @implementation PYRelateDataModel
+
+- (void)convertInfoToData:(RelateData * _Nonnull * _Nonnull)data {
+    NSArray *properties = [self filterDemandPropertys];
+    for (NSString *key in properties) {
+        id value = [self valueForKey:key];
+        [*data setValue:value forKey:key];
+    }
+}
 
 @end

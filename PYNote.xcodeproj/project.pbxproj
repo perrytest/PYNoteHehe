@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		202C80F71DEFC2B40013AE4D /* PYAppProxy+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C80F61DEFC2B40013AE4D /* PYAppProxy+Convert.m */; };
 		20514DB41C86B66900B586D1 /* PYCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DAD1C86B66900B586D1 /* PYCoreDataController.m */; };
 		20514DB51C86B66900B586D1 /* PYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DB01C86B66900B586D1 /* PYTools.m */; };
 		20514DB61C86B66900B586D1 /* PYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DB31C86B66900B586D1 /* PYViewController.m */; };
@@ -76,6 +77,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		202C80F51DEFC2B40013AE4D /* PYAppProxy+Convert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYAppProxy+Convert.h"; sourceTree = "<group>"; };
+		202C80F61DEFC2B40013AE4D /* PYAppProxy+Convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PYAppProxy+Convert.m"; sourceTree = "<group>"; };
 		20514DA91C86B66900B586D1 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		20514DAC1C86B66900B586D1 /* PYCoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCoreDataController.h; sourceTree = "<group>"; };
 		20514DAD1C86B66900B586D1 /* PYCoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCoreDataController.m; sourceTree = "<group>"; };
@@ -528,6 +531,8 @@
 				B80D0AD61D01908E00227BA1 /* PYQuestionModel.m */,
 				B80D0ADB1D0190FD00227BA1 /* PYRelateDataModel.h */,
 				B80D0ADC1D0190FD00227BA1 /* PYRelateDataModel.m */,
+				202C80F51DEFC2B40013AE4D /* PYAppProxy+Convert.h */,
+				202C80F61DEFC2B40013AE4D /* PYAppProxy+Convert.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -743,6 +748,7 @@
 				B80D0AD71D01908E00227BA1 /* PYQuestionModel.m in Sources */,
 				B85D127A1D1BCC8F0091ECA5 /* RelateData+CoreDataProperties.m in Sources */,
 				2088869F1D38D47600F94998 /* PYAppManager.m in Sources */,
+				202C80F71DEFC2B40013AE4D /* PYAppProxy+Convert.m in Sources */,
 				B85D12811D1BCC8F0091ECA5 /* Question.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
