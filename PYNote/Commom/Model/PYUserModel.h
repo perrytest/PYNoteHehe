@@ -10,6 +10,8 @@
 #import "PYAccountModel.h"
 #import "PYQuestionModel.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface PYUserModel : PYBaseModel
 
 @property (nullable, nonatomic, copy) NSString *address; //地址
@@ -46,3 +48,5 @@
 - (BOOL)isUserRegistValid;
 
 @end
+
+NS_ASSUME_NONNULL_END

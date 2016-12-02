@@ -51,7 +51,6 @@
     if (!self.presentedViewController) {
         GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];
         gestureLockVC.type = GestureLockTypeVerifyPwd;
-        gestureLockVC.checkPwd = loginUser.pwd_g;
         gestureLockVC.successBlock = ^(NSString *pwd) {
             loginUser.lastAt = [NSDate date];
             [loginUser refreshAuthToken];

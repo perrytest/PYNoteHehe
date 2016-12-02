@@ -23,6 +23,10 @@
 @property (nonatomic, copy) NSString *firstInputPWD;
 @property (nonatomic, assign) NSInteger tryTimes;
 
+@property (nonatomic, copy) NSString *checkPwd;
+
+@property (nonatomic, assign) NSInteger limitTryTimes;
+
 @end
 
 @implementation GestureLockVC
@@ -52,6 +56,7 @@
     //设置背景色
     self.view.backgroundColor = CoreLockViewBgColor;
     self.tryTimes = 0;
+    self.checkPwd = self.unlockUser.pwd_g;
     self.limitTryTimes = 5;
     
     if (self.type == GestureLockTypeSetPwd) {
@@ -66,6 +71,7 @@
     [self prepareLockView];
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -75,6 +81,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.unlockUser.avator && self.unlockUser.avator.length>0) {
+        NSString *avatarFilePath = [[PYTools getResourceRootDirectoryPath] stringByAppendingPathComponent:self.unlockUser.avator];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:avatarFilePath]) {
+            UIImage *_image = [UIImage imageWithContentsOfFile:avatarFilePath];
+            [self.avatarButton setBackgroundImage:_image forState:UIControlStateNormal];
+        }
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
