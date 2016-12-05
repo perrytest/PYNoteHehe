@@ -15,6 +15,10 @@
 
 + (NSString*)getResourceRootDirectoryPath;
 + (NSURL *)URLForResourceRootDirectory;
++ (NSString*)getResourceDirectoryPathForUser:(NSString *)userId;
++ (NSURL *)URLForResourceDirectoryForUser:(NSString *)userId;
+
++ (void)makeResourceDirectoryForUser:(NSString *)userId;
 
 //获取唯一ID
 + (NSString *)getUniqueId;

@@ -30,6 +30,24 @@
     return resurceDir;
 }
 
++ (NSString*)getResourceDirectoryPathForUser:(NSString *)userId {
+    NSString *dirPath = [[self getResourceRootDirectoryPath] stringByAppendingPathComponent:userId];
+    return dirPath;
+}
+
++ (NSURL *)URLForResourceDirectoryForUser:(NSString *)userId {
+    NSURL *resurceDir = [[self URLForResourceRootDirectory] URLByAppendingPathComponent:userId isDirectory:YES];
+    return resurceDir;
+}
+
++ (void)makeResourceDirectoryForUser:(NSString *)userId {
+    NSString *dirPath = [self getResourceDirectoryPathForUser:userId];
+    BOOL isDir = YES;
+    if (!([[NSFileManager defaultManager] fileExistsAtPath:dirPath isDirectory:&isDir] && isDir)) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:dirPath withIntermediateDirectories:YES attributes:nil error:NULL];
+    }
+}
+
 + (NSString *)getUniqueId {
     CFUUIDRef uuidRef =CFUUIDCreate(NULL);
     

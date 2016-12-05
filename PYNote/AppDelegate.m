@@ -146,8 +146,9 @@ AppDelegate *app = nil;
 - (void)setActiveUser:(User *)activeUser {
     UserDefaultsSetValueForKey(activeUser.userId, kCurrentUserID);
     UserDefaultSynchronize;
-    self.activeUserOID = activeUser.objectID;
     [activeUser refreshAuthToken];
+    [[PYCoreDataController sharedInstance] saveContext];
+    self.activeUserOID = activeUser.objectID;
 }
 
 - (void)logout {

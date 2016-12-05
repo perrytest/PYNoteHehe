@@ -8,7 +8,7 @@
 
 #import "UserInfoViewController.h"
 #import <Photos/Photos.h>
-
+#import "ReactiveCocoa.h"
 
 @interface UserInfoViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -38,20 +38,6 @@
         
         headerView;
     });
-    
-    self.tableView.tableFooterView = ({
-        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
-        
-        UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.width-120)/2, 20, 120, 40)];
-        [logoutButton setTitle:NSLocalizedString(@"退出登录", @"") forState:UIControlStateNormal];
-        [logoutButton setTitleColor:Color_FC08 forState:UIControlStateNormal];
-        logoutButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
-        [logoutButton addTarget:self action:@selector(logoutAction:) forControlEvents:UIControlEventTouchUpInside];
-        [footerView addSubview:logoutButton];
-        
-        footerView;
-    });
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -76,7 +62,7 @@
         [_avatarButton addTarget:self action:@selector(avartarClickAction:) forControlEvents:UIControlEventTouchUpInside];
         
         if (self.user.avator && self.user.avator.length>0) {
-            NSString *avatarFilePath = [[PYTools getResourceRootDirectoryPath] stringByAppendingPathComponent:self.user.avator];
+            NSString *avatarFilePath = [[PYTools getResourceDirectoryPathForUser:self.user.userId] stringByAppendingPathComponent:self.user.avator];
             if ([[NSFileManager defaultManager] fileExistsAtPath:avatarFilePath]) {
                 self.avatarData = [NSData dataWithContentsOfFile:avatarFilePath];
                 UIImage *_image = [UIImage imageWithData:self.avatarData];
@@ -100,7 +86,7 @@
     
 }
 
-- (void)logoutAction:(UIButton *)sender {
+- (void)logoutAction {
     [app logout];
     [self.navigationController popViewControllerAnimated:NO];
     [app.rootVC showLoginPage:YES];
@@ -110,13 +96,13 @@
 
 - (void)writeAvatarData {
     if (self.user.avator && self.user.avator.length>0) {
-        NSString *avatarFilePath = [[PYTools getResourceRootDirectoryPath] stringByAppendingPathComponent:self.user.avator];
+        NSString *avatarFilePath = [[PYTools getResourceDirectoryPathForUser:self.user.userId] stringByAppendingPathComponent:self.user.avator];
         if ([[NSFileManager defaultManager] fileExistsAtPath:avatarFilePath]) {
             [[NSFileManager defaultManager] removeItemAtPath:avatarFilePath error:NULL];
         }
     }
     NSString *avatarFileName = [NSString stringWithFormat:@"%@_avatar.png", self.user.userId];
-    NSString *avatarFilePath = [[PYTools getResourceRootDirectoryPath] stringByAppendingPathComponent:avatarFileName];
+    NSString *avatarFilePath = [[PYTools getResourceDirectoryPathForUser:self.user.userId] stringByAppendingPathComponent:avatarFileName];
     [self.avatarData writeToFile:avatarFilePath atomically:YES];
     self.user.avator = avatarFileName;
     [[PYCoreDataController sharedInstance] saveContext];
@@ -124,17 +110,134 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
 
-    return 10;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return 9;
+            break;
+        case 1:
+            return 2;
+            break;
+        case 2:
+            return 2;
+            break;
+        default:
+            break;
+    }
+    return 0;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 0: {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonRightDetailCell" forIndexPath:indexPath];
+            cell.textLabel.font = Font_FS05;
+            cell.detailTextLabel.font = Font_FS04;
+            cell.detailTextLabel.textColor = HexColor(0x9b9fad);
+            cell.detailTextLabel.text = nil;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = NSLocalizedString(@"姓名", @"");
+                    RAC(cell.detailTextLabel, text) = [RACObserve(self.user, name) takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 1:
+                    cell.textLabel.text = NSLocalizedString(@"昵称", @"");
+                    RAC(cell.detailTextLabel, text) = [RACObserve(self.user, nameNick) takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 2:
+                    cell.textLabel.text = NSLocalizedString(@"身份证", @"");
+                    RAC(cell.detailTextLabel, text) = [RACObserve(self.user, cardId) takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 3:
+                    cell.textLabel.text = NSLocalizedString(@"手机号码", @"");
+                    RAC(cell.detailTextLabel, text) = [RACObserve(self.user, phone) takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 4:
+                    cell.textLabel.text = NSLocalizedString(@"email", @"");
+                    RAC(cell.detailTextLabel, text) = [RACObserve(self.user, email) takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 5:
+                    cell.textLabel.text = NSLocalizedString(@"QQ", @"");
+                    RAC(cell.detailTextLabel, text) = [RACObserve(self.user, qq) takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 6:
+                    cell.textLabel.text = NSLocalizedString(@"地址", @"");
+                    RAC(cell.detailTextLabel, text) = [RACObserve(self.user, address) takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 7:
+                    cell.textLabel.text = NSLocalizedString(@"座右铭", @"");
+                    RAC(cell.detailTextLabel, text) = [RACObserve(self.user, motto) takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                case 8:
+                    cell.textLabel.text = NSLocalizedString(@"备注留言", @"");
+                    RAC(cell.detailTextLabel, text) = [RACObserve(self.user, notice) takeUntil:[cell rac_prepareForReuseSignal]];
+                    break;
+                default:
+                    break;
+            }
+            return cell;
+        }
+            break;
+        case 1: {
+            
+        }
+            break;
+        case 2: {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonCellIdentify" forIndexPath:indexPath];
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = NSLocalizedString(@"退出登录", @"");
+                    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+                    cell.textLabel.textColor = Color_FC08;
+                    break;
+                case 1:
+                    cell.textLabel.text = NSLocalizedString(@"注销用户删除数据", @"");
+                    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+                    cell.textLabel.textColor = Color_FC08;
+                    break;
+                default:
+                    break;
+            }
+            return cell;
+        }
+            break;
+        default:
+            break;
+    }
+    //预防异常情况
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonCellIdentify" forIndexPath:indexPath];
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.section) {
+        case 1: {
+            switch (indexPath.row) {
+                case 0:
+                case 1: {
+                    [self logoutAction];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
 
 #pragma mark - UIActionSheetDelegate
 

@@ -66,6 +66,7 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,14 +82,13 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     [self.user convertInfoToUser:&insertUser];
     [insertUser refreshAuthToken];
     [app setActiveUser:insertUser];
-    [[PYCoreDataController sharedInstance] saveContext];
 }
 
 #pragma mark - Accessor
 
 - (UIBarButtonItem *)doneButton {
     if (!_doneButton) {
-        _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(addAccoutDoneAction:)];
+        _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(addUserDoneAction:)];
     }
     return _doneButton;
 }
@@ -106,18 +106,19 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 
 #pragma mark - Action
 
-- (void)addAccoutDoneAction:(UIButton *)sender {
-    // add account
+- (void)addUserDoneAction:(UIButton *)sender {
+    // add User
     
     if ([self.user isUserRegistValid]) {
         self.user.userId = [PYTools getUniqueId];
+        [PYTools makeResourceDirectoryForUser:self.user.userId];
         TTDEBUGLOG(@"save user id:%@", self.user.userId);
         self.user.creatAt = [NSDate date];
         self.user.lastAt = [NSDate date];
         
         if (self.avatarData && self.avatarData.length>0) {
             NSString *avatarFileName = [NSString stringWithFormat:@"%@_avatar.png", self.user.userId];
-            NSURL *avatarFilePath = [[PYTools URLForResourceRootDirectory] URLByAppendingPathComponent:avatarFileName];
+            NSURL *avatarFilePath = [[PYTools URLForResourceDirectoryForUser:self.user.userId] URLByAppendingPathComponent:avatarFileName];
             [self.avatarData writeToURL:avatarFilePath atomically:YES];
             self.user.avator = avatarFileName;
         }
@@ -230,7 +231,11 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierNormal forIndexPath:indexPath];
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = NSLocalizedString(@"添加手势密码", @"");
+                    if (self.user.pwd_g && self.user.pwd_g.length>0) {
+                        cell.textLabel.text = NSLocalizedString(@"重新设置手势密码", @"");
+                    } else {
+                        cell.textLabel.text = NSLocalizedString(@"添加手势密码", @"");
+                    }
                     break;
                 default:
                     break;
