@@ -51,6 +51,7 @@
     if (!self.presentedViewController) {
         GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];
         gestureLockVC.type = GestureLockTypeVerifyPwd;
+        gestureLockVC.unlockUser = loginUser;
         gestureLockVC.successBlock = ^(NSString *pwd) {
             loginUser.lastAt = [NSDate date];
             [loginUser refreshAuthToken];
@@ -72,11 +73,10 @@
 }
 
 - (void)goUserCenter:(UIBarButtonItem *)sender {
-//    [SVProgressHUD showInfoWithStatus:@"go to user center"];
-//    [app logout];
-//    [self showLoginPage:YES];
-    UserInfoViewController *userInfoVC = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInfoPage"];
-    [self.navigationController pushViewController:userInfoVC animated:YES];
+    //RootToUserInfo
+    [self performSegueWithIdentifier:@"RootToUserInfo" sender:nil];
+//    UserInfoViewController *userInfoVC = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInfoPage"];
+//    [self.navigationController pushViewController:userInfoVC animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

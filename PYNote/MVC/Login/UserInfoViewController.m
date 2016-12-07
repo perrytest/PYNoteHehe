@@ -42,7 +42,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[PYCoreDataController sharedInstance] saveContext];
+    if (self.user && [self.user hasChanges]) {
+        [[PYCoreDataController sharedInstance] saveContext];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,6 +90,21 @@
 
 - (void)logoutAction {
     [app logout];
+    [self.navigationController popViewControllerAnimated:NO];
+    [app.rootVC showLoginPage:YES];
+}
+
+- (void)deleteUserDataAction {
+    [app logout];
+    
+    NSString *userFilePath = [PYTools getResourceDirectoryPathForUser:self.user.userId];
+    BOOL isDir = YES;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:userFilePath isDirectory:&isDir] && isDir) {
+        [[NSFileManager defaultManager] removeItemAtPath:userFilePath error:NULL];
+    }
+    [[PYCoreDataController sharedInstance] deleteUserData:self.user];
+    self.user = nil;
+    
     [self.navigationController popViewControllerAnimated:NO];
     [app.rootVC showLoginPage:YES];
 }
@@ -220,11 +237,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.section) {
-        case 1: {
+        case 2: {
             switch (indexPath.row) {
                 case 0:
-                case 1: {
                     [self logoutAction];
+                    break;
+                case 1: {
+                    [self deleteUserDataAction];
                 }
                     break;
                     

@@ -7,7 +7,9 @@
 //
 
 #import "AccoutListViewController.h"
+#import "AccountInfoViewController.h"
 #import "Account.h"
+#import "PYCoreDataController+Account.h"
 
 @interface AccoutListViewController ()
 
@@ -65,14 +67,14 @@
 
 - (void)reloadAccountList {
     NSArray *array = [[app.activeUser.accounts objectEnumerator] allObjects];
-    [array sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    NSArray *sortedArray = [array sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         Account * account1 = (Account *)obj1;
         Account * account2 = (Account *)obj2;
         
-        NSComparisonResult result = [account1.keyword compare:account2.keyword];
+        NSComparisonResult result = [account1.accountTitle compare:account2.accountTitle];
         return result;
     }];
-    self.accountList = [NSArray arrayWithArray:array];
+    self.accountList = [NSArray arrayWithArray:sortedArray];
 }
 
 #pragma mark - Accessor
@@ -106,11 +108,7 @@
     }
     cell.accessoryType = UITableViewCellAccessoryDetailButton;
     Account *account = [self.accountList objectAtIndex:indexPath.row];
-    if (account.keyword && account.keyword.length>0) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", account.keyword];
-    } else {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", account.account];
-    }
+    cell.textLabel.text = account.accountTitle;
     
     return cell;
 }
@@ -125,6 +123,7 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         Account *account = [self.accountList objectAtIndex:indexPath.row];
         [app.activeUser removeAccountsObject:account];
+        [[PYCoreDataController sharedInstance] deleteAccountData:account];
         [self reloadAccountList];
         [tableView endUpdates];
     }
@@ -136,19 +135,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.selectedIndexPath = indexPath;
     Account *account = [self.accountList objectAtIndex:indexPath.row];
-    NSString *title = nil;
-    if (account.keyword && account.keyword.length>0) {
-        title = [NSString stringWithFormat:@"%@", account.keyword];
-    } else {
-        title = [NSString stringWithFormat:@"%@", account.account];
-    }
     NSString *message = [NSString stringWithFormat:@"%@\n密码备注: %@", account.account, account.pwd_notice];
-    UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:NSLocalizedString(@"Sure", @"") otherButtonTitles:NSLocalizedString(@"Copy_Pwd", Copy_Pwd), nil];
+    UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:account.accountTitle message:message delegate:self cancelButtonTitle:NSLocalizedString(@"Sure", @"") otherButtonTitles:NSLocalizedString(@"Copy_Pwd", Copy_Pwd), nil];
     [infoAlert show];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    TTDEBUGLOG(@"enter to accout detail page....");
+    //AccountToDetail
+    AccountInfoViewController *accountDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AccountInfoPage"];
+    Account *account = [self.accountList objectAtIndex:indexPath.row];
+    accountDetailVC.account = account;
+    [self.navigationController pushViewController:accountDetailVC animated:YES];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {

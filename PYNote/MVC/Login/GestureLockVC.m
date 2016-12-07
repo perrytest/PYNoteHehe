@@ -59,6 +59,7 @@
     self.checkPwd = self.unlockUser.pwd_g;
     self.limitTryTimes = 5;
     
+    self.avatarButton.layer.cornerRadius = self.avatarButton.bounds.size.width/2.0;
     if (self.type == GestureLockTypeSetPwd) {
         self.backBtn.hidden = NO;
         self.forgetBtn.hidden = YES;

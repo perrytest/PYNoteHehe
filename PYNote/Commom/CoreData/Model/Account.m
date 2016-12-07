@@ -16,4 +16,12 @@
 
 // Insert code here to add functionality to your managed object subclass
 
+- (NSString *)accountTitle {
+    if (self.keyword && self.keyword.length>0) {
+        return [NSString stringWithFormat:@"%@", self.keyword];
+    } else {
+        return [NSString stringWithFormat:@"%@", self.account];
+    }
+}
+
 @end

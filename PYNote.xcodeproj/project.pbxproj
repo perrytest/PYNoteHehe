@@ -40,6 +40,7 @@
 		20B921131DB75323000A7E7F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921121DB75323000A7E7F /* CoreGraphics.framework */; };
 		20B921151DB7533A000A7E7F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921141DB7533A000A7E7F /* CoreMedia.framework */; };
 		20B921171DB75358000A7E7F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921161DB75358000A7E7F /* AVFoundation.framework */; };
+		20C21DF61DF651E800CD497D /* AccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C21DF51DF651E800CD497D /* AccountInfoViewController.m */; };
 		20C44F631D92252300EB8BD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20C44F651D92252300EB8BD1 /* Localizable.strings */; };
 		20D349191DA89D0E00743ADA /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D349181DA89D0E00743ADA /* UIView+Frame.m */; };
 		20D3491C1DA89FA900743ADA /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D3491B1DA89FA900743ADA /* UIColor+Extension.m */; };
@@ -52,6 +53,8 @@
 		20D76B941C2146A20026B3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20D76B921C2146A20026B3A0 /* LaunchScreen.storyboard */; };
 		20D76B9D1C21474D0026B3A0 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20D76B9B1C21474D0026B3A0 /* Main_iPad.storyboard */; };
 		20F4A4A31CE9D32000BE76CA /* PYCoreDataController+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4A4A21CE9D32000BE76CA /* PYCoreDataController+User.m */; };
+		20F7F0AC1DF6D45B001527B8 /* PYCoreDataController+Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F7F0AB1DF6D45B001527B8 /* PYCoreDataController+Account.m */; };
+		20F7F0AF1DF6D46C001527B8 /* PYCoreDataController+Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F7F0AE1DF6D46C001527B8 /* PYCoreDataController+Other.m */; };
 		78FAFEFBAD2946EB3783D271 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFDBA95E5C2DA93BB46C63E /* libPods.a */; };
 		B80D0AC01D01639E00227BA1 /* PYTextfieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D0ABE1D01639E00227BA1 /* PYTextfieldCell.m */; };
 		B80D0AC11D01639E00227BA1 /* PYTextfieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80D0ABF1D01639E00227BA1 /* PYTextfieldCell.xib */; };
@@ -140,6 +143,8 @@
 		20B921121DB75323000A7E7F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		20B921141DB7533A000A7E7F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		20B921161DB75358000A7E7F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		20C21DF41DF651E800CD497D /* AccountInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountInfoViewController.h; sourceTree = "<group>"; };
+		20C21DF51DF651E800CD497D /* AccountInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountInfoViewController.m; sourceTree = "<group>"; };
 		20C44F641D92252300EB8BD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		20C44F661D92252500EB8BD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		20D349171DA89D0E00743ADA /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -162,6 +167,10 @@
 		20F4A4A01CE9CFA400BE76CA /* KeyDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyDefine.h; sourceTree = "<group>"; };
 		20F4A4A11CE9D32000BE76CA /* PYCoreDataController+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYCoreDataController+User.h"; sourceTree = "<group>"; };
 		20F4A4A21CE9D32000BE76CA /* PYCoreDataController+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PYCoreDataController+User.m"; sourceTree = "<group>"; };
+		20F7F0AA1DF6D45B001527B8 /* PYCoreDataController+Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYCoreDataController+Account.h"; sourceTree = "<group>"; };
+		20F7F0AB1DF6D45B001527B8 /* PYCoreDataController+Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PYCoreDataController+Account.m"; sourceTree = "<group>"; };
+		20F7F0AD1DF6D46C001527B8 /* PYCoreDataController+Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYCoreDataController+Other.h"; sourceTree = "<group>"; };
+		20F7F0AE1DF6D46C001527B8 /* PYCoreDataController+Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PYCoreDataController+Other.m"; sourceTree = "<group>"; };
 		47F48271C4327E40939B9970 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8FFDBA95E5C2DA93BB46C63E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F3F418794095C0243F6A12 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -258,6 +267,10 @@
 				20514DAD1C86B66900B586D1 /* PYCoreDataController.m */,
 				20F4A4A11CE9D32000BE76CA /* PYCoreDataController+User.h */,
 				20F4A4A21CE9D32000BE76CA /* PYCoreDataController+User.m */,
+				20F7F0AA1DF6D45B001527B8 /* PYCoreDataController+Account.h */,
+				20F7F0AB1DF6D45B001527B8 /* PYCoreDataController+Account.m */,
+				20F7F0AD1DF6D46C001527B8 /* PYCoreDataController+Other.h */,
+				20F7F0AE1DF6D46C001527B8 /* PYCoreDataController+Other.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -443,6 +456,8 @@
 				20ACF8AF1CE5A6F100BFB120 /* AccoutListViewController.m */,
 				20ACF8B11CE5B36400BFB120 /* AccountAddViewController.h */,
 				20ACF8B21CE5B36400BFB120 /* AccountAddViewController.m */,
+				20C21DF41DF651E800CD497D /* AccountInfoViewController.h */,
+				20C21DF51DF651E800CD497D /* AccountInfoViewController.m */,
 				20ACF8DE1CE5C53500BFB120 /* View */,
 			);
 			path = Account;
@@ -717,9 +732,11 @@
 				20D76B861C2146A20026B3A0 /* AppDelegate.m in Sources */,
 				20ACF8B31CE5B36400BFB120 /* AccountAddViewController.m in Sources */,
 				208592941D34D33900D10B6C /* CLLockItemView.m in Sources */,
+				20F7F0AC1DF6D45B001527B8 /* PYCoreDataController+Account.m in Sources */,
 				20514DB41C86B66900B586D1 /* PYCoreDataController.m in Sources */,
 				B80D0AD11D018D4A00227BA1 /* PYUserModel.m in Sources */,
 				B80D0ACE1D018D2900227BA1 /* PYBaseModel.m in Sources */,
+				20F7F0AF1DF6D46C001527B8 /* PYCoreDataController+Other.m in Sources */,
 				20F4A4A31CE9D32000BE76CA /* PYCoreDataController+User.m in Sources */,
 				20514DC61C86B6A400B586D1 /* LoginVC.m in Sources */,
 				B80D0AC61D016DEA00227BA1 /* PYDoubleTextfieldCell.m in Sources */,
@@ -729,6 +746,7 @@
 				208592961D34D33900D10B6C /* CoreLockConst.m in Sources */,
 				B80D0ADD1D0190FD00227BA1 /* PYRelateDataModel.m in Sources */,
 				B85D12791D1BCC8F0091ECA5 /* RelateApp.m in Sources */,
+				20C21DF61DF651E800CD497D /* AccountInfoViewController.m in Sources */,
 				202C80FA1DF00F500013AE4D /* UserInfoViewController.m in Sources */,
 				B80D0AC01D01639E00227BA1 /* PYTextfieldCell.m in Sources */,
 				B85D127C1D1BCC8F0091ECA5 /* User+CoreDataProperties.m in Sources */,
