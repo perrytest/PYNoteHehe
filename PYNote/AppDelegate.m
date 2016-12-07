@@ -149,6 +149,7 @@ AppDelegate *app = nil;
     [activeUser refreshAuthToken];
     [[PYCoreDataController sharedInstance] saveContext];
     self.activeUserOID = activeUser.objectID;
+    [PYTools makeResourceDirectoryForUser:activeUser.userId];
 }
 
 - (void)logout {
