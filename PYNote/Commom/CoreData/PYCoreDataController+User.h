@@ -13,6 +13,8 @@
 
 //查询用户
 
+- (NSArray <User *> *)allUserList;
+
 /*
  * 查询用户
  * userName 查询key值 name | cardId | phone | email

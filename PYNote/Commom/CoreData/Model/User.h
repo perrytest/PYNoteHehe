@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)checkLoginPassword:(NSString *)pwd;
 
 
+
+
 @end
 
 NS_ASSUME_NONNULL_END

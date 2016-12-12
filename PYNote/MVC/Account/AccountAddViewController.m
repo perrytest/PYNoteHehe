@@ -91,6 +91,8 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
         TTDEBUGLOG(@"save account id:%@", self.account.accountId);
         [self addAccoutToCoreData];
         [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"请输入帐号", nil)];
     }
 }
 

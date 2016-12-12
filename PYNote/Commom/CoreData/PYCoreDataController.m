@@ -7,7 +7,7 @@
 //
 
 #import "PYCoreDataController.h"
-
+#import "EncryptedStore.h"
 
 
 #define XOR_KEY 0xB2
@@ -113,7 +113,7 @@ static PYCoreDataController *sharedInstance = nil;
     }
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     _managedObjectContext.persistentStoreCoordinator = coordinator;
     
     return _managedObjectContext;
@@ -145,11 +145,19 @@ static PYCoreDataController *sharedInstance = nil;
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+//    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+//                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+//                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    NSDictionary *options = @{
+//                              NSMigratePersistentStoresAutomaticallyOption : @YES,
+                              EncryptedStorePassphraseKey: self.dataKeyString,
+                              EncryptedStoreDatabaseLocation: [self sourceStoreURL],
+                              NSInferMappingModelAutomaticallyOption : @YES
+                              };
+//    _persistentStoreCoordinator = [EncryptedStore makeStoreWithOptions:options managedObjectModel:mom];
+    
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:EncryptedStoreType//NSSQLiteStoreType//
                                                    configuration:nil
                                                              URL:[self sourceStoreURL]
                                                          options:options
@@ -165,6 +173,8 @@ static PYCoreDataController *sharedInstance = nil;
                           otherButtonTitles:NSLocalizedString(@"删除数据", @""), nil] show];
     }
     
+    
+    
     return _persistentStoreCoordinator;
 }
 
@@ -176,7 +186,7 @@ static PYCoreDataController *sharedInstance = nil;
 
 - (NSDictionary *)sourceMetadata:(NSError **)error
 {
-    return [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType
+    return [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:EncryptedStoreType
                                                                       URL:[self sourceStoreURL]
                                                                     error:error];
 }
@@ -188,9 +198,8 @@ static PYCoreDataController *sharedInstance = nil;
     if (buttonIndex == 1) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         [fileManager removeItemAtPath:[self sourceStoreURL].path error:nil];
-    } else {
-        abort();
     }
+    abort();
 }
 
 

@@ -24,7 +24,7 @@
 }
 
 - (NSInteger)limitTimes {
-    NSInteger times = [self.lockTime integerValue]!=0?[self.lockTime integerValue]:5;
+    NSInteger times = [self.maxTry integerValue]!=0?[self.maxTry integerValue]:5;
     return times;
 }
 
@@ -136,6 +136,13 @@
         return NO;
     }
 }
+
+#pragma mark - Accessor
+
+//- (void)setPwd_s:(NSString *)pwd_s {
+//    NSString *pwd_s_encode = [[pwd_s copy] encodeString];
+//    pwd_s = pwd_s_encode;
+//}
 
 
 @end

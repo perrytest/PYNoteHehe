@@ -18,6 +18,14 @@ static NSString *UserTableName = @"User";
 
 #pragma mark - Search
 
+- (NSArray <User *> *)allUserList {
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:UserTableName];
+    [request setSortDescriptors:@[ [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES] ]];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSArray *users = [context executeFetchRequest:request error:nil];
+    return users;
+}
+
 - (User *)searchUser:(NSString *)userName {
     NSManagedObjectContext *context = [self managedObjectContext];
     

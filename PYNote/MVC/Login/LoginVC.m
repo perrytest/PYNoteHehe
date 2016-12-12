@@ -90,6 +90,12 @@ static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
     });
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSArray *users = [[PYCoreDataController sharedInstance] allUserList];
+    TTDEBUGLOG(@"all user count:%lu", (unsigned long)users.count);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -120,13 +126,17 @@ static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
 - (void)loginAction:(id)sender {
     if (self.userString && self.userString.length>0 && self.password && self.password.length>0) {
         User *loginUser = [[PYCoreDataController sharedInstance] searchUser:self.userString];
-        if ([loginUser checkLoginPassword:self.password]) {
-            loginUser.lastAt = [NSDate date];
-            [loginUser refreshAuthToken];
-            [app setActiveUser:loginUser];
-            [self dismissViewControllerAnimated:YES completion:nil];
+        if (loginUser && loginUser.userId) {
+            if ([loginUser checkLoginPassword:self.password]) {
+                loginUser.lastAt = [NSDate date];
+                [loginUser refreshAuthToken];
+                [app setActiveUser:loginUser];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"用户名和密码不正确", nil)];
+            }
         } else {
-            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"用户名和密码不正确", nil)];
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"用户名不存在", nil)];
         }
     }
 }

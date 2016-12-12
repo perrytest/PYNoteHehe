@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>EncryptedCoreData.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JSONModel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -54,6 +59,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SQLCipher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -68,16 +78,6 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>09FA060F1A0492FB25232F489AC4E573</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>0A6F05D5F594112BD42CB933D7F010ED</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>0AFC06D0402A1A028DAEA671855C346F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,17 +97,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>64247C99F18EC4BF76CA6FBB780D790B</key>
+		<key>4983575801AA88215B70B005BE3672DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>684A3FBC53B66F2C75B79D3B4CD7863D</key>
+		<key>4F1CC5DD055671CCB1ECEC34E0C51076</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B2CEEEE115293923DA2163069E386C1B</key>
+		<key>56531E95D2D6807482AB9B6699BDA9CF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>580B5B49CA9E50F4AD44201E5AF57793</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6B8A8A7AD297E864A306CEEA94F9635D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>73537B3244D51748853BB8A0300A0D62</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +137,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F927D04B5A9C2213755873702116F25C</key>
+		<key>F1AA1DA00A795E46F55D500BC5C7E49B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6D89B548BD3D7E35E2219D507EA1924</key>
 		<dict>
 			<key>primary</key>
 			<true/>

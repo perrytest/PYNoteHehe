@@ -15,5 +15,6 @@ pod 'JSONModel', '~> 1.2.0'
 pod 'ReactiveCocoa', '~> 2.5'
 pod 'AESCrypt', '~> 0.0.1'
 #pod 'CardIO', '~> 5.3.0'
+pod 'EncryptedCoreData', '~> 3.1'
 
 #pod 'HZMobileInstallation', '~> 0.1'

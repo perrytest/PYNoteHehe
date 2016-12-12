@@ -19,7 +19,7 @@
 @dynamic creatAt;
 @dynamic email;
 @dynamic lastAt;
-@dynamic limit;
+@dynamic maxTry;
 @dynamic wrongTimes;
 @dynamic locDarkTime;
 @dynamic lockTime;

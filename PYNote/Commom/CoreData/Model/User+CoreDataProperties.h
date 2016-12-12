@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSDate *creatAt;
 @property (nullable, nonatomic, retain) NSString *email;
 @property (nullable, nonatomic, retain) NSDate *lastAt;
-@property (nullable, nonatomic, retain) NSNumber *limit;
+@property (nullable, nonatomic, retain) NSNumber *maxTry;
 @property (nullable, nonatomic, retain) NSNumber *wrongTimes;
 @property (nullable, nonatomic, retain) NSNumber *locDarkTime;
 @property (nullable, nonatomic, retain) NSNumber *lockTime;
