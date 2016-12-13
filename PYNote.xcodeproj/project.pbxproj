@@ -28,6 +28,8 @@
 		2088869F1D38D47600F94998 /* PYAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2088869E1D38D47600F94998 /* PYAppManager.m */; };
 		208886A21D38D4A700F94998 /* PYAppInstallation.m in Sources */ = {isa = PBXBuildFile; fileRef = 208886A11D38D4A700F94998 /* PYAppInstallation.m */; };
 		2092F2411D8FED0800802CF1 /* AppListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2092F2401D8FED0800802CF1 /* AppListViewController.m */; };
+		20A69C211DFF97930050CCEF /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A69C201DFF97930050CCEF /* UIAlertView+Blocks.m */; };
+		20A69C241DFF99C60050CCEF /* infoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20A69C261DFF99C60050CCEF /* infoPlist.strings */; };
 		20ACF8B01CE5A6F100BFB120 /* AccoutListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ACF8AF1CE5A6F100BFB120 /* AccoutListViewController.m */; };
 		20ACF8B31CE5B36400BFB120 /* AccountAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ACF8B21CE5B36400BFB120 /* AccountAddViewController.m */; };
 		20B921061DB752CF000A7E7F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921041DB752CF000A7E7F /* Accelerate.framework */; };
@@ -129,6 +131,10 @@
 		2092A1AB1C8E6A430030AC80 /* PYNote-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYNote-Prefix.pch"; sourceTree = "<group>"; };
 		2092F23F1D8FED0800802CF1 /* AppListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppListViewController.h; sourceTree = "<group>"; };
 		2092F2401D8FED0800802CF1 /* AppListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppListViewController.m; sourceTree = "<group>"; };
+		20A69C1F1DFF97930050CCEF /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		20A69C201DFF97930050CCEF /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		20A69C251DFF99C60050CCEF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/infoPlist.strings; sourceTree = "<group>"; };
+		20A69C271DFF99C80050CCEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/infoPlist.strings; sourceTree = "<group>"; };
 		20ACF8AE1CE5A6F100BFB120 /* AccoutListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccoutListViewController.h; sourceTree = "<group>"; };
 		20ACF8AF1CE5A6F100BFB120 /* AccoutListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccoutListViewController.m; sourceTree = "<group>"; };
 		20ACF8B11CE5B36400BFB120 /* AccountAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountAddViewController.h; sourceTree = "<group>"; };
@@ -512,6 +518,7 @@
 			isa = PBXGroup;
 			children = (
 				20D76B821C2146A20026B3A0 /* main.m */,
+				20A69C261DFF99C60050CCEF /* infoPlist.strings */,
 				20C44F651D92252300EB8BD1 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
@@ -566,6 +573,8 @@
 				20D349181DA89D0E00743ADA /* UIView+Frame.m */,
 				20D3491A1DA89FA900743ADA /* UIColor+Extension.h */,
 				20D3491B1DA89FA900743ADA /* UIColor+Extension.m */,
+				20A69C1F1DFF97930050CCEF /* UIAlertView+Blocks.h */,
+				20A69C201DFF97930050CCEF /* UIAlertView+Blocks.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -663,6 +672,7 @@
 				B874E6881D00019A000B8366 /* MyLuanch.storyboard in Resources */,
 				20D76B9D1C21474D0026B3A0 /* Main_iPad.storyboard in Resources */,
 				20D3491F1DA8C41600743ADA /* Icon.xcassets in Resources */,
+				20A69C241DFF99C60050CCEF /* infoPlist.strings in Resources */,
 				B80D0AC11D01639E00227BA1 /* PYTextfieldCell.xib in Resources */,
 				B80D0AC71D016DEA00227BA1 /* PYDoubleTextfieldCell.xib in Resources */,
 				20C44F631D92252300EB8BD1 /* Localizable.strings in Resources */,
@@ -736,6 +746,7 @@
 				20514DB41C86B66900B586D1 /* PYCoreDataController.m in Sources */,
 				B80D0AD11D018D4A00227BA1 /* PYUserModel.m in Sources */,
 				B80D0ACE1D018D2900227BA1 /* PYBaseModel.m in Sources */,
+				20A69C211DFF97930050CCEF /* UIAlertView+Blocks.m in Sources */,
 				20F7F0AF1DF6D46C001527B8 /* PYCoreDataController+Other.m in Sources */,
 				20F4A4A31CE9D32000BE76CA /* PYCoreDataController+User.m in Sources */,
 				20514DC61C86B6A400B586D1 /* LoginVC.m in Sources */,
@@ -780,6 +791,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		20A69C261DFF99C60050CCEF /* infoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20A69C251DFF99C60050CCEF /* en */,
+				20A69C271DFF99C80050CCEF /* Base */,
+			);
+			name = infoPlist.strings;
+			sourceTree = "<group>";
+		};
 		20C44F651D92252300EB8BD1 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

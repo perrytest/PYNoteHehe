@@ -38,4 +38,13 @@
 #define Font_FS08 [UIFont systemFontOfSize:20]
 
 
+#define RGBA(r, g, b, a)      [UIColor colorWithRed:r grern:g blue:b alpha:a]
+#define HexColor(hexValue) [UIColor hexColor:(hexValue)]
+
+
+
+#define PYScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define PYScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define PYMainScale [UIScreen mainScreen].scale
+
 #endif /* StyleDefine_h */

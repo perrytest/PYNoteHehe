@@ -115,6 +115,7 @@ static PYCoreDataController *sharedInstance = nil;
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     _managedObjectContext.persistentStoreCoordinator = coordinator;
+    _managedObjectContext.mergePolicy = NSErrorMergePolicy;
     
     return _managedObjectContext;
 }
@@ -145,17 +146,12 @@ static PYCoreDataController *sharedInstance = nil;
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     
-    
-//    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-//                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-//                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
     NSDictionary *options = @{
-//                              NSMigratePersistentStoresAutomaticallyOption : @YES,
+                              NSMigratePersistentStoresAutomaticallyOption : @YES,
                               EncryptedStorePassphraseKey: self.dataKeyString,
                               EncryptedStoreDatabaseLocation: [self sourceStoreURL],
                               NSInferMappingModelAutomaticallyOption : @YES
                               };
-//    _persistentStoreCoordinator = [EncryptedStore makeStoreWithOptions:options managedObjectModel:mom];
     
     if (![_persistentStoreCoordinator addPersistentStoreWithType:EncryptedStoreType//NSSQLiteStoreType//
                                                    configuration:nil
@@ -173,7 +169,10 @@ static PYCoreDataController *sharedInstance = nil;
                           otherButtonTitles:NSLocalizedString(@"删除数据", @""), nil] show];
     }
     
-    
+    NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:NSFileProtectionComplete forKey:NSFileProtectionKey];
+    if (![[NSFileManager defaultManager] setAttributes:fileAttributes ofItemAtPath:[self sourceStorePath] error:&error]) {
+        NSAssert(error != nil, @"%@ in data protect the database", [error description]);
+    }
     
     return _persistentStoreCoordinator;
 }
@@ -183,6 +182,9 @@ static PYCoreDataController *sharedInstance = nil;
     return [[PYTools URLForDocumentsDirectory] URLByAppendingPathComponent:@"PYNote.sqlite"];
 }
 
+- (NSString *)sourceStorePath {
+    return [[PYTools getDocumentDirectoryPath] stringByAppendingPathComponent:@"PYNote.sqlite"];
+}
 
 - (NSDictionary *)sourceMetadata:(NSError **)error
 {

@@ -11,6 +11,13 @@
 
 @class Question, RelateApp, RelateData, User;
 
+
+typedef enum {
+    AccountType_Unknown = 0,
+    AccountType_BankCard = 1,  //银行卡
+    AccountType_Email = 2,     //邮箱
+} AccountType;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Account : NSManagedObject
@@ -18,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 // Insert code here to declare functionality of your managed object subclass
 
 - (NSString *)accountTitle;
+
+- (AccountType)accountType;
 
 @end
 

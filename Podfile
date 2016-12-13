@@ -16,5 +16,6 @@ pod 'ReactiveCocoa', '~> 2.5'
 pod 'AESCrypt', '~> 0.0.1'
 #pod 'CardIO', '~> 5.3.0'
 pod 'EncryptedCoreData', '~> 3.1'
+pod 'CocoaHTTPServer', '~> 2.3'
 
 #pod 'HZMobileInstallation', '~> 0.1'

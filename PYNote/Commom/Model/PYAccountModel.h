@@ -10,12 +10,8 @@
 #import "PYRelateDataModel.h"
 #import "PYAppProxy.h"
 #import "PYQuestionModel.h"
+#import "Account.h"
 
-typedef enum {
-    AccountType_Unknown = 0,
-    AccountType_BankCard = 1,  //银行卡
-    AccountType_Email = 2,     //邮箱
-} AccountType;
 
 NS_ASSUME_NONNULL_BEGIN
 

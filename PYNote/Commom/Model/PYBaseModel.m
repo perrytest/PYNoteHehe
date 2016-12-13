@@ -37,7 +37,7 @@
     NSString *attributes = [NSString stringWithUTF8String:char_a];
     NSString *attributesType = [NSString stringWithUTF8String:char_v];
 //    printf("\nIgnore====%s:%s %s", char_f, char_a, char_v);
-    if ([attributes rangeOfString:@"<Ignore>"].location != NSNotFound || [attributesType isEqualToString:@"i"]) {
+    if ([attributes rangeOfString:@"<Ignore>"].location != NSNotFound || [attributesType isEqualToString:@"i"] || [attributesType isEqualToString:@"NSSet"]) {
         return NO;
     }
     return YES;

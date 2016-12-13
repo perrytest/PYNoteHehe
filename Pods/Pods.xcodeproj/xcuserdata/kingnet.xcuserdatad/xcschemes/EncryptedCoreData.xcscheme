@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3AC602372A47BFDB7B5942C6'
+               BlueprintIdentifier = 'F87B30D72666E3F9364C64D4'
                BlueprintName = 'EncryptedCoreData'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libEncryptedCoreData.a'>

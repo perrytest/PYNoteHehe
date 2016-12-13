@@ -24,4 +24,9 @@
     }
 }
 
+- (AccountType)accountType {
+    NSNumber *tempValue = [self type];
+    return (tempValue != nil) ? [tempValue intValue] : AccountType_Unknown;
+}
+
 @end

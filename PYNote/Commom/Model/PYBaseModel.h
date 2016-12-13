@@ -13,6 +13,9 @@
 
 @interface PYBaseModel : NSObject
 
+/*
+ * 筛选基本对象属性,NString、NSNumber、NSDate、NSData
+ */
 - (NSArray *)filterDemandPropertys;
 
 @end

@@ -24,6 +24,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CocoaAsyncSocket.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>CocoaHTTPServer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CocoaLumberjack.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,7 +92,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>12E2BC28C62976C425F4B71C2723F0B1</key>
+		<key>0B6F2C170BAD088F2F54BDD43FDC79D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1A8356BEA0A5841D3D7014234DA6D9F1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,12 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4167F39DD56398D865B71ED1A874F18D</key>
+		<key>29A5EC86087C08DC1B5CD3B84F7683A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4983575801AA88215B70B005BE3672DE</key>
+		<key>4167F39DD56398D865B71ED1A874F18D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,12 +122,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>56531E95D2D6807482AB9B6699BDA9CF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>580B5B49CA9E50F4AD44201E5AF57793</key>
+		<key>5E06814E6644B7CC6543C64B09099B3E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +132,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>73537B3244D51748853BB8A0300A0D62</key>
+		<key>77A19B87E18C4952C3CD0F8ED395DFA2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9F6AA36CD30E213F53972A26385CF242</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B32BCE8088319B63DCD6BA8488784966</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,17 +152,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C60D4D57539470E1D68FB90B51A8A41B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CC3E4007802BC9296C373474511D8768</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>EB32F19587599827FDC4BE89EDDCABDE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F1AA1DA00A795E46F55D500BC5C7E49B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F6D89B548BD3D7E35E2219D507EA1924</key>
 		<dict>
 			<key>primary</key>
 			<true/>

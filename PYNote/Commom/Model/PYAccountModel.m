@@ -7,7 +7,6 @@
 //
 
 #import "PYAccountModel.h"
-#import "Account.h"
 #import <objc/runtime.h>
 
 @implementation PYAccountModel

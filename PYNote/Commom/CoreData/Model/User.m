@@ -137,12 +137,4 @@
     }
 }
 
-#pragma mark - Accessor
-
-//- (void)setPwd_s:(NSString *)pwd_s {
-//    NSString *pwd_s_encode = [[pwd_s copy] encodeString];
-//    pwd_s = pwd_s_encode;
-//}
-
-
 @end

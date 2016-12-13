@@ -9,6 +9,7 @@
 #import "UserInfoViewController.h"
 #import <Photos/Photos.h>
 #import "ReactiveCocoa.h"
+#import "GestureLockVC.h"
 
 @interface UserInfoViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -95,18 +96,26 @@
 }
 
 - (void)deleteUserDataAction {
-    [app logout];
-    
-    NSString *userFilePath = [PYTools getResourceDirectoryPathForUser:self.user.userId];
-    BOOL isDir = YES;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:userFilePath isDirectory:&isDir] && isDir) {
-        [[NSFileManager defaultManager] removeItemAtPath:userFilePath error:NULL];
-    }
-    [[PYCoreDataController sharedInstance] deleteUserData:self.user];
-    self.user = nil;
-    
-    [self.navigationController popViewControllerAnimated:NO];
-    [app.rootVC showLoginPage:YES];
+    [UIAlertView showWithTitle:PYProjectDisplayName
+                       message:NSLocalizedString(@"是否确认退出并永久删除你的所有数据", @"")
+             cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+             otherButtonTitles:@[NSLocalizedString(@"Delete", @"")]
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                          if (buttonIndex == 1) {
+                              [app logout];
+                              
+                              NSString *userFilePath = [PYTools getResourceDirectoryPathForUser:self.user.userId];
+                              BOOL isDir = YES;
+                              if ([[NSFileManager defaultManager] fileExistsAtPath:userFilePath isDirectory:&isDir] && isDir) {
+                                  [[NSFileManager defaultManager] removeItemAtPath:userFilePath error:NULL];
+                              }
+                              [[PYCoreDataController sharedInstance] deleteUserData:self.user];
+                              self.user = nil;
+                              
+                              [self.navigationController popViewControllerAnimated:NO];
+                              [app.rootVC showLoginPage:YES];
+                          }
+                      }];
 }
 
 #pragma mark - Private
@@ -157,7 +166,6 @@
             cell.detailTextLabel.font = Font_FS04;
             cell.detailTextLabel.textColor = HexColor(0x9b9fad);
             cell.detailTextLabel.text = nil;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             switch (indexPath.row) {
                 case 0:
                     cell.textLabel.text = NSLocalizedString(@"姓名", @"");
@@ -202,21 +210,38 @@
         }
             break;
         case 1: {
-            
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonCellIdentify" forIndexPath:indexPath];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.textAlignment = NSTextAlignmentLeft;
+            cell.textLabel.textColor = [UIColor blackColor];
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = NSLocalizedString(@"重置密码", @"");
+                    break;
+                case 1:
+                    if (self.user.pwd_g && self.user.pwd_g.length>0) {
+                        cell.textLabel.text = NSLocalizedString(@"重新设置手势密码", @"");
+                    } else {
+                        cell.textLabel.text = NSLocalizedString(@"添加手势密码", @"");
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return cell;
         }
             break;
         case 2: {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonCellIdentify" forIndexPath:indexPath];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+            cell.textLabel.textColor = Color_FC08;
             switch (indexPath.row) {
                 case 0:
                     cell.textLabel.text = NSLocalizedString(@"退出登录", @"");
-                    cell.textLabel.textAlignment = NSTextAlignmentCenter;
-                    cell.textLabel.textColor = Color_FC08;
                     break;
                 case 1:
                     cell.textLabel.text = NSLocalizedString(@"注销用户删除数据", @"");
-                    cell.textLabel.textAlignment = NSTextAlignmentCenter;
-                    cell.textLabel.textColor = Color_FC08;
                     break;
                 default:
                     break;
@@ -237,6 +262,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.section) {
+        case 1: {
+            if (indexPath.row == 1) {
+                GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];
+                gestureLockVC.title = NSLocalizedString(@"设置手势密码", @"");
+                gestureLockVC.type = GestureLockTypeSetPwd;
+                gestureLockVC.successBlock = ^(NSString *pwd) {
+                    self.user.pwd_g = pwd;
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                };
+                [self.navigationController pushViewController:gestureLockVC animated:YES];
+            }
+        }
+            break;
         case 2: {
             switch (indexPath.row) {
                 case 0:
