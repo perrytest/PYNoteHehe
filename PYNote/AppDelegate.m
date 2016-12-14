@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "CoverViewController.h"
 #import "PYAppManager.h"
+#import "PYMergeSever.h"
 
 AppDelegate *app = nil;
 
@@ -35,8 +36,9 @@ AppDelegate *app = nil;
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        PYAppManager *appManager = [PYAppManager shareAppManager];
-        TTDEBUGLOG(@"installed app : %@", appManager.installedArray);
+//        PYAppManager *appManager = [PYAppManager shareAppManager];
+//        TTDEBUGLOG(@"installed app : %@", appManager.installedArray);
+        [[PYMergeSever sharedInstance] start];
     });
     
     
@@ -66,11 +68,12 @@ AppDelegate *app = nil;
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [[PYCoreDataController sharedInstance] saveContext];
     [self showCoverPage];
+    [[PYMergeSever sharedInstance] stop];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    
+    [[PYMergeSever sharedInstance] start];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

@@ -74,7 +74,7 @@ static PYCoreDataController *sharedInstance = nil;
             return sharedInstance;
         }
     }
-    return nil;
+    return sharedInstance;
 }
 
 - (instancetype)init {

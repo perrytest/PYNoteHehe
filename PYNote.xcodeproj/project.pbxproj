@@ -54,6 +54,10 @@
 		20D76B911C2146A20026B3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20D76B901C2146A20026B3A0 /* Assets.xcassets */; };
 		20D76B941C2146A20026B3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20D76B921C2146A20026B3A0 /* LaunchScreen.storyboard */; };
 		20D76B9D1C21474D0026B3A0 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20D76B9B1C21474D0026B3A0 /* Main_iPad.storyboard */; };
+		20D787C71E0130A200461659 /* PYDataMergeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D787C61E0130A200461659 /* PYDataMergeManager.m */; };
+		20D787CA1E0130DF00461659 /* PYMergeSever.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D787C91E0130DF00461659 /* PYMergeSever.m */; };
+		20D787CD1E0130F400461659 /* PYMergeClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D787CC1E0130F400461659 /* PYMergeClient.m */; };
+		20D787D01E01408000461659 /* SocketTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D787CF1E01408000461659 /* SocketTestViewController.m */; };
 		20F4A4A31CE9D32000BE76CA /* PYCoreDataController+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4A4A21CE9D32000BE76CA /* PYCoreDataController+User.m */; };
 		20F7F0AC1DF6D45B001527B8 /* PYCoreDataController+Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F7F0AB1DF6D45B001527B8 /* PYCoreDataController+Account.m */; };
 		20F7F0AF1DF6D46C001527B8 /* PYCoreDataController+Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F7F0AE1DF6D46C001527B8 /* PYCoreDataController+Other.m */; };
@@ -169,6 +173,14 @@
 		20D76B931C2146A20026B3A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20D76B951C2146A20026B3A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20D76B9C1C21474D0026B3A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		20D787C51E0130A200461659 /* PYDataMergeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDataMergeManager.h; sourceTree = "<group>"; };
+		20D787C61E0130A200461659 /* PYDataMergeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDataMergeManager.m; sourceTree = "<group>"; };
+		20D787C81E0130DF00461659 /* PYMergeSever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYMergeSever.h; sourceTree = "<group>"; };
+		20D787C91E0130DF00461659 /* PYMergeSever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYMergeSever.m; sourceTree = "<group>"; };
+		20D787CB1E0130F400461659 /* PYMergeClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYMergeClient.h; sourceTree = "<group>"; };
+		20D787CC1E0130F400461659 /* PYMergeClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYMergeClient.m; sourceTree = "<group>"; };
+		20D787CE1E01408000461659 /* SocketTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketTestViewController.h; sourceTree = "<group>"; };
+		20D787CF1E01408000461659 /* SocketTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketTestViewController.m; sourceTree = "<group>"; };
 		20F4A49F1CE9CEAA00BE76CA /* PYToolDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYToolDefine.h; sourceTree = "<group>"; };
 		20F4A4A01CE9CFA400BE76CA /* KeyDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyDefine.h; sourceTree = "<group>"; };
 		20F4A4A11CE9D32000BE76CA /* PYCoreDataController+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYCoreDataController+User.h"; sourceTree = "<group>"; };
@@ -363,6 +375,14 @@
 		20514DC31C86B6A400B586D1 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				20D787C51E0130A200461659 /* PYDataMergeManager.h */,
+				20D787C61E0130A200461659 /* PYDataMergeManager.m */,
+				20D787CE1E01408000461659 /* SocketTestViewController.h */,
+				20D787CF1E01408000461659 /* SocketTestViewController.m */,
+				20D787C81E0130DF00461659 /* PYMergeSever.h */,
+				20D787C91E0130DF00461659 /* PYMergeSever.m */,
+				20D787CB1E0130F400461659 /* PYMergeClient.h */,
+				20D787CC1E0130F400461659 /* PYMergeClient.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -741,6 +761,7 @@
 				B85D127E1D1BCC8F0091ECA5 /* Account+CoreDataProperties.m in Sources */,
 				20D76B861C2146A20026B3A0 /* AppDelegate.m in Sources */,
 				20ACF8B31CE5B36400BFB120 /* AccountAddViewController.m in Sources */,
+				20D787CD1E0130F400461659 /* PYMergeClient.m in Sources */,
 				208592941D34D33900D10B6C /* CLLockItemView.m in Sources */,
 				20F7F0AC1DF6D45B001527B8 /* PYCoreDataController+Account.m in Sources */,
 				20514DB41C86B66900B586D1 /* PYCoreDataController.m in Sources */,
@@ -749,6 +770,7 @@
 				20A69C211DFF97930050CCEF /* UIAlertView+Blocks.m in Sources */,
 				20F7F0AF1DF6D46C001527B8 /* PYCoreDataController+Other.m in Sources */,
 				20F4A4A31CE9D32000BE76CA /* PYCoreDataController+User.m in Sources */,
+				20D787D01E01408000461659 /* SocketTestViewController.m in Sources */,
 				20514DC61C86B6A400B586D1 /* LoginVC.m in Sources */,
 				B80D0AC61D016DEA00227BA1 /* PYDoubleTextfieldCell.m in Sources */,
 				20514DB51C86B66900B586D1 /* PYTools.m in Sources */,
@@ -766,6 +788,7 @@
 				20514DC51C86B6A400B586D1 /* GestureLockVC.m in Sources */,
 				B85D12781D1BCC8F0091ECA5 /* RelateApp+CoreDataProperties.m in Sources */,
 				20D349191DA89D0E00743ADA /* UIView+Frame.m in Sources */,
+				20D787C71E0130A200461659 /* PYDataMergeManager.m in Sources */,
 				20514DB61C86B66900B586D1 /* PYViewController.m in Sources */,
 				20514DCE1C86B6E300B586D1 /* PYNote.xcdatamodeld in Sources */,
 				B85D127D1D1BCC8F0091ECA5 /* User.m in Sources */,
@@ -785,6 +808,7 @@
 				2088869F1D38D47600F94998 /* PYAppManager.m in Sources */,
 				202C80F71DEFC2B40013AE4D /* PYAppProxy+Convert.m in Sources */,
 				B85D12811D1BCC8F0091ECA5 /* Question.m in Sources */,
+				20D787CA1E0130DF00461659 /* PYMergeSever.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
