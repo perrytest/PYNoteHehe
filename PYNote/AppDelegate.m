@@ -34,12 +34,10 @@ AppDelegate *app = nil;
     [SVProgressHUD setBackgroundColor:[UIColor darkGrayColor]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        PYAppManager *appManager = [PYAppManager shareAppManager];
-        TTDEBUGLOG(@"installed app : %@", appManager.installedArray);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[PYAppManager shareAppManager] browseInstalledAppList];
+        TTDEBUGLOG(@"installed app : %@", [PYAppManager shareAppManager].installedArray);
     });
-    
-    
     
     return YES;
 }

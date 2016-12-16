@@ -102,7 +102,8 @@ NSArray *AppList(NSString *applicationType){
         id workspace = objc_msgSend(LSApplicationWorkspace, selector);
         if (workspace) {
            
-            SEL appListSEL = NSSelectorFromString(@"allInstalledApplications");
+//            SEL appListSEL = NSSelectorFromString(@"allInstalledApplications");
+            SEL appListSEL = NSSelectorFromString(@"allApplications");
             id array = objc_msgSend(workspace, appListSEL);
 //            TTDEBUGLOG(@"installed array : %@", array);
             if (array && [array isKindOfClass:[NSArray class]]) {

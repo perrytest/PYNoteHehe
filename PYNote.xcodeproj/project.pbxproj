@@ -42,6 +42,8 @@
 		20B921131DB75323000A7E7F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921121DB75323000A7E7F /* CoreGraphics.framework */; };
 		20B921151DB7533A000A7E7F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921141DB7533A000A7E7F /* CoreMedia.framework */; };
 		20B921171DB75358000A7E7F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B921161DB75358000A7E7F /* AVFoundation.framework */; };
+		20C109261E029ECA00325062 /* AccountAppCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C109241E029EC900325062 /* AccountAppCell.m */; };
+		20C109271E029ECA00325062 /* AccountAppCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C109251E029EC900325062 /* AccountAppCell.xib */; };
 		20C21DF61DF651E800CD497D /* AccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C21DF51DF651E800CD497D /* AccountInfoViewController.m */; };
 		20C44F631D92252300EB8BD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20C44F651D92252300EB8BD1 /* Localizable.strings */; };
 		20D349191DA89D0E00743ADA /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D349181DA89D0E00743ADA /* UIView+Frame.m */; };
@@ -149,6 +151,9 @@
 		20B921121DB75323000A7E7F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		20B921141DB7533A000A7E7F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		20B921161DB75358000A7E7F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		20C109231E029EC900325062 /* AccountAppCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountAppCell.h; sourceTree = "<group>"; };
+		20C109241E029EC900325062 /* AccountAppCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountAppCell.m; sourceTree = "<group>"; };
+		20C109251E029EC900325062 /* AccountAppCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountAppCell.xib; sourceTree = "<group>"; };
 		20C21DF41DF651E800CD497D /* AccountInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountInfoViewController.h; sourceTree = "<group>"; };
 		20C21DF51DF651E800CD497D /* AccountInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountInfoViewController.m; sourceTree = "<group>"; };
 		20C44F641D92252300EB8BD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -451,6 +456,7 @@
 			children = (
 				2092F23F1D8FED0800802CF1 /* AppListViewController.h */,
 				2092F2401D8FED0800802CF1 /* AppListViewController.m */,
+				20C109221E029EB900325062 /* View */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -472,6 +478,16 @@
 		20ACF8DE1CE5C53500BFB120 /* View */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		20C109221E029EB900325062 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				20C109231E029EC900325062 /* AccountAppCell.h */,
+				20C109241E029EC900325062 /* AccountAppCell.m */,
+				20C109251E029EC900325062 /* AccountAppCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -673,6 +689,7 @@
 				20D76B9D1C21474D0026B3A0 /* Main_iPad.storyboard in Resources */,
 				20D3491F1DA8C41600743ADA /* Icon.xcassets in Resources */,
 				20A69C241DFF99C60050CCEF /* infoPlist.strings in Resources */,
+				20C109271E029ECA00325062 /* AccountAppCell.xib in Resources */,
 				B80D0AC11D01639E00227BA1 /* PYTextfieldCell.xib in Resources */,
 				B80D0AC71D016DEA00227BA1 /* PYDoubleTextfieldCell.xib in Resources */,
 				20C44F631D92252300EB8BD1 /* Localizable.strings in Resources */,
@@ -785,6 +802,7 @@
 				2088869F1D38D47600F94998 /* PYAppManager.m in Sources */,
 				202C80F71DEFC2B40013AE4D /* PYAppProxy+Convert.m in Sources */,
 				B85D12811D1BCC8F0091ECA5 /* Question.m in Sources */,
+				20C109261E029ECA00325062 /* AccountAppCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

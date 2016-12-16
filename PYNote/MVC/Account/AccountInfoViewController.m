@@ -11,8 +11,16 @@
 #import "Account.h"
 #import "GestureLockVC.h"
 #import "PYCoreDataController+Account.h"
+#import "AccountAppCell.h"
+#import "PYAppManager.h"
+#import "RelateApp.h"
+#import "PYCoreDataController+Other.h"
 
-@interface AccountInfoViewController ()
+
+@interface AccountInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (nonatomic, strong) UICollectionView *appCollectionView;
+@property (nonatomic, strong) NSArray *appList;
 
 @end
 
@@ -28,7 +36,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.title = self.account.accountTitle;
-
+    [self loadRelatedAppList];
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -41,6 +51,56 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - getter/setter
+
+- (UICollectionView *)appCollectionView {
+    if (_appCollectionView == nil) {
+        UICollectionViewFlowLayout *_flowLayout = [[UICollectionViewFlowLayout alloc]init];
+        _flowLayout.sectionInset = UIEdgeInsetsMake(0, 10.0, 0, 10.0);
+        _flowLayout.minimumInteritemSpacing = 10.0;
+        _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _flowLayout.itemSize = CGSizeMake(60.0, 80.0);
+        _appCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80.0+10.0*2) collectionViewLayout:_flowLayout];
+        _appCollectionView.bounces = YES;
+        _appCollectionView.delegate= self;
+        _appCollectionView.dataSource = self;
+        _appCollectionView.showsHorizontalScrollIndicator = NO;
+        _appCollectionView.backgroundColor = [UIColor clearColor];
+        // Register cell class
+        [_appCollectionView registerClass:[AccountAppCell class] forCellWithReuseIdentifier:@"AppCollectionCell"];
+    }
+    return _appCollectionView;
+}
+
+#pragma mark - Private
+
+- (void)loadRelatedAppList {
+    NSMutableArray <RelateApp *> *needDeleteList = [[NSMutableArray alloc] init];
+    NSMutableArray <PYAppProxy *> *appProxyArray = [[NSMutableArray alloc] init];
+    [self.account.appList enumerateObjectsUsingBlock:^(RelateApp * _Nonnull obj, BOOL * _Nonnull stop) {
+        PYAppProxy *appProxy = [[PYAppManager shareAppManager] appProxyWithBundleId:obj.bundleId];
+        if (appProxy) {
+            [appProxyArray addObject:appProxy];
+        } else {
+            [needDeleteList addObject:obj];
+        }
+    }];
+    self.appList = [NSArray arrayWithArray:appProxyArray];
+    if (self.appList.count>0) {
+        self.tableView.tableHeaderView = ({
+            UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80.0+10.0*2)];
+            
+            [headerView addSubview:self.appCollectionView];
+            
+            headerView;
+        });
+    }
+    
+    [needDeleteList enumerateObjectsUsingBlock:^(RelateApp * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[PYCoreDataController sharedInstance] deleteRelateAppData:obj];
+    }];
 }
 
 #pragma mark - Action
@@ -190,6 +250,22 @@
         default:
             break;
     }
+}
+
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.appList.count+1;
+}
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    AccountAppCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AppCollectionCell" forIndexPath:indexPath];
+    
+    cell.contentView.backgroundColor = [UIColor yellowColor];
+//    PYAppProxy *appProxy = [self.account.appList objec]
+    
+    return cell;
 }
 
 /*

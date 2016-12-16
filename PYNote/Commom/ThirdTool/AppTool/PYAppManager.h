@@ -14,6 +14,8 @@
 
 + (instancetype)shareAppManager;
 
+- (void)browseInstalledAppList;
+
 /**
  *  获取 app icon
  *
@@ -38,9 +40,12 @@
 - (UIImage *)iconWithBundleId:(NSString *)bundleID format:(int)format;
 - (UIImage *)iconWithBundleId:(NSString *)bundleID format:(int)format scale:(float)scale;
 
-- (BOOL)uninstallAppWithBundleId:(NSString *)bundleID;
+// 无效
+//- (BOOL)uninstallAppWithBundleId:(NSString *)bundleID;
 
 - (BOOL)openAppWithBundleId:(NSString *)bundleID;
+
+- (PYAppProxy *)appProxyWithBundleId:(NSString *)bundleID;
 
 
 @end

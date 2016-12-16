@@ -168,7 +168,7 @@ static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
             cell.inputTF.placeholder = NSLocalizedString(@"请输入姓名/身份证/手机号/email", @"");
             cell.inputTF.text = self.userString;
             RAC(self, userString) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
-//            RAC(cell.inputTF, text) = [RACObserve(self, userString) takeUntil:[cell rac_prepareForReuseSignal]];
+//            RAC(cell.inputTF, text) = [RACObserve(self, userString) takeUntil:[cell rac_prepareForReuseSignal]];
         }
             break;
         case 1:

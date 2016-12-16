@@ -29,8 +29,8 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        NSArray *array = AppList(kUser);
-        self.installedArray = [NSArray arrayWithArray:array];
+//        NSArray *array = AppList(kUser);
+//        self.installedArray = [NSArray arrayWithArray:array];
     }
     return self;
 }
@@ -46,6 +46,27 @@
     });
     
     return shareAppManager;
+}
+
+- (NSArray *)installedArray {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self browseInstalledAppList];
+    });
+    while (!(_installedArray && _installedArray.count>0)) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return _installedArray;
+}
+
+#pragma mark - Public
+
+- (void)browseInstalledAppList {
+    NSArray *array = AppList(kUser);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        @synchronized (_installedArray) {
+            self.installedArray = [NSArray arrayWithArray:array];
+        }
+    });
 }
 
 - (UIImage *)iconWithBundleId:(NSString *)bundleID format:(int)format {
@@ -79,6 +100,18 @@
         return YES;
     }
     return NO;
+}
+
+- (PYAppProxy *)appProxyWithBundleId:(NSString *)bundleID {
+    __block PYAppProxy *appProxy = nil;
+    [self.installedArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        PYAppProxy *app = (PYAppProxy *)obj;
+        if ([app.applicationIdentifier isEqualToString:bundleID]) {
+            appProxy = app;
+            *stop = YES;
+        }
+    }];
+    return appProxy;
 }
 
 @end
