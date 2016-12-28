@@ -15,6 +15,16 @@
     // Initialization code
 }
 
+//- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+//    self = [super initWithCoder:aDecoder];
+//    if (![self.contentView.subviews count]) {
+//        NSBundle *mainBundle = [NSBundle mainBundle];
+//        NSArray *loadedViews = [mainBundle loadNibNamed:@"PYTextfieldCell" owner:self options:nil];
+//        self = [loadedViews firstObject];
+//    }
+//    return self;
+//}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

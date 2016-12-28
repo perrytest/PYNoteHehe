@@ -10,7 +10,6 @@
 #import "PYTextfieldCell.h"
 #import "ReactiveCocoa.h"
 
-static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
 
 @interface LoginVC () <UITabBarDelegate>
 
@@ -41,7 +40,7 @@ static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
     
     
     UINib *cellNib1 = [UINib nibWithNibName:NSStringFromClass([PYTextfieldCell class]) bundle:nil];
-    [self.tableView registerNib:cellNib1 forCellReuseIdentifier:cellTFIdentifierNormal];
+    [self.tableView registerNib:cellNib1 forCellReuseIdentifier:NormalSingleTFCellID];
     
     self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.width-60)/2, 20, 60, 60)];
     self.iconImageView.image = [UIImage imageNamed:@"Icon-60"];
@@ -159,7 +158,7 @@ static NSString *cellTFIdentifierNormal = @"NormalCellTextFieldIdentifier";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierNormal forIndexPath:indexPath];
+    PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:NormalSingleTFCellID forIndexPath:indexPath];
     
     cell.inputTF.secureTextEntry = NO;
     cell.inputTF.placeholder = nil;

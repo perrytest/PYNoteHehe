@@ -11,6 +11,8 @@
 #import "ReactiveCocoa.h"
 #import "GestureLockVC.h"
 
+#import "TitleSettingViewController.h"
+
 @interface UserInfoViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIButton *avatarButton;
@@ -134,6 +136,123 @@
     [[PYCoreDataController sharedInstance] saveContext];
 }
 
+- (NSString *)titleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *title = nil;
+    switch (indexPath.section) {
+        case 0: {
+            switch (indexPath.row) {
+                case 0:
+                    title = NSLocalizedString(@"姓名", @"");
+                    break;
+                case 1:
+                    title = NSLocalizedString(@"昵称", @"");
+                    break;
+                case 2:
+                    title = NSLocalizedString(@"身份证", @"");
+                    break;
+                case 3:
+                    title = NSLocalizedString(@"手机号码", @"");
+                    break;
+                case 4:
+                    title = NSLocalizedString(@"email", @"");
+                    break;
+                case 5:
+                    title = NSLocalizedString(@"QQ", @"");
+                    break;
+                case 6:
+                    title = NSLocalizedString(@"地址", @"");
+                    break;
+                case 7:
+                    title = NSLocalizedString(@"座右铭", @"");
+                    break;
+                case 8:
+                    title = NSLocalizedString(@"备注留言", @"");
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        case 1: {
+            if (indexPath.row == 0) {
+                title = NSLocalizedString(@"用户密码", @"");
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    return title;
+}
+
+- (NSString *)propertyForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *property = nil;
+    switch (indexPath.section) {
+        case 0: {
+            switch (indexPath.row) {
+                case 0:
+                    property = @"name";
+                    break;
+                case 1:
+                    property = @"nameNick";
+                    break;
+                case 2:
+                    property = @"cardId";
+                    break;
+                case 3:
+                    property = @"phone";
+                    break;
+                case 4:
+                    property = @"email";
+                    break;
+                case 5:
+                    property = @"qq";
+                    break;
+                case 6:
+                    property = @"address";
+                    break;
+                case 7:
+                    property = @"motto";
+                    break;
+                case 8:
+                    property = @"notice";
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        case 1: {
+            if (indexPath.row == 0) {
+                property = @"pwd_s";
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    return property;
+}
+
+- (void)didSelectedForSettingAtIndexPath:(NSIndexPath *)indexPath {
+    TitleSettingViewController *settingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TitleSettingPage"];
+    settingVC.title = [self titleForRowAtIndexPath:indexPath];
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        settingVC.secureTextEntry = YES;
+        settingVC.hasNotice = YES;
+        settingVC.noticeValue = self.user.pwd_notice;
+    }
+    NSString *property = [self propertyForRowAtIndexPath:indexPath];
+    settingVC.textValue = [self.user valueForKey:property];
+    
+    settingVC.changedBlock = ^(NSString *value1, NSString *notice) {
+        [self.user setValue:value1 forKey:property];
+        self.user.pwd_notice = notice;
+    };
+    
+    [self.navigationController pushViewController:settingVC animated:YES];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -166,41 +285,33 @@
             cell.detailTextLabel.font = Font_FS04;
             cell.detailTextLabel.textColor = HexColor(0x9b9fad);
             cell.detailTextLabel.text = nil;
+            cell.textLabel.text = [self titleForRowAtIndexPath:indexPath];
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = NSLocalizedString(@"姓名", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.user, name) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 1:
-                    cell.textLabel.text = NSLocalizedString(@"昵称", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.user, nameNick) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 2:
-                    cell.textLabel.text = NSLocalizedString(@"身份证", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.user, cardId) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 3:
-                    cell.textLabel.text = NSLocalizedString(@"手机号码", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.user, phone) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 4:
-                    cell.textLabel.text = NSLocalizedString(@"email", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.user, email) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 5:
-                    cell.textLabel.text = NSLocalizedString(@"QQ", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.user, qq) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 6:
-                    cell.textLabel.text = NSLocalizedString(@"地址", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.user, address) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 7:
-                    cell.textLabel.text = NSLocalizedString(@"座右铭", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.user, motto) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 8:
-                    cell.textLabel.text = NSLocalizedString(@"备注留言", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.user, notice) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 default:
@@ -262,6 +373,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.section) {
+        case 0: {
+            [self didSelectedForSettingAtIndexPath:indexPath];
+        }
+            break;
         case 1: {
             if (indexPath.row == 1) {
                 GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];
@@ -272,6 +387,8 @@
                     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                 };
                 [self.navigationController pushViewController:gestureLockVC animated:YES];
+            } else {
+                [self didSelectedForSettingAtIndexPath:indexPath];
             }
         }
             break;

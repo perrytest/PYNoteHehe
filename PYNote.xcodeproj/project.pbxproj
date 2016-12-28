@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		201158011E07904F004ADFF0 /* TitleSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 201158001E07904F004ADFF0 /* TitleSettingViewController.m */; };
 		202C80F71DEFC2B40013AE4D /* PYAppProxy+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C80F61DEFC2B40013AE4D /* PYAppProxy+Convert.m */; };
 		202C80FA1DF00F500013AE4D /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C80F91DF00F500013AE4D /* UserInfoViewController.m */; };
 		20514DB41C86B66900B586D1 /* PYCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20514DAD1C86B66900B586D1 /* PYCoreDataController.m */; };
@@ -85,6 +86,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		201157FF1E07904F004ADFF0 /* TitleSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleSettingViewController.h; sourceTree = "<group>"; };
+		201158001E07904F004ADFF0 /* TitleSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleSettingViewController.m; sourceTree = "<group>"; };
 		202C80F51DEFC2B40013AE4D /* PYAppProxy+Convert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYAppProxy+Convert.h"; sourceTree = "<group>"; };
 		202C80F61DEFC2B40013AE4D /* PYAppProxy+Convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PYAppProxy+Convert.m"; sourceTree = "<group>"; };
 		202C80F81DF00F500013AE4D /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
@@ -368,6 +371,8 @@
 		20514DC31C86B6A400B586D1 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				201157FF1E07904F004ADFF0 /* TitleSettingViewController.h */,
+				201158001E07904F004ADFF0 /* TitleSettingViewController.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -770,6 +775,7 @@
 				B80D0AC61D016DEA00227BA1 /* PYDoubleTextfieldCell.m in Sources */,
 				20514DB51C86B66900B586D1 /* PYTools.m in Sources */,
 				20ACF8B01CE5A6F100BFB120 /* AccoutListViewController.m in Sources */,
+				201158011E07904F004ADFF0 /* TitleSettingViewController.m in Sources */,
 				B85D12801D1BCC8F0091ECA5 /* Question+CoreDataProperties.m in Sources */,
 				208592961D34D33900D10B6C /* CoreLockConst.m in Sources */,
 				B80D0ADD1D0190FD00227BA1 /* PYRelateDataModel.m in Sources */,

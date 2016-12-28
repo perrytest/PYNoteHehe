@@ -20,7 +20,6 @@
 
 
 static NSString *cellTFIdentifierNormal = @"kNormalCellIdentifier";
-static NSString *cellTFIdentifierSingle = @"kCellTextFieldIdentifier";
 static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
 
 @interface RegistVC () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -47,7 +46,7 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
     
     UINib *cellNib1 = [UINib nibWithNibName:NSStringFromClass([PYTextfieldCell class]) bundle:nil];
     UINib *cellNib2 = [UINib nibWithNibName:NSStringFromClass([PYDoubleTextfieldCell class]) bundle:nil];
-    [self.tableView registerNib:cellNib1 forCellReuseIdentifier:cellTFIdentifierSingle];
+    [self.tableView registerNib:cellNib1 forCellReuseIdentifier:NormalSingleTFCellID];
     [self.tableView registerNib:cellNib2 forCellReuseIdentifier:cellTFIdentifierDouble];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTFIdentifierNormal];
     
@@ -180,7 +179,7 @@ static NSString *cellTFIdentifierDouble = @"DoubleCellTextFieldIdentifier";
                 return cell;
             }
             
-            PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTFIdentifierSingle forIndexPath:indexPath];
+            PYTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:NormalSingleTFCellID forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.inputTF.secureTextEntry = NO;
             cell.inputTF.placeholder = nil;

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define NormalSingleTFCellID @"kCellTextFieldIdentifier"
+
 @interface PYTextfieldCell : UITableViewCell
 
 
