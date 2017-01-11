@@ -67,14 +67,11 @@
         [_avatarButton addTarget:self action:@selector(avartarClickAction:) forControlEvents:UIControlEventTouchUpInside];
         
         if (self.user.avator && self.user.avator.length>0) {
-            NSString *avatarFilePath = [[PYTools getResourceDirectoryPathForUser:self.user.userId] stringByAppendingPathComponent:self.user.avator];
-            if ([[NSFileManager defaultManager] fileExistsAtPath:avatarFilePath]) {
+            NSString *avatarFilePath = [self.user avatarPath];
+            if (avatarFilePath) {
                 self.avatarData = [NSData dataWithContentsOfFile:avatarFilePath];
                 UIImage *_image = [UIImage imageWithData:self.avatarData];
                 [_avatarButton setBackgroundImage:_image forState:UIControlStateNormal];
-            } else {
-                self.user.avator = nil;
-                [[PYCoreDataController sharedInstance] saveContext];
             }
         }
         

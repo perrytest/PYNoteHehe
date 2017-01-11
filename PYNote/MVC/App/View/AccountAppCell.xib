@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,20 +19,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="60" height="80"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9F-jY-dFL">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d9F-jY-dFL">
                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="d9F-jY-dFL" secondAttribute="height" multiplier="1:1" id="FiQ-tS-W3Y"/>
+                            <constraint firstAttribute="width" constant="60" id="InI-Q5-nEx"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YD-xz-Yol">
-                        <rect key="frame" x="9" y="59" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YD-xz-Yol">
+                        <rect key="frame" x="0.0" y="60" width="60" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
+            <constraints>
+                <constraint firstItem="9YD-xz-Yol" firstAttribute="centerX" secondItem="d9F-jY-dFL" secondAttribute="centerX" id="5bH-sk-YHW"/>
+                <constraint firstItem="9YD-xz-Yol" firstAttribute="width" secondItem="d9F-jY-dFL" secondAttribute="width" id="ATo-4V-ROm"/>
+                <constraint firstItem="d9F-jY-dFL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Sar-vA-aKk"/>
+                <constraint firstItem="9YD-xz-Yol" firstAttribute="top" secondItem="d9F-jY-dFL" secondAttribute="bottom" id="XCL-Oc-NGY"/>
+                <constraint firstItem="d9F-jY-dFL" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="dPa-ls-wlu"/>
+                <constraint firstItem="d9F-jY-dFL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rrT-Zp-LVR"/>
+                <constraint firstAttribute="bottom" secondItem="9YD-xz-Yol" secondAttribute="bottom" id="xAJ-mC-RxD"/>
+            </constraints>
             <size key="customSize" width="60" height="80"/>
+            <connections>
+                <outlet property="iconImageView" destination="d9F-jY-dFL" id="iBU-ia-Uff"/>
+                <outlet property="titleLabel" destination="9YD-xz-Yol" id="eiH-eX-k2w"/>
+            </connections>
             <point key="canvasLocation" x="30" y="67"/>
         </collectionViewCell>
     </objects>

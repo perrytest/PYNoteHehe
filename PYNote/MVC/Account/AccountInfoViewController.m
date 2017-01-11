@@ -14,10 +14,13 @@
 #import "AccountAppCell.h"
 #import "PYAppManager.h"
 #import "RelateApp.h"
+#import "PYAppProxy+Convert.h"
 #import "PYCoreDataController+Other.h"
+#import "TitleSettingViewController.h"
+#import "AppListViewController.h"
 
 
-@interface AccountInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface AccountInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegate, AppListSelectDelegate>
 
 @property (nonatomic, strong) UICollectionView *appCollectionView;
 @property (nonatomic, strong) NSArray *appList;
@@ -32,13 +35,11 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"拷贝", @"") style:UIBarButtonItemStylePlain target:self action:@selector(copyBarAction:)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
     
     self.title = self.account.accountTitle;
-    [self loadRelatedAppList];
-    
-    
+    [self loadRelatedAppList];    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -69,7 +70,8 @@
         _appCollectionView.showsHorizontalScrollIndicator = NO;
         _appCollectionView.backgroundColor = [UIColor clearColor];
         // Register cell class
-        [_appCollectionView registerClass:[AccountAppCell class] forCellWithReuseIdentifier:@"AppCollectionCell"];
+        UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([AccountAppCell class]) bundle:nil];
+        [_appCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"AppCollectionCell"];
     }
     return _appCollectionView;
 }
@@ -96,6 +98,8 @@
             
             headerView;
         });
+    } else {
+        self.tableView.tableHeaderView = nil;
     }
     
     [needDeleteList enumerateObjectsUsingBlock:^(RelateApp * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -103,7 +107,113 @@
     }];
 }
 
+- (NSString *)titleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *title = nil;
+    switch (indexPath.section) {
+        case 0: {
+            switch (indexPath.row) {
+                case 0:
+                    title = ([self.account accountType] == AccountType_BankCard)?NSLocalizedString(@"卡号", @""):NSLocalizedString(@"账号", @"");;
+                    break;
+                case 1:
+                    title = NSLocalizedString(@"姓名", @"");
+                    break;
+                case 2:
+                    title = NSLocalizedString(@"昵称", @"");
+                    break;
+                case 3:
+                    title = NSLocalizedString(@"关键字", @"");
+                    break;
+                case 4:
+                    title = NSLocalizedString(@"手机号", @"");
+                    break;
+                case 5:
+                    title = NSLocalizedString(@"email", @"");
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        case 1: {
+            if (indexPath.row == 0) {
+                title = NSLocalizedString(@"账号密码", @"");
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    return title;
+}
+
+- (NSString *)propertyForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *property = nil;
+    switch (indexPath.section) {
+        case 0: {
+            switch (indexPath.row) {
+                case 0:
+                    property = @"account";
+                    break;
+                case 1:
+                    property = @"name";
+                    break;
+                case 2:
+                    property = @"nick";
+                    break;
+                case 3:
+                    property = @"keyword";
+                    break;
+                case 4:
+                    property = @"phone";
+                    break;
+                case 5:
+                    property = @"email";
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        case 1: {
+            if (indexPath.row == 0) {
+                property = @"pwd";
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    return property;
+}
+
 #pragma mark - Action
+
+- (void)copyBarAction:(id)sender {
+    NSString *copyString = [NSString stringWithFormat:@"%@|%@", self.account.account, self.account.pwd];
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = copyString;
+    [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"Copy_OK", @"")];
+}
+
+- (void)didSelectedForSettingAtIndexPath:(NSIndexPath *)indexPath {
+    TitleSettingViewController *settingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TitleSettingPage"];
+    settingVC.title = [self titleForRowAtIndexPath:indexPath];
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        settingVC.secureTextEntry = YES;
+        settingVC.hasNotice = YES;
+        settingVC.noticeValue = self.account.pwd_notice;
+    }
+    NSString *property = [self propertyForRowAtIndexPath:indexPath];
+    settingVC.textValue = [self.account valueForKey:property];
+    
+    settingVC.changedBlock = ^(NSString *value1, NSString *notice) {
+        [self.account setValue:value1 forKey:property];
+        self.account.pwd_notice = notice;
+    };
+    
+    [self.navigationController pushViewController:settingVC animated:YES];
+}
 
 - (void)deleteAccountDataAction {
     [UIAlertView showWithTitle:PYProjectDisplayName
@@ -151,30 +261,26 @@
             cell.textLabel.font = Font_FS05;
             cell.detailTextLabel.font = Font_FS04;
             cell.detailTextLabel.textColor = HexColor(0x9b9fad);
+            cell.textLabel.text = [self titleForRowAtIndexPath:indexPath];
             cell.detailTextLabel.text = nil;
+            
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = ([self.account accountType] == AccountType_BankCard)?NSLocalizedString(@"账号", @""):NSLocalizedString(@"卡号", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.account, account) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 1:
-                    cell.textLabel.text = NSLocalizedString(@"姓名", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.account, name) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 2:
-                    cell.textLabel.text = NSLocalizedString(@"昵称", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.account, nick) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 3:
-                    cell.textLabel.text = NSLocalizedString(@"关键字", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.account, keyword) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 4:
-                    cell.textLabel.text = NSLocalizedString(@"手机号", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.account, phone) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 case 5:
-                    cell.textLabel.text = NSLocalizedString(@"email", @"");
                     RAC(cell.detailTextLabel, text) = [RACObserve(self.account, email) takeUntil:[cell rac_prepareForReuseSignal]];
                     break;
                 default:
@@ -223,6 +329,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.section) {
+        case 0:
+            [self didSelectedForSettingAtIndexPath:indexPath];
+            break;
         case 1: {
             if (indexPath.row == 1) {
                 GestureLockVC *gestureLockVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GestureLockPage"];
@@ -232,6 +341,8 @@
                     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                 };
                 [self.navigationController pushViewController:gestureLockVC animated:YES];
+            } else {
+                [self didSelectedForSettingAtIndexPath:indexPath];
             }
         }
             break;
@@ -246,13 +357,12 @@
             }
         }
             break;
-            
         default:
             break;
     }
 }
 
-#pragma mark - UICollectionViewDataSource
+#pragma mark - UICollectionViewDataSource & UICollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.appList.count+1;
@@ -262,20 +372,45 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     AccountAppCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AppCollectionCell" forIndexPath:indexPath];
     
-    cell.contentView.backgroundColor = [UIColor yellowColor];
-//    PYAppProxy *appProxy = [self.account.appList objec]
+//    cell.contentView.backgroundColor = [UIColor yellowColor];
+    if (indexPath.row < self.appList.count) {
+        PYAppProxy *appProxy = [self.appList objectAtIndex:indexPath.row];
+        [cell loadUIWithApp:appProxy];
+    } else {
+        [cell loadUIWithApp:nil];
+    }
     
     return cell;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    if (indexPath.row < self.appList.count) {
+        PYAppProxy *appProxy = [self.appList objectAtIndex:indexPath.row];
+        [[PYAppManager shareAppManager] openAppWithBundleId:appProxy.applicationIdentifier];
+    } else {
+        AppListViewController *appListVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AppListPage"];
+        appListVC.delegate = self;
+        appListVC.originList = self.appList;
+        [self.navigationController pushViewController:appListVC animated:YES];
+    }
 }
-*/
+
+#pragma mark - AppListSelectDelegate
+
+- (void)didSelectedAppList:(NSArray <PYAppProxy *> *)appList {
+    NSManagedObjectContext *context = [PYCoreDataController sharedInstance].managedObjectContext;
+    NSSet *appSet = self.account.appList;
+    [self.account removeAppList:appSet];
+    NSMutableSet *newAppSet = [[NSMutableSet alloc] initWithCapacity:appList.count];
+    for (PYAppProxy *appProxy in appList) {
+        RelateApp *insertApp = [NSEntityDescription insertNewObjectForEntityForName:@"RelateApp" inManagedObjectContext:context];
+        [appProxy convertInfoToRelateApp:&insertApp];
+        [newAppSet addObject:insertApp];
+    }
+    [self.account addAppList:newAppSet];
+    [self loadRelatedAppList];
+    [self.appCollectionView reloadData];
+}
 
 @end

@@ -16,10 +16,10 @@
 
 @property (nonatomic, strong) UIBarButtonItem *doneButton;
 
-@property (nonatomic, strong) NSArray *installArray;
+@property (nonatomic, strong) NSArray<PYAppProxy *> *installArray;
 
 //@property (nonatomic, strong) NSIndexPath *selectIndexPath;
-@property (nonatomic, strong) NSMutableArray *selectedIndexPaths;
+@property (nonatomic, strong) NSMutableArray<NSIndexPath *> *selectedIndexPaths;
 
 @end
 
@@ -39,7 +39,7 @@
     self.installArray = [NSArray arrayWithArray:installedArray];
     
     self.selectedIndexPaths = [[NSMutableArray alloc] initWithCapacity:1];
-    
+    [self setupSelectList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,6 +57,18 @@
 }
 
 #pragma mark - Private
+
+- (void)setupSelectList {
+    for (PYAppProxy *appProxy in self.originList) {
+        [self.installArray enumerateObjectsUsingBlock:^(PYAppProxy * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([appProxy.applicationIdentifier isEqualToString:obj.applicationIdentifier]) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+                [self.selectedIndexPaths addObject:indexPath];
+                *stop = YES;
+            }
+        }];
+    }
+}
 
 - (BOOL)isSelectedForIndexPath:(NSIndexPath *)selectIndexPath {
     for (NSIndexPath *indexPath in self.selectedIndexPaths) {

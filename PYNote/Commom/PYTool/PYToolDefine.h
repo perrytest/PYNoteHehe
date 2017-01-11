@@ -23,6 +23,9 @@
 objectForKey:@"CFBundleShortVersionString"]
 #define PYProjectBundleID [[NSBundle mainBundle] bundleIdentifier]
 
+//weak self
+#define DeclareWeakSelf __weak typeof(self) weakSelf = self;
+
 
 // check system version, make adapter for ios6 and 7
 #define PY_IS_IOS10_AND_UP ([[UIDevice currentDevice].systemVersion floatValue] >= 10.0)

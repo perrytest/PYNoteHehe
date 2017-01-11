@@ -19,4 +19,6 @@
 
 @property (nonatomic, weak) id <AppListSelectDelegate> delegate;
 
+@property (nonatomic, strong) NSArray *originList;
+
 @end

@@ -137,4 +137,18 @@
     }
 }
 
+- (NSString *)avatarPath {
+    if (self.avator && self.avator.length>0) {
+        NSString *avatarFilePath = [[PYTools getResourceDirectoryPathForUser:self.userId] stringByAppendingPathComponent:self.avator];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:avatarFilePath]) {
+            return avatarFilePath;
+        } else {
+            self.avator = nil;
+            [[PYCoreDataController sharedInstance] saveContext];
+            return nil;
+        }
+    }
+    return nil;
+}
+
 @end

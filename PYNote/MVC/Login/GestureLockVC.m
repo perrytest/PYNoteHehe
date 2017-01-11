@@ -87,10 +87,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.unlockUser.avator && self.unlockUser.avator.length>0) {
-        NSString *avatarFilePath = [[PYTools getResourceDirectoryPathForUser:self.unlockUser.userId] stringByAppendingPathComponent:self.unlockUser.avator];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:avatarFilePath]) {
+        NSString *avatarFilePath = [self.unlockUser avatarPath];
+        if (avatarFilePath) {
             UIImage *_image = [UIImage imageWithContentsOfFile:avatarFilePath];
-            [self.avatarButton setBackgroundImage:_image forState:UIControlStateNormal];
+            [_avatarButton setBackgroundImage:_image forState:UIControlStateNormal];
         }
     }
 }

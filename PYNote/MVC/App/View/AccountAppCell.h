@@ -10,4 +10,6 @@
 
 @interface AccountAppCell : UICollectionViewCell
 
+- (void)loadUIWithApp:(PYAppProxy *)appProxy;
+
 @end

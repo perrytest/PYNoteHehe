@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)checkLoginPassword:(NSString *)pwd;
 
-
+- (NSString *)avatarPath;
 
 
 @end

@@ -11,7 +11,7 @@
 #import "ReactiveCocoa.h"
 
 
-@interface LoginVC () <UITabBarDelegate>
+@interface LoginVC ()
 
 @property (nonatomic, strong) UIImageView *iconImageView;
 
@@ -44,7 +44,10 @@
     
     self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.width-60)/2, 20, 60, 60)];
     self.iconImageView.image = [UIImage imageNamed:@"Icon-60"];
-    
+    UITapGestureRecognizer *swipeGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarGestureAction:)];
+    swipeGesture.numberOfTapsRequired = 2;
+    [self.iconImageView addGestureRecognizer:swipeGesture];
+    self.iconImageView.userInteractionEnabled = YES;
     
     self.tableView.tableHeaderView = ({
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 100)];
@@ -91,8 +94,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSArray *users = [[PYCoreDataController sharedInstance] allUserList];
-    TTDEBUGLOG(@"all user count:%lu", (unsigned long)users.count);
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,6 +123,32 @@
     [self performSegueWithIdentifier:@"LoginToRegister" sender:nil];
 }
 
+- (void)avatarGestureAction:(id)sender {
+    TTDEBUGLOG(@"show all user");
+    NSArray <User *> *users = [[PYCoreDataController sharedInstance] allUserList];
+    if (users.count>0) {
+        DeclareWeakSelf
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"选择登录用户", @"") message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:nil];
+        [actionSheet addAction:cancelAction];
+        [users enumerateObjectsUsingBlock:^(User * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIAlertAction *userAction = [UIAlertAction actionWithTitle:obj.name style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                weakSelf.userString = obj.name;
+                NSString *avatarFilePath = [obj avatarPath];
+                if (avatarFilePath) {
+                    UIImage *_image = [UIImage imageWithContentsOfFile:avatarFilePath];
+                    weakSelf.iconImageView.image = _image;
+                } else {
+                    weakSelf.iconImageView.image = [UIImage imageNamed:@"Icon-60"];
+                }
+            }];
+            [actionSheet addAction:userAction];
+        }];
+        [self presentViewController:actionSheet animated:YES completion:nil];
+    }
+    
+}
+
 - (void)loginAction:(id)sender {
     if (self.userString && self.userString.length>0 && self.password && self.password.length>0) {
         User *loginUser = [[PYCoreDataController sharedInstance] searchUser:self.userString];
@@ -147,6 +174,11 @@
     if (userID && userID.length>0) {
         User *currentUser = [[PYCoreDataController sharedInstance] userWithUserID:userID];
         self.userString = currentUser.name;
+        NSString *avatarFilePath = [currentUser avatarPath];
+        if (avatarFilePath) {
+            UIImage *_image = [UIImage imageWithContentsOfFile:avatarFilePath];
+            self.iconImageView.image = _image;
+        }
     }
 }
 
@@ -165,17 +197,20 @@
     switch (indexPath.row) {
         case 0: {
             cell.inputTF.placeholder = NSLocalizedString(@"请输入姓名/身份证/手机号/email", @"");
-            cell.inputTF.text = self.userString;
-            RAC(self, userString) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
-//            RAC(cell.inputTF, text) = [RACObserve(self, userString) takeUntil:[cell rac_prepareForReuseSignal]];
+            RACChannelTerminal *textFieldTerminal = [cell.inputTF rac_newTextChannel];
+            RACChannelTerminal *modelTerminal = RACChannelTo(self, userString);
+            [modelTerminal subscribe:textFieldTerminal];
+            [[textFieldTerminal skip:1] subscribe:modelTerminal];
         }
             break;
-        case 1:
+        case 1: {
             cell.inputTF.placeholder = NSLocalizedString(@"请输入密码", @"");
             cell.inputTF.secureTextEntry = YES;
-            cell.inputTF.text = self.password;
-            RAC(self, password) = [[cell.inputTF rac_textSignal] takeUntil:[cell rac_prepareForReuseSignal]];
-//            RAC(cell.inputTF, text) = [RACObserve(self, password) takeUntil:[cell rac_prepareForReuseSignal]];
+            RACChannelTerminal *textFieldTerminal = [cell.inputTF rac_newTextChannel];
+            RACChannelTerminal *modelTerminal = RACChannelTo(self, password);
+            [modelTerminal subscribe:textFieldTerminal];
+            [[textFieldTerminal skip:1] subscribe:modelTerminal];
+        }
             break;
         default:
             break;

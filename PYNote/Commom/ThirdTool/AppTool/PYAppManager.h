@@ -10,7 +10,7 @@
 
 @interface PYAppManager : NSObject
 
-@property (strong, nonatomic) NSArray *installedArray;
+@property (strong, nonatomic) NSArray <PYAppProxy *> *installedArray;
 
 + (instancetype)shareAppManager;
 

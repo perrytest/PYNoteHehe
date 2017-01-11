@@ -1002,7 +1002,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpy.PYNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fffc65c1-d7eb-4fb5-a2c4-b1cc81e13ce2";
-				PROVISIONING_PROFILE_SPECIFIER = development_common_20160722;
+				PROVISIONING_PROFILE_SPECIFIER = developerment_common_20161028;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1055,7 +1055,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpy.PYNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fffc65c1-d7eb-4fb5-a2c4-b1cc81e13ce2";
-				PROVISIONING_PROFILE_SPECIFIER = development_common_20160722;
+				PROVISIONING_PROFILE_SPECIFIER = developerment_common_20161028;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
