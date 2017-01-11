@@ -85,9 +85,16 @@
         
     }];
     
+    UIButton *forgetBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width-20-100.0, loginBtn.bottom+20, 100.0, 30)];
+    [forgetBtn setTitle:NSLocalizedString(@"忘记密码", @"") forState:UIControlStateNormal];
+    [forgetBtn setTitleColor:HexColor(0x595d71) forState:UIControlStateNormal];
+    [forgetBtn addTarget:self action:@selector(forgetPwdAction:) forControlEvents:UIControlEventTouchUpInside];
+    forgetBtn.titleLabel.font = Font_FS03;
+    
     self.tableView.tableFooterView = ({
-        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 100)];
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 150)];
         [footerView addSubview:loginBtn];
+        [footerView addSubview:forgetBtn];
         footerView;
     });
 }
@@ -164,6 +171,15 @@
         } else {
             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"用户名不存在", nil)];
         }
+    }
+}
+
+- (void)forgetPwdAction:(id)sender {
+    User *loginUser = [[PYCoreDataController sharedInstance] searchUser:self.userString];
+    if (loginUser) {
+        [SVProgressHUD showInfoWithStatus:loginUser.pwd_notice];
+    } else {
+        [self avatarGestureAction:nil];
     }
 }
 
